@@ -24,7 +24,7 @@
         </button>
       </div>
 
-      <!-- Modal body -->
+      <!-- Modal body --> 
       <div class="relative flex-auto p-4">
         <div class="p-2 mb-2">
             <p>Odaberi vrstu kvara:</p>
