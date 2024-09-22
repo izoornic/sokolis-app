@@ -1,5 +1,5 @@
 <div class="static p-6">
-    <img class="mx-auto h-auto max-w-full rounded-lg" src="{{route('image.displayImage',  $image_name)}}" alt="">
+    <img class="mx-auto h-auto max-w-full rounded-lg" src="/storage/{{$image_name}}" alt="">
     <div class="absolute top-6 right-6">
         <button type="button"
           class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none"
