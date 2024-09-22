@@ -76,7 +76,7 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 @foreach($slike as $slika)
                 <div>       
-                    <a style="cursor:pointer" wire:click="viewImage({{ $slika->id }})"><img class="h-auto max-w-full rounded-lg" src="/storage/{{$slika->image_path}}" alt=""></a>
+                    <a style="cursor:pointer" wire:click="viewImage({{ $slika->id }})"><img class="h-auto max-w-full rounded-lg" @if($sorce == 'local') src="{{route('image.displayImage',  $slika->image_path)}}" @else src="/storage/{{$slika->image_path}}" @endif alt=""></a>
                 </div>
                 @endforeach
             </div>

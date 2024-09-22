@@ -11,6 +11,7 @@ use App\Models\KvarKomentari;
 use App\Models\KvarKomentarUserView;
 use App\Models\KvarTiketImage;
 
+
 use Illuminate\Support\Facades\Storage;
 
 class KvarPregled extends Component
@@ -32,8 +33,11 @@ class KvarPregled extends Component
 
     public $vlasnik_tiketa;
 
+    public $sorce;
+
     public function mount()
     {
+        $this->sorce=env('IMAGE_MANIPILATION');
         if(!session()->exists(['stanovi', 'zgrade'])){
             User::getMyZgradeStanove();
         }
@@ -199,8 +203,6 @@ class KvarPregled extends Component
     {
         $this->dispatch('openModal', 'modals.image-view-modal', ['img' => $imgid]);
     }
-
-    //<!-- src="{{route('image.displayImage',  $slika->image_path)}}" -->
 
     public function render()
     {
