@@ -45,7 +45,7 @@
                 <div class="">
                     
                     <div class="p-4 text-base text-xl leading-7 text-gray-700">
-                        <p> {{ $textdisp }}</p>
+                        <p> {!! nl2br(e($textdisp)) !!}</p>
                     </div>
                     @php
                         if($koments_seen == '') $koments_seen=0;
