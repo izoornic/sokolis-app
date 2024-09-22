@@ -13,7 +13,7 @@ class HomeController
     {
         $contents = Storage::get($filename);
         $mime = Storage::mimeType($filename);
-
+        ob_end_clean();
         return response($contents)
             ->header('Content-Type', $mime);
     }
