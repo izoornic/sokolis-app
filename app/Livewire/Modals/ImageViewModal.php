@@ -15,6 +15,7 @@ class ImageViewModal extends ModalComponent
     public $img;
     public $image_name;
     public $tiket_id;
+    public $sorce;
 
     public static function modalMaxWidth(): string
     {
@@ -23,6 +24,7 @@ class ImageViewModal extends ModalComponent
 
     public function mount()
     {
+        $this->sorce=env('IMAGE_MANIPILATION');
         $img_model = KvarTiketImage::where('id', '=', $this->img)->first();
         $this->image_name = $img_model->image_path;
         $this->tiket_id = $img_model->kvar_tiketId;

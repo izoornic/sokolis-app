@@ -77,7 +77,7 @@
         <div class="p-2 pb-4 mb-2 border-b border-slate-300">
           <div class="flex pb-4">
           <label for="browse_btn" style="cursor:pointer" class="ms-1 inline-block rounded bg-slate-500 px-6 pb-2 pt-2.5 text-base font-medium uppercase leading-normal text-white shadow-neutral-200 hover:text-neutral-700 hover:bg-slate-100 hover:shadow-neutral-400">Dodja slike: </label>
-          <input id="browse_btn" type="file" wire:model="photos" multiple style="visibility: hidden; height: 2px; width: 150px">
+          <input id="browse_btn" type="file" accept="image/*" wire:model="photos" multiple style="visibility: hidden; height: 2px; width: 150px">
         </div>
         @endif
          
