@@ -73,7 +73,7 @@ class TiketPrijava extends ModalComponent
 
     public function mount()
     {
-        //$this->modalMaxWidth();
+        $this->photos = [];
         $this->userId = auth()->user()->id;
         $this->kvar_prioritet = 0;
         //$this->vrsta_kvara = 1;
