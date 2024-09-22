@@ -69,14 +69,14 @@
         </div> 
     </div>
     
-    <!-- SLIKE -->
+    <!-- SLIKE --> 
     @if($slike->count() || $vlasnik_tiketa)
     <div class="mx-6 my-4">
         <div class="bg-grey-50 border-t-4 border-slate-400 rounded-b text-sky-900 px-4 py-3 shadow-md mb-6" role="alert">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 @foreach($slike as $slika)
-                <div>
-                    <a style="cursor:pointer" wire:click="viewImage({{ $slika->id }})"><img class="h-auto max-w-full rounded-lg" src="{{route('image.displayImage',  $slika->image_path)}}" alt=""></a>
+                <div>       
+                    <a style="cursor:pointer" wire:click="viewImage({{ $slika->id }})"><img class="h-auto max-w-full rounded-lg" src="/storage/{{$slika->image_path}}" alt=""></a>
                 </div>
                 @endforeach
             </div>

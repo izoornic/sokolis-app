@@ -200,6 +200,8 @@ class KvarPregled extends Component
         $this->dispatch('openModal', 'modals.image-view-modal', ['img' => $imgid]);
     }
 
+    //<!-- src="{{route('image.displayImage',  $slika->image_path)}}" -->
+
     public function render()
     {
         if($this->can_view)
