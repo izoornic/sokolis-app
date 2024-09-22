@@ -629,7 +629,7 @@
     bottom: 40%;
   }
   .m{
-    right: 15%;
+    right: 13%;
   }
   .n{
     bottom: 5%;
@@ -1412,6 +1412,9 @@
   .vh{
     fill: #D1D8E0;
   }
+  .vhinsta{
+    color: #D1D8E0;
+  }
   .wh{
     fill: #4E6BFF;
   }
@@ -1828,9 +1831,21 @@
   .ul:hover{
     fill: #4E6BFF;
   }
+
+  .vhinsta:hover{
+    color: #4E6BFF;
+  }
   
   .vl:hover{
     fill: #F36A8D;
+  }
+
+  .vllhow{
+    color: #fff;
+  }
+
+  .vllhow:hover{
+    color: #F36A8D;
   }
   
   .wl:hover{

@@ -4,11 +4,11 @@ return [
 
 	'siteFooter' => '© 2024 Grading Sva prava zadržana',
 
-	'version' => 'V 0.0.0.3',
+	'version' => 'V 1.0.0',
 
 	'paginate' => 10,
 
-	'terminal_paginate' => 20,
+	'obavestenja_paginate' => 10,
 
 	'modal_search' => 10,
 

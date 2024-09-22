@@ -9,6 +9,12 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Stranica;
+use App\Models\UserStanIndex;
+use App\Models\Stan;
+use Auth;
+
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -27,6 +33,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'user_tipId',
+        'tel',
+        'adresa',
+        'sediste',
+        'zip',
+        'mb',
+        'pib',
+        'tr',
     ];
 
     /**
@@ -62,4 +76,50 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+     /**
+     * Lista stranica i ruta za kreiranje menija
+     * u zavisnosti od uloge koju korisnik ima
+     *
+     * @return void
+     */
+    public static function userPozicijeList()
+    {
+        return Stranica::select('stranicas.stranica_naziv', 'stranicas.route_name')
+            ->join('user_stranica_prikazs', 'user_stranica_prikazs.stranica_Id', '=', 'stranicas.id')
+            ->join('users', 'user_stranica_prikazs.user_tip_Id', '=', 'users.user_tipId')
+            ->where([
+                'stranicas.show_in_menu' => 1,
+                'users.id' => Auth::user()->id,
+            ])
+            ->orderBy('stranicas.menu_order')
+            ->pluck('stranica_naziv', 'route_name');
+    }
+
+    /**
+     * Setuje idjeve u sesiju
+     *
+     * @return void
+     */
+    public static function getMyZgradeStanove()
+    {
+        $stanovi = UserStanIndex::select('stanId')
+            ->where('userId', '=', Auth::user()->id)
+            ->pluck('stanId');
+
+        $zgrade = Stan::distinct('zgradaId')
+            ->whereIn('id', $stanovi)
+            ->pluck('zgradaId');
+        
+            session(['stanovi' => $stanovi, 'zgrade' => $zgrade]);
+    }
+
+    /**
+     * Get sve stanove korisnika.
+     */
+    public function stanovi(): BelongsToMany
+    {
+        return $this->BelongsToMany(Stan::class, 'user_stan_indices', 'userId', 'stanId');
+    }
+
 }

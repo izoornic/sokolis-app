@@ -116,17 +116,17 @@
             <div class="animate_left jn/2">
               <h2 class="vj">Dobrodošli</h2>
               <h1 class="fk vj zp or kk-green wm wb">SOKOLIS</h1>
-              <p class="tj">
+              <div class="tc tf yo zf mb">
+                <a href="https://sokolis.rs/" target="_blank" class="ek jk lk gh gi hi rg ml il vc _d _l">Prodaja dostupnih stanova i lokala</a>
+              </div>
+              <p class="tj jb">
                 Portal za stanare kondominijuma sa svim informacijama vezanim za stanovanje i servise.
               </p>
 
-              <div class="tc tf yo zf mb">
-                <a href="https://sokolis.rs/" target="_blank" class="ek jk lk gh gi hi rg ml il vc _d _l"
-                  >Prodaja stanova i lokala</a
-                >
+              <div class="tc tf yo zf mb">               
 
                 <span class="tc sf">
-                  <a href="#" class="inline-block ek xj kk wm"> Pozovite nas (+381) 63 999 999 </a>
+                  <a href="#" class="inline-block ek xj kk wm"> Pozovite nas (+381) 64 186 27 87 </a>
                   <span class="inline-block">Za sve informacije</span>
                 </span>
               </div>
@@ -137,10 +137,10 @@
       <!-- ===== Hero End ===== -->
 
       <!-- ===== Small Features Start ===== -->
-    <section>
+    <!-- <section>
         <div style="margin-bottom: 70px; padding-bottom: 70px;" class="bb ze ki yn 2xl:ud-px-12.5">
           <div class="tc uf zo xf ap zf bp mq">
-            <!-- Small Features Item -->
+           
             <div class="animate_top kn to/3 tc cg oq">
               <div class="tc wf xf cf ae cd rg mh">
                 <img src="images/icon-01.svg" alt="Icon" />
@@ -151,7 +151,6 @@
               </div>
             </div>
 
-            <!-- Small Features Item -->
             <div class="animate_top kn to/3 tc cg oq">
               <div class="tc wf xf cf ae cd rg nh">
                 <img src="images/icon-02.svg" alt="Icon" />
@@ -162,7 +161,6 @@
               </div>
             </div>
 
-            <!-- Small Features Item -->
             <div class="animate_top kn to/3 tc cg oq">
               <div class="tc wf xf cf ae cd rg oh">
                 <img src="images/icon-03.svg" alt="Icon" />
@@ -174,7 +172,7 @@
             </div>
           </div>
         </div>
-    </section>
+    </section> -->
       <!-- ===== Small Features End ===== -->
 
 
@@ -189,7 +187,7 @@
 
         <!-- Section Title Start -->
         <div
-          x-data="{ sectionTitle: `Kondominijum Sokolis`, sectionTitleText: ` Kompleks „Sokolis“ odlikuje najsavremeniji koncept stanova, prilagođen zahtevima moderne porodice. Kondominijum je pozicioniran u Erdogliji – jednom od najotmenijih kragujevačkih naselja, tačno prekoputa Sokolane. Lokacija ovog kompleksa obezbeđuje blizinu svega što je savremenom čoveku svakodnevno potrebno, kao i veliki broj posebnih pogodnosti za relaksaciju i rekreaciju. Erdoglija je grad u gradu, sa svim elementima kulturne i urbane celine, tako da je „Sokolis“ okružen poslovnim centrima, brojnim kulturno-istorijskim znamenitostima, ali i gustim zelenilom. Ovo mesto nije slučajno pre 100 godina izabrano za prvu planski izgrađenu radničku koloniju na teritoriji Srbije, poznatu kao „zeleni grad“. Jedinstven spoj gradskog i prirodnog okruženja čini lokaciju idealnom za život, a veoma blizu centra. `}"
+          x-data="{ sectionTitle: `Kondominijum Sokolis`, sectionTitleText: `Kompleks „Sokolis“ odlikuje najsavremeniji koncept stanova, prilagođen zahtevima moderne porodice. Kondominijum je pozicioniran u Staroj radničkoj koloniji, mirnom i zelenom naselju Kragujevca, tačno prekoputa Sokolane. Lokacija obezbeđuje blizinu svih potrebnih sadržaja za savremen život, uz posebne pogodnosti za relaksaciju i rekreaciju. „Sokolis“ je okružen poslovnim centrima, kulturno-istorijskim znamenitostima i gustim zelenilom. Ovo mesto, poznato kao „zeleni grad“, pre 100 godina postalo je prva planski izgrađena radnička kolonija u Srbiji. Savršeni spoj gradskog i prirodnog okruženja čini ga idealnim za život, blizu centra.`}"
         >
           <div class="animate_top bb ze rj ki xn vq">
                 <h2
@@ -214,24 +212,18 @@
                   <div class="h s p vd ij jj xa">
                     <ul class="tc xf wf gg">
                       <li>
-                        <a href="#">
-                          <svg class="uh vl ml il" width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.66634 10.25H8.74968L9.58301 6.91669H6.66634V5.25002C6.66634 4.39169 6.66634 3.58335 8.33301 3.58335H9.58301V0.783354C9.31134 0.74752 8.28551 0.666687 7.20218 0.666687C4.93968 0.666687 3.33301 2.04752 3.33301 4.58335V6.91669H0.833008V10.25H3.33301V17.3334H6.66634V10.25Z" fill=""/>
-                          </svg>
+                        <a href="https://www.facebook.com/sokoliskg/">
+                        <svg class="uh vl ml il" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z" clip-rule="evenodd"/></svg>
                         </a>
                       </li>
                       <li>
-                        <a href="#">
-                          <svg class="uh vl ml il" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M17.4683 1.71333C16.8321 1.99475 16.1574 2.17956 15.4666 2.26167C16.1947 1.82619 16.7397 1.14085 16.9999 0.333333C16.3166 0.74 15.5674 1.025 14.7866 1.17917C14.2621 0.617982 13.5669 0.245803 12.809 0.120487C12.0512 -0.00482822 11.2732 0.123742 10.596 0.486211C9.91875 0.848679 9.38024 1.42474 9.06418 2.12483C8.74812 2.82492 8.67221 3.60982 8.84825 4.3575C7.46251 4.28805 6.10686 3.92794 4.86933 3.30055C3.63179 2.67317 2.54003 1.79254 1.66492 0.715833C1.35516 1.24788 1.19238 1.85269 1.19326 2.46833C1.19326 3.67667 1.80826 4.74417 2.74326 5.36917C2.18993 5.35175 1.64878 5.20232 1.16492 4.93333V4.97667C1.16509 5.78142 1.44356 6.56135 1.95313 7.18422C2.46269 7.80709 3.17199 8.23456 3.96075 8.39417C3.4471 8.53337 2.90851 8.55388 2.38576 8.45417C2.60814 9.14686 3.04159 9.75267 3.62541 10.1868C4.20924 10.6209 4.9142 10.8615 5.64159 10.875C4.91866 11.4428 4.0909 11.8625 3.20566 12.1101C2.32041 12.3578 1.39503 12.4285 0.482422 12.3183C2.0755 13.3429 3.93 13.8868 5.82409 13.885C12.2349 13.885 15.7408 8.57417 15.7408 3.96833C15.7408 3.81833 15.7366 3.66667 15.7299 3.51833C16.4123 3.02514 17.0013 2.41418 17.4691 1.71417L17.4683 1.71333Z" fill=""/>
-                          </svg>
+                        <a href="https://www.instagram.com/sokolis.kragujevac/">
+                        <svg class="uh vllhow ml il" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" clip-rule="evenodd"/></svg>
                         </a>
                       </li>
                       <li>
-                        <a href="#">
-                          <svg class="uh vl ml il" width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3.78353 2.16665C3.78331 2.60867 3.6075 3.03251 3.29478 3.34491C2.98207 3.65732 2.55806 3.8327 2.11603 3.83248C1.674 3.83226 1.25017 3.65645 0.937761 3.34373C0.625357 3.03102 0.449975 2.60701 0.450196 2.16498C0.450417 1.72295 0.626223 1.29912 0.93894 0.986712C1.25166 0.674307 1.67567 0.498925 2.1177 0.499146C2.55972 0.499367 2.98356 0.675173 3.29596 0.98789C3.60837 1.30061 3.78375 1.72462 3.78353 2.16665V2.16665ZM3.83353 5.06665H0.500195V15.5H3.83353V5.06665ZM9.1002 5.06665H5.78353V15.5H9.06686V10.025C9.06686 6.97498 13.0419 6.69165 13.0419 10.025V15.5H16.3335V8.89165C16.3335 3.74998 10.4502 3.94165 9.06686 6.46665L9.1002 5.06665V5.06665Z" fill=""/>
-                          </svg>
+                        <a href="https://www.youtube.com/@gradingrs">
+                        <svg class="uh vl ml il" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M21.7 8.037a4.26 4.26 0 0 0-.789-1.964 2.84 2.84 0 0 0-1.984-.839c-2.767-.2-6.926-.2-6.926-.2s-4.157 0-6.928.2a2.836 2.836 0 0 0-1.983.839 4.225 4.225 0 0 0-.79 1.965 30.146 30.146 0 0 0-.2 3.206v1.5a30.12 30.12 0 0 0 .2 3.206c.094.712.364 1.39.784 1.972.604.536 1.38.837 2.187.848 1.583.151 6.731.2 6.731.2s4.161 0 6.928-.2a2.844 2.844 0 0 0 1.985-.84 4.27 4.27 0 0 0 .787-1.965 30.12 30.12 0 0 0 .2-3.206v-1.516a30.672 30.672 0 0 0-.202-3.206Zm-11.692 6.554v-5.62l5.4 2.819-5.4 2.801Z" clip-rule="evenodd"/></svg>
                         </a>
                       </li>
                     </ul>
@@ -254,25 +246,19 @@
                   <div class="h s p vd ij jj xa">
                     <ul class="tc xf wf gg">
                       <li>
-                        <a href="#">
-                          <svg class="uh vl ml il" width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.66634 10.25H8.74968L9.58301 6.91669H6.66634V5.25002C6.66634 4.39169 6.66634 3.58335 8.33301 3.58335H9.58301V0.783354C9.31134 0.74752 8.28551 0.666687 7.20218 0.666687C4.93968 0.666687 3.33301 2.04752 3.33301 4.58335V6.91669H0.833008V10.25H3.33301V17.3334H6.66634V10.25Z" fill=""/>
-                          </svg>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <svg class="uh vl ml il" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M17.4683 1.71333C16.8321 1.99475 16.1574 2.17956 15.4666 2.26167C16.1947 1.82619 16.7397 1.14085 16.9999 0.333333C16.3166 0.74 15.5674 1.025 14.7866 1.17917C14.2621 0.617982 13.5669 0.245803 12.809 0.120487C12.0512 -0.00482822 11.2732 0.123742 10.596 0.486211C9.91875 0.848679 9.38024 1.42474 9.06418 2.12483C8.74812 2.82492 8.67221 3.60982 8.84825 4.3575C7.46251 4.28805 6.10686 3.92794 4.86933 3.30055C3.63179 2.67317 2.54003 1.79254 1.66492 0.715833C1.35516 1.24788 1.19238 1.85269 1.19326 2.46833C1.19326 3.67667 1.80826 4.74417 2.74326 5.36917C2.18993 5.35175 1.64878 5.20232 1.16492 4.93333V4.97667C1.16509 5.78142 1.44356 6.56135 1.95313 7.18422C2.46269 7.80709 3.17199 8.23456 3.96075 8.39417C3.4471 8.53337 2.90851 8.55388 2.38576 8.45417C2.60814 9.14686 3.04159 9.75267 3.62541 10.1868C4.20924 10.6209 4.9142 10.8615 5.64159 10.875C4.91866 11.4428 4.0909 11.8625 3.20566 12.1101C2.32041 12.3578 1.39503 12.4285 0.482422 12.3183C2.0755 13.3429 3.93 13.8868 5.82409 13.885C12.2349 13.885 15.7408 8.57417 15.7408 3.96833C15.7408 3.81833 15.7366 3.66667 15.7299 3.51833C16.4123 3.02514 17.0013 2.41418 17.4691 1.71417L17.4683 1.71333Z" fill=""/>
-                          </svg>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <svg class="uh vl ml il" width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3.78353 2.16665C3.78331 2.60867 3.6075 3.03251 3.29478 3.34491C2.98207 3.65732 2.55806 3.8327 2.11603 3.83248C1.674 3.83226 1.25017 3.65645 0.937761 3.34373C0.625357 3.03102 0.449975 2.60701 0.450196 2.16498C0.450417 1.72295 0.626223 1.29912 0.93894 0.986712C1.25166 0.674307 1.67567 0.498925 2.1177 0.499146C2.55972 0.499367 2.98356 0.675173 3.29596 0.98789C3.60837 1.30061 3.78375 1.72462 3.78353 2.16665V2.16665ZM3.83353 5.06665H0.500195V15.5H3.83353V5.06665ZM9.1002 5.06665H5.78353V15.5H9.06686V10.025C9.06686 6.97498 13.0419 6.69165 13.0419 10.025V15.5H16.3335V8.89165C16.3335 3.74998 10.4502 3.94165 9.06686 6.46665L9.1002 5.06665V5.06665Z" fill=""/>
-                          </svg>
-                        </a>
+                          <a href="https://www.facebook.com/sokoliskg/">
+                          <svg class="uh vl ml il" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z" clip-rule="evenodd"/></svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="https://www.instagram.com/sokolis.kragujevac/">
+                          <svg class="uh vllhow ml il" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" clip-rule="evenodd"/></svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="https://www.youtube.com/@gradingrs">
+                          <svg class="uh vl ml il" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M21.7 8.037a4.26 4.26 0 0 0-.789-1.964 2.84 2.84 0 0 0-1.984-.839c-2.767-.2-6.926-.2-6.926-.2s-4.157 0-6.928.2a2.836 2.836 0 0 0-1.983.839 4.225 4.225 0 0 0-.79 1.965 30.146 30.146 0 0 0-.2 3.206v1.5a30.12 30.12 0 0 0 .2 3.206c.094.712.364 1.39.784 1.972.604.536 1.38.837 2.187.848 1.583.151 6.731.2 6.731.2s4.161 0 6.928-.2a2.844 2.844 0 0 0 1.985-.84 4.27 4.27 0 0 0 .787-1.965 30.12 30.12 0 0 0 .2-3.206v-1.516a30.672 30.672 0 0 0-.202-3.206Zm-11.692 6.554v-5.62l5.4 2.819-5.4 2.801Z" clip-rule="evenodd"/></svg>
+                          </a>
                       </li>
                     </ul>
                   </div>
@@ -280,7 +266,7 @@
               </div>
 
               <h4 class="yj go kk wm ob zb">Prijatna okolina</h4>
-              <p>Skolana, igrališta, tržni centar</p>
+              <p>Oaza udobnosti i mira - blizina spomen parka Šumarice</p>
             </div>
 
             <!-- Team Item -->
@@ -293,34 +279,28 @@
                   <span class="h s p rc vd hd mh va"></span>
                   <div class="h s p vd ij jj xa">
                     <ul class="tc xf wf gg">
-                      <li>
-                        <a href="#">
-                          <svg class="uh vl ml il" width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.66634 10.25H8.74968L9.58301 6.91669H6.66634V5.25002C6.66634 4.39169 6.66634 3.58335 8.33301 3.58335H9.58301V0.783354C9.31134 0.74752 8.28551 0.666687 7.20218 0.666687C4.93968 0.666687 3.33301 2.04752 3.33301 4.58335V6.91669H0.833008V10.25H3.33301V17.3334H6.66634V10.25Z" fill=""/>
-                          </svg>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <svg class="uh vl ml il" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M17.4683 1.71333C16.8321 1.99475 16.1574 2.17956 15.4666 2.26167C16.1947 1.82619 16.7397 1.14085 16.9999 0.333333C16.3166 0.74 15.5674 1.025 14.7866 1.17917C14.2621 0.617982 13.5669 0.245803 12.809 0.120487C12.0512 -0.00482822 11.2732 0.123742 10.596 0.486211C9.91875 0.848679 9.38024 1.42474 9.06418 2.12483C8.74812 2.82492 8.67221 3.60982 8.84825 4.3575C7.46251 4.28805 6.10686 3.92794 4.86933 3.30055C3.63179 2.67317 2.54003 1.79254 1.66492 0.715833C1.35516 1.24788 1.19238 1.85269 1.19326 2.46833C1.19326 3.67667 1.80826 4.74417 2.74326 5.36917C2.18993 5.35175 1.64878 5.20232 1.16492 4.93333V4.97667C1.16509 5.78142 1.44356 6.56135 1.95313 7.18422C2.46269 7.80709 3.17199 8.23456 3.96075 8.39417C3.4471 8.53337 2.90851 8.55388 2.38576 8.45417C2.60814 9.14686 3.04159 9.75267 3.62541 10.1868C4.20924 10.6209 4.9142 10.8615 5.64159 10.875C4.91866 11.4428 4.0909 11.8625 3.20566 12.1101C2.32041 12.3578 1.39503 12.4285 0.482422 12.3183C2.0755 13.3429 3.93 13.8868 5.82409 13.885C12.2349 13.885 15.7408 8.57417 15.7408 3.96833C15.7408 3.81833 15.7366 3.66667 15.7299 3.51833C16.4123 3.02514 17.0013 2.41418 17.4691 1.71417L17.4683 1.71333Z" fill=""/>
-                          </svg>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <svg class="uh vl ml il" width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3.78353 2.16665C3.78331 2.60867 3.6075 3.03251 3.29478 3.34491C2.98207 3.65732 2.55806 3.8327 2.11603 3.83248C1.674 3.83226 1.25017 3.65645 0.937761 3.34373C0.625357 3.03102 0.449975 2.60701 0.450196 2.16498C0.450417 1.72295 0.626223 1.29912 0.93894 0.986712C1.25166 0.674307 1.67567 0.498925 2.1177 0.499146C2.55972 0.499367 2.98356 0.675173 3.29596 0.98789C3.60837 1.30061 3.78375 1.72462 3.78353 2.16665V2.16665ZM3.83353 5.06665H0.500195V15.5H3.83353V5.06665ZM9.1002 5.06665H5.78353V15.5H9.06686V10.025C9.06686 6.97498 13.0419 6.69165 13.0419 10.025V15.5H16.3335V8.89165C16.3335 3.74998 10.4502 3.94165 9.06686 6.46665L9.1002 5.06665V5.06665Z" fill=""/>
-                          </svg>
-                        </a>
-                      </li>
+                        <li>
+                          <a href="https://www.facebook.com/sokoliskg/">
+                          <svg class="uh vl ml il" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z" clip-rule="evenodd"/></svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="https://www.instagram.com/sokolis.kragujevac/">
+                          <svg class="uh vllhow ml il" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" clip-rule="evenodd"/></svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="https://www.youtube.com/@gradingrs">
+                          <svg class="uh vl ml il" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M21.7 8.037a4.26 4.26 0 0 0-.789-1.964 2.84 2.84 0 0 0-1.984-.839c-2.767-.2-6.926-.2-6.926-.2s-4.157 0-6.928.2a2.836 2.836 0 0 0-1.983.839 4.225 4.225 0 0 0-.79 1.965 30.146 30.146 0 0 0-.2 3.206v1.5a30.12 30.12 0 0 0 .2 3.206c.094.712.364 1.39.784 1.972.604.536 1.38.837 2.187.848 1.583.151 6.731.2 6.731.2s4.161 0 6.928-.2a2.844 2.844 0 0 0 1.985-.84 4.27 4.27 0 0 0 .787-1.965 30.12 30.12 0 0 0 .2-3.206v-1.516a30.672 30.672 0 0 0-.202-3.206Zm-11.692 6.554v-5.62l5.4 2.819-5.4 2.801Z" clip-rule="evenodd"/></svg>
+                          </a>
+                        </li>
                     </ul>
                   </div>
                 </div>
               </div>
 
               <h4 class="yj go kk wm ob zb">Savremeni stanovi</h4>
-              <p>Zajedničke prostorije i uređena bašta</p>
+              <p>Zajedničke prostorije i uređena bašta. <br /> Stil, Komfor i Pristupačnost</p>
             </div>
           </div>
         </div>
@@ -331,7 +311,7 @@
       <section id="aktivnosti" class="lj tp kr ej">
         <!-- Section Title Start -->
         <div 
-            x-data="{ sectionTitle: `Aktivnosti`, sectionTitleText: `U okviru kondominijuma zajedničke celine nude stanarima širok dijapazon različitih aktivnosti.`}"
+            x-data="{ sectionTitle: `Aktivnosti`, sectionTitleText: `U okviru kondominijuma, zajedničke površine pružaju stanarima raznovrsne mogućnosti za aktivnosti. Od rekreacije i opuštanja do druženja, svaki stanar može pronaći nešto za sebe.`}"
         >
             <div class="animate_top bb ze rj ki xn vq">
                 <h2
@@ -351,21 +331,21 @@
             <div class="animate_top sg oi pi zq ml il am cn _m">
               <img src="images/aktivnosti_1.jpg" alt="Igralista" />
               <h4 class="ek zj kk wm nb _b">Dečija igrališta</h4>
-              <p>Prilagođena deci svih uzrasta sa sadržajima primerenim svakom uzrastu.</p>
+              <p>Uživajte u sigurnom i stimulativnom okruženju koje podstiče igru i kreativnost.</p>
             </div>
 
             <!-- Service Item -->
             <div class="animate_top sg oi pi zq ml il am cn _m">
               <img src="images/aktivnosti_2.jpg" alt="Vrt" />
               <h4 class="ek zj kk wm nb _b">Vrt</h4>
-              <p>Pažljivo projektovan vrt je sastavni deo unutrašnjeg prostora. Koncipiran je tako da stanarima pruži zelenu oazu mira i spokoja. Održavanje vrta je povereno proverenom partneru čiji stručnjaci brinu biljkama.</p>
+              <p>Pažljivo projektovan vrt obogaćuje unutrašnji prostor.</p>
             </div>
 
             <!-- Service Item -->
             <div class="animate_top sg oi pi zq ml il am cn _m">
               <img src="images/aktivnosti_3.jpg" alt="Zajedničke prostorije" />
-              <h4 class="ek zj kk wm nb _b">Zajedničke prostorije</h4>
-              <p>Posebno uređeni prostor namenjen slobodnom vremenu i socijalnim aktivnostima. U ovim prostorijama stanari mogu zajedno da prate sportske događaje, provode slobodno vreme uz opuštajuće sadržaje kao što su bilijar, stoni fudbal, pikdo...</p>
+              <h4 class="ek zj kk wm nb _b">Rekreacija</h4>
+              <p>Zdrav i aktivan način života u sklopu kompleksa.</p>
             </div>
 
           </div>
@@ -383,7 +363,7 @@
         <img src="images/shape-13.svg" alt="Shape" class="h r q ua" />
 
         <!-- Section Title Start -->
-        <div x-data="{ sectionTitle: `Higijena`, sectionTitleText: `Za održavanje higijene je zadužena kompanija D-clean. Redovno čišćenje se izvodi prema prikazanom rasporedu na nedeljnom nivou. Kompanija koristi najsavremenije mašine i sredstva za čišćenje kao i hemiska sredststva koja su ecko-friendly.`}"
+        <div x-data="{ sectionTitle: `Higijena`, sectionTitleText: `Redovno čišćenje se izvodi prema rasporedu koji je prikazan na nedeljnom nivou.`}"
             >
           <div class="animate_top bb ze rj ki xn vq">
                 <h2
@@ -403,49 +383,29 @@
         <div class="bb ze i ki li xn br">
           <div class="tc uf tn xf gg">
             <div class="animate_top me/6 ln rj">
-              <h2 class="ek bk _p kk wm hc xe/3">Lamela 1</h2>
+              <h2 class="ek bk _p kk wm hc xe/3">Lamela 2</h2>
               <p class="ek bk aq">Ponedeljak 14:00 </p>
               <p class="ek bk aq">Četvrtak 16:00 </p>
-            </div>
-            <div class="animate_top me/6 ln rj">
-              <h2 class="ek bk _p kk wm hc xe/3">Lamela 2</h2>
-              <p class="ek bk aq">Ponedeljak 16:00 </p>
-              <p class="ek bk aq">Četvrtak 18:00 </p>
             </div>
             <div class="animate_top me/6 ln rj">
               <h2 class="ek bk _p kk wm hc xe/3">Lamela 3</h2>
-              <p class="ek bk aq">Utorak 14:00 </p>
-              <p class="ek bk aq">Petak 12:00 </p>
-            </div>
-            <div class="animate_top me/6 ln rj">
-              <h2 class="ek bk _p kk wm hc xe/3">Lamela 4</h2>
-              <p class="ek bk aq">Sreda 12:00 </p>
-              <p class="ek bk aq">Subota 12:00 </p>
-            </div>
-            <div class="animate_top me/6 ln rj">
-              <h2 class="ek bk _p kk wm hc xe/3">Lamela 5</h2>
-              <p class="ek bk aq">Ponedeljak 14:00 </p>
-              <p class="ek bk aq">Četvrtak 16:00 </p>
-            </div>
-            <div class="animate_top me/6 ln rj">
-              <h2 class="ek bk _p kk wm hc xe/3">Lamela 6</h2>
               <p class="ek bk aq">Ponedeljak 16:00 </p>
               <p class="ek bk aq">Četvrtak 18:00 </p>
             </div>
             <div class="animate_top me/6 ln rj">
-              <h2 class="ek bk _p kk wm hc xe/3">Lamela 7</h2>
+              <h2 class="ek bk _p kk wm hc xe/3">Lamela 4</h2>
               <p class="ek bk aq">Utorak 14:00 </p>
               <p class="ek bk aq">Petak 12:00 </p>
             </div>
             <div class="animate_top me/6 ln rj">
-              <h2 class="ek bk _p kk wm hc xe/3">Lamela 8</h2>
+              <h2 class="ek bk _p kk wm hc xe/3">Garaža</h2>
               <p class="ek bk aq">Sreda 12:00 </p>
               <p class="ek bk aq">Subota 12:00 </p>
             </div>
             <div class="animate_top me/6 ln rj">
-              <h2 class="ek bk _p kk wm hc xe/3">Lamela 9</h2>
-              <p class="ek bk aq">Sreda 12:00 </p>
-              <p class="ek bk aq">Subota 12:00 </p>
+              <h2 class="ek bk _p kk wm hc xe/3">Dvorište</h2>
+              <p class="ek bk aq">Ponedeljak 14:00 </p>
+              <p class="ek bk aq">Četvrtak 16:00 </p>
             </div>
           </div>
         </div>
@@ -458,11 +418,11 @@
 
       <!-- ===== Projects Start ===== -->
       <section id="obezbedjenje" class="pg pj vp mr oj wp nr i">
-        <img src="images/shape-01.svg" alt="Shape" style="width: 70px;" class="of h m z/3" />
+        <img src="images/shape-01.svg" alt="Shape" style="width: 70px;" class="of h m z/2" />
         <img src="images/shape-02.svg" alt="Shape" style="width: 50px;" class="of h y" />
         <!-- Section Title Start -->
         <div
-          x-data="{ sectionTitle: `Obezbeđenje`, sectionTitleText: `Koncept kondominijuma pruža potpunu sigurnost kvartu „Sokolis“ i njegovim stanarima. Kupovinom nekretnine u stambeno-poslovnom kompleksu „Sokolis“ birate dom u zaštićenoj poslovnoj zoni, sa recepcijom 24/7, pristupom pomoću kartice, video-nadzorom, privatnim parkom kao oazom mira i podzemnim garažama.`}"
+          x-data="{ sectionTitle: `Obezbedjenje - Bezbednost`, sectionTitleText: `Kondominijum „Sokolis“ nudi sigurnost za svoje stanare. Kupovinom nekretnine birate dom u zaštićenoj zoni sa kontrolom pristupa, 24/7 nadzorom, kartičnim pristupom, video-nadzorom, savremenim protivpožarnim sistemima, privatnim parkom kao oazom mira i podzemnim garažama.`}"
         >
           <div class="animate_top bb ze rj ki xn vq">
                 <h2
@@ -482,21 +442,21 @@
             <div class="animate_top sg oi pi zq ml il am cn _m">
               <img src="images/obezb_2.jpg" alt="Obezbedjenje" />
               <h4 class="ek zj kk wm nb _b">Video nadzor</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dolor diam, feugiat quis enim sed, ullamcorper semper ligula. Mauris consequat justo volutpat..</p>
+              <p>Naš savremeni sistem video nadzora obezbeđuje 24/7 praćenje zajedničkih prostora, čime se omogućava bezbednost svih stanara i poslovnih korisnika. Uz najnovije tehnologije, svi aspekti kompleksa su pod stalnim nadzorom, što stvara sigurno i ugodno okruženje za život i rad.</p>
             </div>
 
             <!-- Service Item -->
             <div class="animate_top sg oi pi zq ml il am cn _m">
               <img src="images/obezb_1.jpg" alt="Obezbedjenje" />
-              <h4 class="ek zj kk wm nb _b">Recepcija</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dolor diam, feugiat quis enim sed, ullamcorper semper ligula. Mauris consequat justo volutpat..</p>
+              <h4 class="ek zj kk wm nb _b">Kontrola pristupa</h4>
+              <p>U kompleksu Sokolis, bezbednost je prioritet. Implementirali smo napredne sisteme kontrole pristupa koji osiguravaju da samo ovlašćeni posetioci mogu ući u naše prostore.</p>
             </div>
 
             <!-- Service Item -->
             <div class="animate_top sg oi pi zq ml il am cn _m">
               <img src="images/obezb_3.jpg" alt="Protivpožarni sistem" />
               <h4 class="ek zj kk wm nb _b">Protivpožarni sistem</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dolor diam, feugiat quis enim sed, ullamcorper semper ligula. Mauris consequat justo volutpat..</p>
+              <p>Sistem uključuje detektore dima, automatske sprinkler sisteme i jasno označene evakuacione puteve.</p>
             </div>
 
           </div>
@@ -550,7 +510,7 @@
 
           <ul class="tc wf cg">
             <li>
-              <a href="#">
+              <a href="https://www.facebook.com/sokoliskg/">
                 <svg class="vh ul cl il" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_48_1499)">
                     <path d="M14 13.5H16.5L17.5 9.5H14V7.5C14 6.47 14 5.5 16 5.5H17.5V2.14C17.174 2.097 15.943 2 14.643 2C11.928 2 10 3.657 10 6.7V9.5H7V13.5H10V22H14V13.5Z" fill="" />
@@ -564,53 +524,15 @@
               </a>
             </li>
             <li>
-              <a href="#">
-                <svg class="vh ul cl il" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clip-path="url(#clip0_48_1502)">
-                    <path
-                      d="M22.162 5.65593C21.3985 5.99362 20.589 6.2154 19.76 6.31393C20.6337 5.79136 21.2877 4.96894 21.6 3.99993C20.78 4.48793 19.881 4.82993 18.944 5.01493C18.3146 4.34151 17.4803 3.89489 16.5709 3.74451C15.6615 3.59413 14.7279 3.74842 13.9153 4.18338C13.1026 4.61834 12.4564 5.30961 12.0771 6.14972C11.6978 6.98983 11.6067 7.93171 11.818 8.82893C10.1551 8.74558 8.52832 8.31345 7.04328 7.56059C5.55823 6.80773 4.24812 5.75098 3.19799 4.45893C2.82628 5.09738 2.63095 5.82315 2.63199 6.56193C2.63199 8.01193 3.36999 9.29293 4.49199 10.0429C3.828 10.022 3.17862 9.84271 2.59799 9.51993V9.57193C2.59819 10.5376 2.93236 11.4735 3.54384 12.221C4.15532 12.9684 5.00647 13.4814 5.95299 13.6729C5.33661 13.84 4.6903 13.8646 4.06299 13.7449C4.32986 14.5762 4.85 15.3031 5.55058 15.824C6.25117 16.345 7.09712 16.6337 7.96999 16.6499C7.10247 17.3313 6.10917 17.8349 5.04687 18.1321C3.98458 18.4293 2.87412 18.5142 1.77899 18.3819C3.69069 19.6114 5.91609 20.2641 8.18899 20.2619C15.882 20.2619 20.089 13.8889 20.089 8.36193C20.089 8.18193 20.084 7.99993 20.076 7.82193C20.8949 7.2301 21.6016 6.49695 22.163 5.65693L22.162 5.65593Z"
-                      fill=""
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_48_1502">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
+              <a href="https://www.instagram.com/sokolis.kragujevac/">
+                <!-- Insta -->
+                <a href="https://www.instagram.com/sokolis.kragujevac/">
+                <svg class="vhinsta cl il" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" clip-rule="evenodd"/></svg>
               </a>
             </li>
             <li>
-              <a href="#">
-                <svg class="vh ul cl il" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clip-path="url(#clip0_48_1505)">
-                    <path
-                      d="M6.94 5.00002C6.93974 5.53046 6.72877 6.03906 6.35351 6.41394C5.97825 6.78883 5.46944 6.99929 4.939 6.99902C4.40857 6.99876 3.89997 6.78779 3.52508 6.41253C3.1502 6.03727 2.93974 5.52846 2.94 4.99802C2.94027 4.46759 3.15124 3.95899 3.5265 3.5841C3.90176 3.20922 4.41057 2.99876 4.941 2.99902C5.47144 2.99929 5.98004 3.21026 6.35492 3.58552C6.72981 3.96078 6.94027 4.46959 6.94 5.00002ZM7 8.48002H3V21H7V8.48002ZM13.32 8.48002H9.34V21H13.28V14.43C13.28 10.77 18.05 10.43 18.05 14.43V21H22V13.07C22 6.90002 14.94 7.13002 13.28 10.16L13.32 8.48002Z"
-                      fill=""
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_48_1505">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <svg class="vh ul cl il" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <g clip-path="url(#clip0_48_1508)">
-                    <path
-                      d="M7.443 5.3501C8.082 5.3501 8.673 5.4001 9.213 5.5481C9.70301 5.63814 10.1708 5.82293 10.59 6.0921C10.984 6.3391 11.279 6.6861 11.475 7.1311C11.672 7.5761 11.77 8.1211 11.77 8.7141C11.77 9.4071 11.623 10.0001 11.279 10.4451C10.984 10.8911 10.492 11.2861 9.902 11.5831C10.738 11.8311 11.377 12.2761 11.77 12.8691C12.164 13.4631 12.41 14.2051 12.41 15.0461C12.41 15.7391 12.262 16.3321 12.016 16.8271C11.77 17.3221 11.377 17.7671 10.934 18.0641C10.4528 18.3825 9.92084 18.6165 9.361 18.7561C8.771 18.9051 8.181 19.0041 7.591 19.0041H1V5.3501H7.443ZM7.049 10.8901C7.59 10.8901 8.033 10.7421 8.377 10.4951C8.721 10.2481 8.869 9.8021 8.869 9.2581C8.869 8.9611 8.819 8.6641 8.721 8.4671C8.623 8.2691 8.475 8.1201 8.279 7.9721C8.082 7.8731 7.885 7.7741 7.639 7.7251C7.393 7.6751 7.148 7.6751 6.852 7.6751H4V10.8911H7.05L7.049 10.8901ZM7.197 16.7281C7.492 16.7281 7.787 16.6781 8.033 16.6291C8.28138 16.5819 8.51628 16.4805 8.721 16.3321C8.92139 16.1873 9.08903 16.002 9.213 15.7881C9.311 15.5411 9.41 15.2441 9.41 14.8981C9.41 14.2051 9.213 13.7101 8.82 13.3641C8.426 13.0671 7.885 12.9191 7.246 12.9191H4V16.7291H7.197V16.7281ZM16.689 16.6781C17.082 17.0741 17.672 17.2721 18.459 17.2721C19 17.2721 19.492 17.1241 19.885 16.8771C20.279 16.5801 20.525 16.2831 20.623 15.9861H23.033C22.639 17.1731 22.049 18.0141 21.263 18.5581C20.475 19.0531 19.541 19.3501 18.41 19.3501C17.6864 19.3523 16.9688 19.2179 16.295 18.9541C15.6887 18.7266 15.148 18.3529 14.721 17.8661C14.2643 17.4107 13.9267 16.8498 13.738 16.2331C13.492 15.5901 13.393 14.8981 13.393 14.1061C13.393 13.3641 13.492 12.6721 13.738 12.0281C13.9745 11.4082 14.3245 10.8378 14.77 10.3461C15.213 9.9011 15.754 9.5061 16.344 9.2581C17.0007 8.99416 17.7022 8.85969 18.41 8.8621C19.246 8.8621 19.984 9.0111 20.623 9.3571C21.263 9.7031 21.754 10.0991 22.148 10.6931C22.5499 11.2636 22.8494 11.8998 23.033 12.5731C23.131 13.2651 23.18 13.9581 23.131 14.7491H16C16 15.5411 16.295 16.2831 16.689 16.6791V16.6781ZM19.787 11.4841C19.443 11.1381 18.902 10.9401 18.262 10.9401C17.82 10.9401 17.475 11.0391 17.18 11.1871C16.885 11.3361 16.689 11.5341 16.492 11.7321C16.311 11.9234 16.1912 12.1643 16.148 12.4241C16.098 12.6721 16.049 12.8691 16.049 13.0671H20.475C20.377 12.3251 20.131 11.8311 19.787 11.4841V11.4841ZM15.459 6.2901H20.967V7.6261H15.46V6.2901H15.459Z"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_48_1508">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
+              <a href="https://www.youtube.com/@gradingrs">
+              <svg class="vh ul cl il" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M21.7 8.037a4.26 4.26 0 0 0-.789-1.964 2.84 2.84 0 0 0-1.984-.839c-2.767-.2-6.926-.2-6.926-.2s-4.157 0-6.928.2a2.836 2.836 0 0 0-1.983.839 4.225 4.225 0 0 0-.79 1.965 30.146 30.146 0 0 0-.2 3.206v1.5a30.12 30.12 0 0 0 .2 3.206c.094.712.364 1.39.784 1.972.604.536 1.38.837 2.187.848 1.583.151 6.731.2 6.731.2s4.161 0 6.928-.2a2.844 2.844 0 0 0 1.985-.84 4.27 4.27 0 0 0 .787-1.965 30.12 30.12 0 0 0 .2-3.206v-1.516a30.672 30.672 0 0 0-.202-3.206Zm-11.692 6.554v-5.62l5.4 2.819-5.4 2.801Z" clip-rule="evenodd"/></svg>
               </a>
             </li>
           </ul>
