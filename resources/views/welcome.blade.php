@@ -207,7 +207,7 @@
             <!-- Team Item -->
             <div class="animate_top rj">
               <div class="c i pg z-1">
-                <img class="vd" src="images/team-01.png" alt="Dvoriste" />
+                <img class="vd" src="images/prostrano-dvoriste.jpg" alt="Dvoriste" />
 
                 <div class="ef im nl il">
                   <span class="h -ud-left-5 -ud-bottom-21 rc de gd gh if wa"></span>
@@ -241,7 +241,7 @@
             <!-- Team Item -->
             <div class="animate_top rj">
               <div class="c i pg z-1">
-                <img class="vd" src="images/team-02.png" alt="Okolina" />
+                <img class="vd" src="images/sokolis-prijatna-okolina.jpg" alt="Okolina" />
 
                 <div class="ef im nl il">
                   <span class="h -ud-left-5 -ud-bottom-21 rc de gd gh if wa"></span>
@@ -275,7 +275,7 @@
             <!-- Team Item -->
             <div class="animate_top rj">
               <div class="c i pg z-1">
-                <img class="vd" src="images/team-03.png" alt="Stanovi" />
+                <img class="vd" src="images/sokolis-savremeni-stanovi.jpg" alt="Stanovi" />
 
                 <div class="ef im nl il">
                   <span class="h -ud-left-5 -ud-bottom-21 rc de gd gh if wa"></span>
@@ -332,21 +332,21 @@
           <div class="wc qf pn xo ng">
             <!-- Service Item -->
             <div class="animate_top sg oi pi zq ml il am cn _m">
-              <img src="images/aktivnosti_1.jpg" alt="Igralista" />
+              <img src="images/sokolis-decija-igralista.jpg" alt="Igralista" />
               <h4 class="ek zj kk wm nb _b">Dečija igrališta</h4>
               <p>Uživajte u sigurnom i stimulativnom okruženju koje podstiče igru i kreativnost.</p>
             </div>
 
             <!-- Service Item -->
             <div class="animate_top sg oi pi zq ml il am cn _m">
-              <img src="images/aktivnosti_2.jpg" alt="Vrt" />
+              <img src="images/sokolis-vrt.jpg" alt="Vrt" />
               <h4 class="ek zj kk wm nb _b">Vrt</h4>
               <p>Pažljivo projektovan vrt obogaćuje unutrašnji prostor.</p>
             </div>
 
             <!-- Service Item -->
             <div class="animate_top sg oi pi zq ml il am cn _m">
-              <img src="images/aktivnosti_3.jpg" alt="Zajedničke prostorije" />
+              <img src="images/sokolis-rekreacija.jpg" alt="Rekreacija" />
               <h4 class="ek zj kk wm nb _b">Rekreacija</h4>
               <p>Zdrav i aktivan način života u sklopu kompleksa.</p>
             </div>
