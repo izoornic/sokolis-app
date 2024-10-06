@@ -541,6 +541,19 @@
     --tw-bg-opacity: 1;
     background-color: rgb(24 28 49 / var(--tw-bg-opacity));
   }
+
+  .pdfdownload{
+    padding-top: 20px;
+    margin-top: 15px;
+    color: #bc8f8f;
+  }
+
+  .pdfdownload:hover {
+    color: #a52a2a;
+  }
+
+
+
   @media (min-width: 1024px){
   
     .a{

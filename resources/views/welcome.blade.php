@@ -303,7 +303,7 @@
               </div>
 
               <h4 class="yj go kk wm ob zb">Savremeni stanovi</h4>
-              <p>Zajedničke prostorije i uređena bašta. <br /> Stil, Komfor i Pristupačnost</p>
+              <p>Stil, Komfor i Pristupačnost</p>
             </div>
           </div>
         </div>
@@ -434,10 +434,13 @@
                 >
                 </h2>
                 <p class="bb on/5 wo/5 hq" x-text="sectionTitleText"></p>
+                <p>&nbsp;</P>
+                <p><a class="pdfdownload" href="images/uputstvo-za-video-interfon.pdf" target="_blanck">Uputstvo za upotrebu interfona (preuzmite PDF)</a></p>
             </div>
 
-
+            
         </div>
+        
         <!-- Section Title End -->
         <div class="bb ze ki xn yq mb en">
           <div class="wc qf pn xo ng">
