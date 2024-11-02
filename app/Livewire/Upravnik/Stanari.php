@@ -4,6 +4,7 @@ namespace App\Livewire\Upravnik;
 
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\WithPagination;
 
 use App\Models\User;
 //use App\Models\UserStanIndex;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Config;
 class Stanari extends Component
 {
     use WithPagination;
-    
+
     public $del_id;
 
     //search
