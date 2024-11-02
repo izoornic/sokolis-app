@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Config;
 
 class Stanari extends Component
 {
+    use WithPagination;
+    
     public $del_id;
 
     //search
