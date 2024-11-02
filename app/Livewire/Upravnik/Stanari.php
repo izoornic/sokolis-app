@@ -41,7 +41,7 @@ class Stanari extends Component
     public function stanUkljonjenInfo()
     {
         session()->flash('status', 'Stan je uspešno uklonjen.');
-        $this->render();
+        $this->redirect('/upravnik-stanari');
     }
     
     #[On('obrisi-stanara')] 
