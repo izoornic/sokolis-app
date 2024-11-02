@@ -32,7 +32,7 @@ class Stanari extends Component
     public function stanDodatInfo()
     {
         session()->flash('status', 'Stan je uspešno dodat.');
-        $this->redirect('#');
+        $this->redirect('/upravnik-stanari');
         //$this->render();
     }
 
