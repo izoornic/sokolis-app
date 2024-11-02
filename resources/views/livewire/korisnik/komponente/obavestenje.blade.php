@@ -46,6 +46,15 @@
                     
                     <div class="p-4 text-base text-xl leading-7 text-gray-700">
                         <p> {!! nl2br(e($textdisp)) !!}</p>
+                        @if(count($ob_links))
+                        <div class="flex mt-2">
+                            @foreach($ob_links as $oblink)
+                               <a 
+                               class="my-1 mx-2 bg-neutral-400 hover:bg-neutral-600 text-white text-sm py-2 px-2 rounded flex"
+                               href="{{ $oblink->ob_link_adress }}" target="_blanck"> {{ $oblink->ob_link_tekst }}</a><br />
+                            @endforeach
+                        </div>
+                        @endif
                     </div>
                     @php
                         if($koments_seen == '') $koments_seen=0;

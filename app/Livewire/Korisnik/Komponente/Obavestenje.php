@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\ObavestenjeKomentari;
 use App\Models\Obavestenja;
 use App\Models\ObavestenjaKomentarUserViewd;
+use App\Models\ObavestenjaLink;
 
 class Obavestenje extends Component
 {
@@ -18,6 +19,8 @@ class Obavestenje extends Component
     public $koments_br;
     public $koments_seen;
 
+    public $ob_links;
+
     public $komentari;
     public $show_koments;
 
@@ -25,11 +28,20 @@ class Obavestenje extends Component
 
     public function mount()
     {
+        //dd($this->getMyLinks());
+        $this->ob_links = $this->getMyLinks();
         //$this->show_koments = false;
         $this->komentari = [];
         $this->new_coment = '';
 
        // dd($this->komentari);
+    }
+
+    private function getMyLinks()
+    {
+        return ObavestenjaLink::select('ob_link_tekst', 'ob_link_adress')
+                                ->where('obavestenjeId', '=', $this->o_id)
+                                ->get();
     }
 
     public function ShowComments($o_id)
