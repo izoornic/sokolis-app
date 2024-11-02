@@ -62,7 +62,8 @@ class StanNoviStanaru extends ModalComponent
                         ->whereNotIn('id', 
                             DB::table('user_stan_indices')->select('stanId')->pluck('stanId') 
                         )
-                        ->orderBy('stans.sprat')
+                        ->orderBy('stans.sprat', 'ASC')
+                        ->orderBy('stans.spb', 'ASC')
                         ->get();
     }
 
