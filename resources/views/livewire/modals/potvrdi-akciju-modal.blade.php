@@ -27,9 +27,14 @@
       <!-- Modal body --> 
       <div class="relative flex-auto p-4">
 
-        <div class="p-2 pb-4 mb-2 border-b border-slate-300"> 
+        <div class="p-2 pb-4 mb-2"> 
             <p class="text-slate-600 text-lg">{{ $body_text }}</p>
         </div>
+        @if($body_text2ndrow)
+        <div class="p-2 pb-4 mb-2"> 
+            <p class="text-slate-600 text-lg font-bold">{{ $body_text2ndrow }}</p>
+        </div>
+        @endif
 
       <!-- Modal footer -->
       <div class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 p-4">

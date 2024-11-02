@@ -32,7 +32,7 @@ class kvarTiket extends Model
     ];
 
     /**
-     * Get the user that owns the phone.
+     * Get the user 
      */
     public function user(): BelongsTo
     {
@@ -40,7 +40,7 @@ class kvarTiket extends Model
     }
 
     /**
-     * Get the user that owns the phone.
+     * Get the coments.
      */
     public function komentari(): HasMany
     {
@@ -48,7 +48,7 @@ class kvarTiket extends Model
     }
 
     /**
-     * Get the user that owns the phone.
+     * Get the images.
      */
     public function images(): HasMany
     {

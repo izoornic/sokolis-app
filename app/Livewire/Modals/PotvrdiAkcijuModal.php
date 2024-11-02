@@ -11,6 +11,7 @@ class PotvrdiAkcijuModal extends ModalComponent
     public $button_label;
     public $body_text;
     public $naslov; 
+    public $body_text2ndrow;
 
     public static function modalMaxWidth(): string
     {

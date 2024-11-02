@@ -12,9 +12,15 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\Stranica;
 use App\Models\UserStanIndex;
 use App\Models\Stan;
+use App\Models\Zgrada;
+use App\Models\UpravnikZgradaIndex;
+
 use Auth;
 
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+//use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -117,9 +123,38 @@ class User extends Authenticatable
     /**
      * Get sve stanove korisnika.
      */
-    public function stanovi(): BelongsToMany
+   /*  public function stanovi(): BelongsToMany
     {
         return $this->BelongsToMany(Stan::class, 'user_stan_indices', 'userId', 'stanId');
+    } */
+
+    public function zgrade():  HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Zgrada::class,
+            UpravnikZgradaIndex::class,
+            'userId',
+            'id',
+            'id',
+            'zgradaId'
+        );
+    }
+
+    public function stanoviDetalji():  HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Stan::class,
+            UserStanIndex::class,
+            'userId',
+            'id',
+            'id',
+            'stanId'
+        );
+    }
+
+    public function stanovi(): HasMany
+    {
+        return $this->HasMany(UserStanIndex::class, 'userId');
     }
 
 }

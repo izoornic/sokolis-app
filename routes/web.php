@@ -25,8 +25,8 @@ Route::middleware([
         if(auth()->user()->user_tipId == 1){
             User::getMyZgradeStanove();
             return redirect('/pocetna');
-        }else{
-            return redirect('/pocetna');
+        }elseif(auth()->user()->user_tipId == 2){
+            return redirect('/upravnik-pocetna');
         }
         //return (auth()->user()->user_tipId == 1) ? redirect('/pocetna') : 
         //return view('dashboard');
@@ -51,5 +51,17 @@ Route::middleware([
     Route::get('/stambena-zajednica', function () {
         return view('korisnik/stambena-zajednica');
     })->name('stambena-zajednica');
+
+    Route::get('/upravnik-pocetna', function () {
+        return view('upravnik/pocetna');
+    })->name('upravnik-pocetna');
+
+    Route::get('/upravnik-zgrade', function () {
+        return view('upravnik/zgrade');
+    })->name('upravnik-zgrade');
+
+    Route::get('/upravnik-stanari', function () {
+        return view('upravnik/stanari');
+    })->name('upravnik-stanari');
     
 });
