@@ -33,7 +33,8 @@ class Zgrade extends Component
                         ->leftJoin('user_stan_indices', 'user_stan_indices.stanId', '=', 'stans.id')
                         ->leftJoin('users', 'users.id', '=', 'user_stan_indices.userId')
                         ->where('stans.zgradaId', '=', IzabranaZgrada::getIzabranaZgradaId())
-                        ->orderBy('stans.sprat')
+                        ->orderBy('stans.sprat', 'ASC')
+                        ->orderBy('stans.stanbr', 'ASC')
                         ->get();
     }
 
