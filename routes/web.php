@@ -63,5 +63,9 @@ Route::middleware([
     Route::get('/upravnik-stanari', function () {
         return view('upravnik/stanari');
     })->name('upravnik-stanari');
+
+    Route::get('/upravnik-kvarovi', function () {
+        return view('upravnik/kvar-prijave-pregled');
+    })->name('upravnik-kvarovi');
     
 });

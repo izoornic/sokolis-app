@@ -32,16 +32,20 @@ class KvarPregled extends Component
     public $tiket_zgrada;
 
     public $vlasnik_tiketa;
+    public $upravnik;
 
-    public $sorce;
+    public $sorce; //za prikaz slika na lokalu i online
 
     public function mount()
     {
         $this->sorce=env('IMAGE_MANIPILATION');
-        if(!session()->exists(['stanovi', 'zgrade'])){
-            User::getMyZgradeStanove();
+        $this->upravnik = (auth()->user()->user_tipId == 1) ? false : true;
+        if(!$this->upravnik){
+            if(!session()->exists(['stanovi', 'zgrade'])){
+                User::getMyZgradeStanove();
+            }
+            $this->user_zids = session()->only(['stanovi', 'zgrade']);
         }
-        $this->user_zids = session()->only(['stanovi', 'zgrade']);
 
         $this->can_view = false;
         $this->vlasnik_tiketa = false;
@@ -59,13 +63,18 @@ class KvarPregled extends Component
         $this->tiket_status = $this->tiket_init->tiket_statusId;
 
         if($this->tiket_init){
-            if($this->tiket_init->userId == auth()->user()->id || ( in_array($this->tiket_init->zgradaId, $this->user_zids['zgrade']->toArray()) && $this->tiket_init->vidljiv_zgradi == 1)){
+            if($this->upravnik){
                 $this->can_view = true;
-                //set broj vidjenih komentara
-                KvarKomentarUserView::updateOrCreate( ['kvar_tiketId'=>$this->tkid, 'userId'=>auth()->user()->id], ['broj_vidjenih'=>$this->tiket_init->tiket_br_komentara] );
-
-                if($this->tiket_init->userId == auth()->user()->id) $this->vlasnik_tiketa = true;
+                $this->vlasnik_tiketa = true;
+            }else{
+                // ako je vlasnik tiketa ili je tiket u njegovoj zgradi i vidljiv je svima
+                if($this->tiket_init->userId == auth()->user()->id || ( in_array($this->tiket_init->zgradaId, $this->user_zids['zgrade']->toArray()) && $this->tiket_init->vidljiv_zgradi == 1)){
+                    $this->can_view = true;
+                    $this->vlasnik_tiketa = ($this->tiket_init->userId == auth()->user()->id);
+                }
             }
+            //set broj vidjenih komentara
+            KvarKomentarUserView::updateOrCreate( ['kvar_tiketId'=>$this->tkid, 'userId'=>auth()->user()->id], ['broj_vidjenih'=>$this->tiket_init->tiket_br_komentara] );
         }
     }
 
