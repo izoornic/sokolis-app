@@ -47,6 +47,23 @@ class ObavestenjeNovo extends Component
         }
     }
 
+    /* 
+    [
+        [
+            'header' => [1, 2, 3, 4, 5, 6, false],
+        ],
+    ], 
+    [
+        [
+            'list' => 'ordered',
+        ],
+        [
+            'list' => 'bullet',
+        ],
+    ],
+
+    */
+
     public function contentChanged($editorId, $content)
     {
         // $editorId is the id use when you initiated the livewire component
