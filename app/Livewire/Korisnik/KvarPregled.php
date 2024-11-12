@@ -34,6 +34,8 @@ class KvarPregled extends Component
     public $vlasnik_tiketa;
     public $upravnik;
 
+    public $tiket_vidljivost;
+
     public $sorce; //za prikaz slika na lokalu i online
 
     public function mount()
@@ -61,6 +63,7 @@ class KvarPregled extends Component
         $this->tiket_creator = kvarTiket::find($this->tkid)->user()->first()->name;
 
         $this->tiket_status = $this->tiket_init->tiket_statusId;
+        $this->tiket_vidljivost =  $this->tiket_init->vidljiv_zgradi;
 
         if($this->tiket_init){
             if($this->upravnik){
@@ -113,6 +116,13 @@ class KvarPregled extends Component
         return $this->redirect('/prijavi-kvar');
     }
 
+    #[On('promena-vidljivosti')]
+    public function promeniVidljivostTiketa()
+    {
+        kvarTiket::where('id',$this->tkid)->update(['vidljiv_zgradi'=> ($this->tiket_vidljivost) ? 0 : 1]);
+        $this->setInitVals();
+    }
+
     public function dodajSlike()
     {
         $this->dispatch('openModal', 'modals.images-add-modal', ['tkid' => $this->tkid]);
@@ -140,6 +150,14 @@ class KvarPregled extends Component
                 'body_text' => 'Da li ste sigurni da želite da obrišete tiket?',
                 'naslov' => 'Obriši tiket',
                 'akcija' => 'brisanje',
+            ];
+        }elseif($action == 'promeniVidljivost'){
+            $promena_txt = ($this->tiket_vidljivost) ? 'samo vlasniku' : 'celoj zgradi';
+            $modal_labels = [
+                'button_label' => 'Promeni vidljiivost',
+                'body_text' => 'Da li ste sigurni da želite da tiket bude vidljiv '.$promena_txt.'?',
+                'naslov' => 'Promena vidljivosti',
+                'akcija' => 'promena-vidljivosti',
             ];
         }
         

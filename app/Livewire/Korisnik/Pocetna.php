@@ -40,6 +40,7 @@ class Pocetna extends Component
     {
         $obavestenja_ids = ObavestenjeZgradaIndex::distinct('obavestenjeId')
                             ->whereIn('zgradaId', $this->ko_stanovi_zgrade['zgrade'])
+                            ->where('obavestenje_zgrada_indices.active', '=', 1)
                             ->pluck('obavestenjeId');
 
         return Obavestenja::select('*','obavestenjas.id as oid', 'obavestenjas.created_at as obv_date')

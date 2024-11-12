@@ -15,6 +15,7 @@ class Obavestenja extends Model
      * @var string[]
      */
     protected $fillable = [
+        'userId',
         'ob_tipId',
         'ob_broj_komentara',
         'ob_naslov',

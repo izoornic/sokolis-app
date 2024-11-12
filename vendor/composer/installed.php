@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'a6c7d53506eefb5b9d9d4724454fcebd9c064898',
+        'reference' => 'c4e1d88c8c0fe0878e3da14bc8cc1a8f09616a03',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -406,6 +406,15 @@
                 0 => 'v11.23.2',
             ),
         ),
+        'joelwmale/livewire-quill' => array(
+            'pretty_version' => '3.0.0',
+            'version' => '3.0.0.0',
+            'reference' => '80d3b2d1369d442075d6851766517359c1a4ee77',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../joelwmale/livewire-quill',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -451,7 +460,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'a6c7d53506eefb5b9d9d4724454fcebd9c064898',
+            'reference' => 'c4e1d88c8c0fe0878e3da14bc8cc1a8f09616a03',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -862,8 +871,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '3.0.0',
-                1 => '1.0|2.0|3.0',
+                0 => '1.0|2.0|3.0',
+                1 => '3.0.0',
             ),
         ),
         'psr/simple-cache' => array(

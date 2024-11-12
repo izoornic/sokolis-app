@@ -8,7 +8,7 @@
         <div class="bg-{{$tiket->prioritet_bg_collor}} border-t-4 border-{{$tiket->prioritet_txt_collor}} rounded-b text-slate-600 px-4 py-3 shadow-md mb-6 mx-2 my-2" role="alert">
 			<div class="flex justify-between">  
 				<div class="flex">
-					<div class="py-1"><svg class="fill-{{$tiket->prioritet_txt_collor}} w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M128 160H448V352H128V160zM512 64C547.3 64 576 92.65 576 128V208C549.5 208 528 229.5 528 256C528 282.5 549.5 304 576 304V384C576 419.3 547.3 448 512 448H64C28.65 448 0 419.3 0 384V304C26.51 304 48 282.5 48 256C48 229.5 26.51 208 0 208V128C0 92.65 28.65 64 64 64H512zM96 352C96 369.7 110.3 384 128 384H448C465.7 384 480 369.7 480 352V160C480 142.3 465.7 128 448 128H128C110.3 128 96 142.3 96 160V352z"/></svg></div>
+					<div class="py-1"><svg class="fill-{{$tiket->prioritet_txt_collor}} w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M128 160H448V352H128V160zM512 64C547.3 64 576 92.65 576 128V208C549.5 208 528 229.5 528 256C528 282.5 549.5 304 576 304V384C576 419.3 547.3 448 512 448H64C28.65 448 0 419.3 0 384V304C26.51 304 48 282.5 48 256C48 229.5 26.51 208 0 208V128C0 92.65 28.65 64 64 64H512zM96 352C96 369.7 110.3 384 128 384H448C465.7 384 480 369.7 480 352V160C480 142.3 465.7 128 448 128H128C110.3 128 96 142.3 96 160V352z"/></svg></div>
 					<div>
 						<div class="flex"><span class="mt-1">Prioritet:</span> 
                         <span class="mt-1 mx-2 font-bold uppercase text-{{$tiket->prioritet_txt_collor}}">{{$tiket->prioritet_naziv}}</span>
@@ -21,13 +21,24 @@
                             @endif
                         </span>
                         <span class="ml-2 mt-1 font-bold uppercase text-{{$tiket->prioritet_txt_collor}}">@if($tiket->tiket_statusId == 1) otvoren @else zatvoren @endif</span>
+                        @if($upravnik)
+                           <span class="mt-1 ml-4 font-bold flex">
+                                @if($tiket->vidljiv_zgradi == 1) 
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="1.5" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/><path stroke="currentColor" stroke-width="1.5" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+                                    <span class="ml-2">vidljiv zgradi</span>
+                                @else 
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.933 13.909A4.357 4.357 0 0 1 3 12c0-1 4-6 9-6m7.6 3.8A5.068 5.068 0 0 1 21 12c0 1-3 6-9 6-.314 0-.62-.014-.918-.04M5 19 19 5m-4 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+                                    <span class="ml-2">vidljiv samo vlasniku</span> 
+                                @endif
+                            </span>
+                        @endif
                         
                         </div>
 						<table class="divide-y divide-gray-200">
 							<tr>
 								<td class="p-2">Kreiran:</td>
 								<td><span class="font-bold">{{ App\Http\TimeFormatHelper::datumFormat($tiket->created_at) }}</span></td>
-								<td class="px-2 pl-4"><svg class="float-left fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"/></svg>otvorio:</td>
+								<td class="px-2 pl-4"><svg class="float-left fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"/></svg>otvorio:</td>
 								<td><span class="font-bold">{{$tiket_creator}}</span></td>
 							</tr>
 							<tr>
@@ -55,11 +66,19 @@
                         </button> 
                     @endif
                    <div class="py-4">
-                        <button wire:click="showComfirmModal('obrisi')" title='promeni status' class="my-1 bg-neutral-100 hover:bg-white text-neutral-600 hover:text-{{$tiket->prioritet_txt_collor}} font-bold py-1 px-2 border border-neutral-200 rounded flex">
+                        <button wire:click="showComfirmModal('obrisi')" title='Obriši tiket' class="my-1 bg-neutral-100 hover:bg-white text-neutral-600 hover:text-{{$tiket->prioritet_txt_collor}} font-bold py-1 px-2 border border-neutral-200 rounded flex">
                                 <svg class="fill-current w-4 h-4 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M135.2 17.69C140.6 6.848 151.7 0 163.8 0H284.2C296.3 0 307.4 6.848 312.8 17.69L320 32H416C433.7 32 448 46.33 448 64C448 81.67 433.7 96 416 96H32C14.33 96 0 81.67 0 64C0 46.33 14.33 32 32 32H128L135.2 17.69zM31.1 128H416V448C416 483.3 387.3 512 352 512H95.1C60.65 512 31.1 483.3 31.1 448V128zM111.1 208V432C111.1 440.8 119.2 448 127.1 448C136.8 448 143.1 440.8 143.1 432V208C143.1 199.2 136.8 192 127.1 192C119.2 192 111.1 199.2 111.1 208zM207.1 208V432C207.1 440.8 215.2 448 223.1 448C232.8 448 240 440.8 240 432V208C240 199.2 232.8 192 223.1 192C215.2 192 207.1 199.2 207.1 208zM304 208V432C304 440.8 311.2 448 320 448C328.8 448 336 440.8 336 432V208C336 199.2 328.8 192 320 192C311.2 192 304 199.2 304 208z"/></svg> 
                                 <span>Obriši tiket</span>
                         </button>
                     </div>
+                    @if($upravnik)
+                    <div class="py-4">
+                        <button wire:click="showComfirmModal('promeniVidljivost')" title='promeni vidljivost tiketa' class="my-1 bg-neutral-100 hover:bg-white text-neutral-600 hover:text-{{$tiket->prioritet_txt_collor}} font-bold py-1 px-2 border border-neutral-200 rounded flex">
+                            <svg class="w-6 h-6 text-current mr-1 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="1.5" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/><path stroke="currentColor" stroke-width="1.5" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+                                <span>Promeni vidljivost</span>
+                        </button>
+                    </div>  
+                    @endif
                 @endif
             
             </div>

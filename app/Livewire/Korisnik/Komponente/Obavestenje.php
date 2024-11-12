@@ -3,15 +3,21 @@
 namespace App\Livewire\Korisnik\Komponente;
 
 use Livewire\Component;
+use Livewire\Attributes\On;
 use App\Models\ObavestenjeKomentari;
 use App\Models\Obavestenja;
 use App\Models\ObavestenjaKomentarUserViewd;
 use App\Models\ObavestenjaLink;
+use App\Models\ObavestenjeZgradaIndex;
+
+use App\Livewire\Upravnik\ObavestenjaPregled;
 
 class Obavestenje extends Component
 {
 
     public $o_id;
+    public $del_ob_id;
+
     public $tip;
     public $naslov;
     public $textdisp;
@@ -26,6 +32,8 @@ class Obavestenje extends Component
 
     public $new_coment;
 
+    public $upravnik;
+
     public function mount()
     {
         //dd($this->getMyLinks());
@@ -34,6 +42,7 @@ class Obavestenje extends Component
         $this->komentari = [];
         $this->new_coment = '';
 
+        $this->upravnik = (auth()->user()->user_tipId == 2) ? true : false;
        // dd($this->komentari);
     }
 
@@ -87,6 +96,36 @@ class Obavestenje extends Component
         $this->new_coment = '';
         $this->show_koments = false;
         $this->ShowComments($this->o_id);
+    }
+
+    
+    #[On('obrisi-obavestenje')] 
+    public function obrisiObavestenje()
+    {
+        if(session('obavestenje_del_id')) $del_id = session('obavestenje_del_id');
+        //dd(session('obavestenje_del_id'));
+        ObavestenjeZgradaIndex::where('obavestenjeId', $del_id)->update(['active' => 0]);
+        session()->flash('status', 'Obaveštenje je uspešno obrisano.');
+        $this->redirect('/upravnik-obavestenja');
+    }
+
+    public function deleteObavestenje($oid)
+    {
+        session(['obavestenje_del_id' => $oid]);
+        $ob_data = Obavestenja::where('id', '=', $oid)->first();
+        $modal_labels = [
+            'naslov' => 'Brisanje obaveštenja',
+            'body_text' => 'Da li ste sigurni da želite da obrišete obaveštenje: ',
+            'body_text2ndrow' => $ob_data->ob_naslov.' ?',
+            'button_label' => 'Obriši obaveštenje',
+            'akcija' => 'obrisi-obavestenje',
+        ];
+        $this->dispatch('openModal', 'modals.potvrdi-akciju-modal', $modal_labels);
+    }
+
+    public function editObavestenje($oid=0)
+    {
+        $this->redirect('/upravnik-obavestenje-novo?oid='.$oid);
     }
 
     public function render()

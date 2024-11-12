@@ -76,6 +76,7 @@ return array(
     'Laravel\\Jetstream\\' => array($vendorDir . '/laravel/jetstream/src'),
     'Laravel\\Fortify\\' => array($vendorDir . '/laravel/fortify/src'),
     'LakM\\Comments\\' => array($vendorDir . '/lakm/laravel-comments/src'),
+    'Joelwmale\\LivewireQuill\\' => array($vendorDir . '/joelwmale/livewire-quill/src'),
     'Illuminate\\Support\\' => array($vendorDir . '/laravel/framework/src/Illuminate/Macroable', $vendorDir . '/laravel/framework/src/Illuminate/Collections', $vendorDir . '/laravel/framework/src/Illuminate/Conditionable'),
     'Illuminate\\' => array($vendorDir . '/laravel/framework/src/Illuminate'),
     'GuzzleHttp\\UriTemplate\\' => array($vendorDir . '/guzzlehttp/uri-template/src'),

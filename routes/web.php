@@ -67,5 +67,13 @@ Route::middleware([
     Route::get('/upravnik-kvarovi', function () {
         return view('upravnik/kvar-prijave-pregled');
     })->name('upravnik-kvarovi');
+
+    Route::get('/upravnik-obavestenja', function () {
+        return view('upravnik/obavestenja');
+    })->name('upravnik-obavestenja');
+
+    Route::get('/upravnik-obavestenje-novo', function () {
+        return view('upravnik/obavestenje-novo');
+    })->name('upravnik-obavestenje-novo');
     
 });
