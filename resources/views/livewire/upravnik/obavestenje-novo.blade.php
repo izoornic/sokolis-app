@@ -48,7 +48,7 @@
         <!-- FAJLOVI -->
         @if (!$files)
           <div class="p-2 mb-2 border-b border-slate-300">
-            <p class="text-slate-600 text-lg">Fajlovi:</p>
+            <p>Fajlovi:</p>
             <div class="flex">
               <label for="browse_btn" style="cursor:pointer" class="ms-1 inline-block rounded bg-slate-500 px-6 pb-2 pt-2.5 text-base font-medium uppercase leading-normal text-white shadow-neutral-200 hover:text-neutral-700 hover:bg-slate-100 hover:shadow-neutral-400">Dodja fajlove: </label>
               <input id="browse_btn" type="file" accept=".pdf,.xlsx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" wire:model="files" multiple style="visibility: hidden; height: 2px; width: 150px">
@@ -58,6 +58,17 @@
             </div>
           </div>
         @endif
+
+       <!--  ZGRADE  -->
+       <div class="p-2 mb-2 border-b border-slate-300">
+            <p>Zgrade koje vide obaveštenje:</p>
+            @foreach ($zgrade_upravnika as $item)
+               <p class="p-2"> <input type="checkbox" value="{{$item->id}}" wire:model="zgrade"  class="form-checkbox h-6 w-6 text-blue-500"> - {{ $item->naziv }}</p>
+            @endforeach
+            <div class="p-2 text-red-500 mb-3">{{$zgrade_error}} </div>
+            
+       </div>
+
         <div class="py-4">
             <button wire:click="save()" class="mt-2 ml-4 bg-teal-700 hover:bg-teal-900 text-white font-bold py-2 px-4 border border-teal-600 rounded flex">  
                 <svg class="w-6 h-6 current-color dark:text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21a9 9 0 1 1 0-18c1.052 0 2.062.18 3 .512M7 9.577l3.923 3.923 8.5-8.5M17 14v6m-3-3h6"/></svg>

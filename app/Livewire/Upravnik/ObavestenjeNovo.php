@@ -3,11 +3,13 @@
 namespace App\Livewire\Upravnik;
 
 use Livewire\Component;
+use Livewire\Attributes\On;
+
 use App\Models\Obavestenja;
 use App\Models\ObavestenjeZgradaIndex;
+use App\Models\UpravnikZgradaIndex;
 
 use App\Actions\Zgrada\IzabranaZgrada;
-
 use Joelwmale\LivewireQuill\Traits\HasQuillEditor;
 
 
@@ -25,12 +27,16 @@ class ObavestenjeNovo extends Component
     
     public $is_edit;
     public $zgrade;
+    public $zgrade_error;
 
+
+    //TODO Naslov i telo REQUIRED i DODAVANJE FAJLOVA
     public function mount()
     {
         $this->oid = request()->query('oid');
-        $this->zgrade = [IzabranaZgrada::getIzabranaZgradaId()];
+        
 
+       //dd(auth()->user()->zgrade()->get());
         if($this->oid){
             $this->title = "Izmeni obaveštenje";
             $this->is_edit = true;
@@ -40,11 +46,27 @@ class ObavestenjeNovo extends Component
             $this->content = str_replace('text-right', 'ql-align-right', $this->content);
             $this->content = str_replace('text-center','ql-align-center', $this->content);
             $this->ob_tip = $ob_model->ob_tipId;
+
+            $this->zgrade = ObavestenjeZgradaIndex::select('zgradaId')->where('obavestenjeId', $this->oid)->pluck('zgradaId');
         }else{
+            $this->zgrade = [IzabranaZgrada::getIzabranaZgradaId()];
             $this->title = "Novo obaveštenje";
             $this->is_edit = false;
             $this->ob_tip = 1;
         }
+    }
+
+    #[On('promenjenaZgrada')]
+    public function refreshMe()
+    {
+        if($this->is_edit) return;
+        //$this->render();
+        return to_route('upravnik-obavestenje-novo');
+    }
+
+    public function zgradeList()
+    {
+        return auth()->user()->zgrade()->get();
     }
 
     /* 
@@ -75,6 +97,10 @@ class ObavestenjeNovo extends Component
 
     public function save()
     {
+        if(!count($this->zgrade)){
+            $this->zgrade_error = 'Barem jedna zgrada mora biti izabrana!';
+            return;
+        }
         $this->content = str_replace('ql-align-right', 'text-right', $this->content);
         $this->content = str_replace('ql-align-center', 'text-center', $this->content);
         $model_data = [
@@ -86,22 +112,28 @@ class ObavestenjeNovo extends Component
 
         if($this->is_edit){
             Obavestenja::where('id', $this->oid)->update($model_data);
+            //obrisi sve redove sa ovim idjem
+            ObavestenjeZgradaIndex::where('obavestenjeId', $this->oid)->delete();
+            $new_ob_id = $this->oid;
         }else{
-
             $new = Obavestenja::create($model_data);
-            $new_ob_id = $new->id;
-            foreach($this->zgrade as $zg_id){
-                ObavestenjeZgradaIndex::create([
-                    'obavestenjeId' => $new_ob_id,
-                    'zgradaId' => $zg_id
-                ]);
-            }
+            $new_ob_id = $new->id; 
         }
+
+        foreach($this->zgrade as $zg_id){
+            ObavestenjeZgradaIndex::create([
+                'obavestenjeId' => $new_ob_id,
+                'zgradaId' => $zg_id
+            ]);
+        }
+
         $this->redirect('/upravnik-obavestenja');
     }
 
     public function render()
     {
-        return view('livewire.upravnik.obavestenje-novo');
+        return view('livewire.upravnik.obavestenje-novo', [
+            'zgrade_upravnika' => $this->zgradeList()
+        ]);
     }
 }

@@ -387,28 +387,28 @@
           <div class="tc uf tn xf gg">
             <div class="animate_top me/6 ln rj">
               <h2 class="ek bk _p kk wm hc xe/3">Lamela 2</h2>
-              <p class="ek bk aq">Ponedeljak 14:00 </p>
-              <p class="ek bk aq">Četvrtak 16:00 </p>
+              <p class="ek bk aq">Uskoro više  </p>
+              <p class="ek bk aq">informacija... </p>
             </div>
             <div class="animate_top me/6 ln rj">
-              <h2 class="ek bk _p kk wm hc xe/3">Lamela 3</h2>
-              <p class="ek bk aq">Ponedeljak 16:00 </p>
-              <p class="ek bk aq">Četvrtak 18:00 </p>
+              <h2 class="ek bk _p kk wm hc xe/3">Lamela 3 - Soko</h2>
+              <p class="ek bk aq">Utorak 14:00 </p>
+              <p class="ek bk aq">Četvrtak 14:00 </p>
             </div>
             <div class="animate_top me/6 ln rj">
               <h2 class="ek bk _p kk wm hc xe/3">Lamela 4</h2>
-              <p class="ek bk aq">Utorak 14:00 </p>
-              <p class="ek bk aq">Petak 12:00 </p>
+              <p class="ek bk aq">Uskoro više  </p>
+              <p class="ek bk aq">informacija... </p>
             </div>
             <div class="animate_top me/6 ln rj">
               <h2 class="ek bk _p kk wm hc xe/3">Garaža</h2>
-              <p class="ek bk aq">Sreda 12:00 </p>
-              <p class="ek bk aq">Subota 12:00 </p>
+              <p class="ek bk aq">Uskoro više  </p>
+              <p class="ek bk aq">informacija... </p>
             </div>
             <div class="animate_top me/6 ln rj">
               <h2 class="ek bk _p kk wm hc xe/3">Dvorište</h2>
-              <p class="ek bk aq">Ponedeljak 14:00 </p>
-              <p class="ek bk aq">Četvrtak 16:00 </p>
+              <p class="ek bk aq">Uskoro više  </p>
+              <p class="ek bk aq">informacija... </p>
             </div>
           </div>
         </div>
