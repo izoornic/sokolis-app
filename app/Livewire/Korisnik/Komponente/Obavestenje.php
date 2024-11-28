@@ -49,9 +49,16 @@ class Obavestenje extends Component
 
     private function getMyLinks()
     {
-        return ObavestenjaLink::select('id', 'ob_link_tekst', 'ob_link_adress')
+        $oblinks = ObavestenjaLink::select('id', 'ob_link_tekst', 'ob_link_adress')
                                 ->where('obavestenjeId', '=', $this->o_id)
                                 ->get();
+        
+        $oblinks->each(function ($item, $key) {
+            $item->url = Storage::url($item->ob_link_adress);
+        });
+
+        
+        return $oblinks;
     }
 
     public function ShowComments($o_id)
@@ -128,14 +135,6 @@ class Obavestenje extends Component
     {
         $this->redirect('/upravnik-obavestenje-novo?oid='.$oid);
     }
-
-    public function getAttDocument($ob_link_id)
-    {
-        //dd(ObavestenjaLink::where('id', $ob_link_id)->first()->ob_link_adress);
-        return Storage::download(ObavestenjaLink::where('id', $ob_link_id)->first()->ob_link_adress);
-    }
-
-    //<!-- href="{{ $oblink->ob_link_adress }}" target="_blanck" -->
 
     public function render()
     {
