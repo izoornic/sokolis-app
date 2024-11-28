@@ -4,18 +4,22 @@ namespace App\Livewire\Upravnik;
 
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\WithFileUploads;
 
 use App\Models\Obavestenja;
-use App\Models\ObavestenjeZgradaIndex;
+use App\Models\ObavestenjaLink;
 use App\Models\UpravnikZgradaIndex;
+use App\Models\ObavestenjeZgradaIndex;
+
+use Illuminate\Support\Facades\Storage;
 
 use App\Actions\Zgrada\IzabranaZgrada;
 use Joelwmale\LivewireQuill\Traits\HasQuillEditor;
 
-
 class ObavestenjeNovo extends Component
 {
     use HasQuillEditor;
+    use WithFileUploads;
 
     public $oid;
     public $title;
@@ -23,18 +27,25 @@ class ObavestenjeNovo extends Component
     public $ob_naslov;
     public $content;
     public $ob_tip;
-    public $files; 
+    public $ob_tip_labels;
+    
+    public $db_files;   //ranije sacuvani fajlovi koji se ucitaju samo kad je edit iz databaze
+    public $files;      // fajlovi ucitani uploadom
+    public $upload_files_display_text;
+    public $cur_file;
+
     
     public $is_edit;
     public $zgrade;
     public $zgrade_error;
 
-
-    //TODO Naslov i telo REQUIRED i DODAVANJE FAJLOVA
     public function mount()
     {
         $this->oid = request()->query('oid');
-        
+        $this->files = [];
+        $this->db_files = [];
+        $this->upload_files_display_text = [];
+        $this->ob_tip_labels = ['', 'važno', 'obaveštenje', 'informacija'];
 
        //dd(auth()->user()->zgrade()->get());
         if($this->oid){
@@ -47,6 +58,7 @@ class ObavestenjeNovo extends Component
             $this->content = str_replace('text-center','ql-align-center', $this->content);
             $this->ob_tip = $ob_model->ob_tipId;
 
+            $this->db_files = ObavestenjaLink::where('obavestenjeId', $this->oid)->get();
             $this->zgrade = ObavestenjeZgradaIndex::select('zgradaId')->where('obavestenjeId', $this->oid)->pluck('zgradaId');
         }else{
             $this->zgrade = [IzabranaZgrada::getIzabranaZgradaId()];
@@ -54,6 +66,13 @@ class ObavestenjeNovo extends Component
             $this->is_edit = false;
             $this->ob_tip = 1;
         }
+    }
+
+    public function rules()
+    {
+        return [
+            'ob_naslov' => 'required|string|max:255',
+        ]; 
     }
 
     #[On('promenjenaZgrada')]
@@ -67,6 +86,11 @@ class ObavestenjeNovo extends Component
     public function zgradeList()
     {
         return auth()->user()->zgrade()->get();
+    }
+
+    public function setTipId($tid)
+    {
+        $this->ob_tip = $tid;
     }
 
     /* 
@@ -97,6 +121,8 @@ class ObavestenjeNovo extends Component
 
     public function save()
     {
+        $this->validate();
+
         if(!count($this->zgrade)){
             $this->zgrade_error = 'Barem jedna zgrada mora biti izabrana!';
             return;
@@ -118,6 +144,13 @@ class ObavestenjeNovo extends Component
         }else{
             $new = Obavestenja::create($model_data);
             $new_ob_id = $new->id; 
+
+            if(count($this->files)){
+                foreach($this->files as $file){
+                    $file['link_txt'] = $file['link_txt'] ?: $file['original_name'];
+                    if ( Storage::disk('public')->putFileAs('', $file['file_to_up'], $file['hashName'])) ObavestenjaLink::create(['obavestenjeId'=>$new_ob_id, 'ob_link_tekst'=>$file['link_txt'] , 'ob_link_adress'=>$file['hashName']]);
+                }
+            }
         }
 
         foreach($this->zgrade as $zg_id){
@@ -128,6 +161,34 @@ class ObavestenjeNovo extends Component
         }
 
         $this->redirect('/upravnik-obavestenja');
+    }
+
+    public function updated($key, $value)
+    {
+        if($this->cur_file){
+            $currr = $this->cur_file;
+            $this->cur_file = null;
+            array_push( $this->files, [
+                'origin' => 'upload',
+                'original_name' => $currr->getClientOriginalName(),
+                'hashName' => $currr->hashName(),
+                'link_txt' => '',
+                'file_to_up' => $currr
+            ]);
+        }
+    }
+
+    public function delUpload($ind)
+    {
+        array_splice($this->files, $ind, 1);
+    }
+
+    public function delDbUpload($id)
+    {
+        $db_row = ObavestenjaLink::where('id', $id)->first();
+        Storage::delete($db_row->ob_link_adress);
+        ObavestenjaLink::where('id', $id)->delete();
+        $this->db_files = ObavestenjaLink::where('obavestenjeId', $this->oid)->get();
     }
 
     public function render()

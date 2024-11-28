@@ -71,8 +71,7 @@ class ImagesAddModal extends ModalComponent
     public function savePhotos()
     {
         if(!$this->photos) return;
-        $no_of_photos = count($this->photos);
-        if($no_of_photos){
+        if(count($this->photos)){
             foreach($this->photos as $phooto){
                 $name = $phooto->hashName();
                 if ( Storage::disk('public')->putFileAs('', $phooto, $name)) KvarTiketImage::create(['userId'=>auth()->user()->id, 'kvar_tiketId'=>$this->tkid , 'image_path'=>$name]);

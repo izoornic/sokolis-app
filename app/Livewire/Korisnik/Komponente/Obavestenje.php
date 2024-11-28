@@ -11,6 +11,7 @@ use App\Models\ObavestenjaLink;
 use App\Models\ObavestenjeZgradaIndex;
 
 use App\Livewire\Upravnik\ObavestenjaPregled;
+use Illuminate\Support\Facades\Storage;
 
 class Obavestenje extends Component
 {
@@ -48,7 +49,7 @@ class Obavestenje extends Component
 
     private function getMyLinks()
     {
-        return ObavestenjaLink::select('ob_link_tekst', 'ob_link_adress')
+        return ObavestenjaLink::select('id', 'ob_link_tekst', 'ob_link_adress')
                                 ->where('obavestenjeId', '=', $this->o_id)
                                 ->get();
     }
@@ -127,6 +128,14 @@ class Obavestenje extends Component
     {
         $this->redirect('/upravnik-obavestenje-novo?oid='.$oid);
     }
+
+    public function getAttDocument($ob_link_id)
+    {
+        //dd(ObavestenjaLink::where('id', $ob_link_id)->first()->ob_link_adress);
+        return Storage::download(ObavestenjaLink::where('id', $ob_link_id)->first()->ob_link_adress);
+    }
+
+    //<!-- href="{{ $oblink->ob_link_adress }}" target="_blanck" -->
 
     public function render()
     {
