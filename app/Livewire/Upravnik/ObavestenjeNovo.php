@@ -39,6 +39,7 @@ class ObavestenjeNovo extends Component
     public $zgrade;
     public $zgrade_error;
 
+    //TODO Kada se edituje obavestenje ne dodje fajl
     public function mount()
     {
         $this->oid = request()->query('oid');
@@ -144,12 +145,13 @@ class ObavestenjeNovo extends Component
         }else{
             $new = Obavestenja::create($model_data);
             $new_ob_id = $new->id; 
+        }
 
-            if(count($this->files)){
-                foreach($this->files as $file){
-                    $file['link_txt'] = $file['link_txt'] ?: $file['original_name'];
-                    if ( Storage::disk('public')->putFileAs('', $file['file_to_up'], $file['hashName'])) ObavestenjaLink::create(['obavestenjeId'=>$new_ob_id, 'ob_link_tekst'=>$file['link_txt'] , 'ob_link_adress'=>$file['hashName']]);
-                }
+        //dodja zakacene fajlove ako ih ima
+        if(count($this->files)){
+            foreach($this->files as $file){
+                $file['link_txt'] = $file['link_txt'] ?: $file['original_name'];
+                if ( Storage::disk('public')->putFileAs('', $file['file_to_up'], $file['hashName'])) ObavestenjaLink::create(['obavestenjeId'=>$new_ob_id, 'ob_link_tekst'=>$file['link_txt'] , 'ob_link_adress'=>$file['hashName']]);
             }
         }
 
