@@ -56,8 +56,6 @@ class Obavestenje extends Component
         $oblinks->each(function ($item, $key) {
             $item->url = Storage::url($item->ob_link_adress);
         });
-
-        
         return $oblinks;
     }
 
@@ -110,11 +108,23 @@ class Obavestenje extends Component
     #[On('obrisi-obavestenje')] 
     public function obrisiObavestenje()
     {
-        if(session('obavestenje_del_id')) $del_id = session('obavestenje_del_id');
-        //dd(session('obavestenje_del_id'));
-        ObavestenjeZgradaIndex::where('obavestenjeId', $del_id)->update(['active' => 0]);
-        session()->flash('status', 'Obaveštenje je uspešno obrisano.');
+        if(session('obavestenje_del_id')) {
+            $del_id = session('obavestenje_del_id');
+            //dd(session('obavestenje_del_id'));
+            ObavestenjeZgradaIndex::where('obavestenjeId', $del_id)->update(['active' => 0]);
+            if($this->ob_links){
+                foreach($this->ob_links as $olink){
+                    Storage::delete($olink->ob_link_adress);
+                    ObavestenjaLink::where('id', $olink->id)->delete();
+                }
+            }
+            session()->flash('status', 'Obaveštenje je uspešno obrisano.');
+        }else{
+            session()->flash('status', 'GREŠKA 216');
+        }
+
         $this->redirect('/upravnik-obavestenja');
+        
     }
 
     public function deleteObavestenje($oid)
