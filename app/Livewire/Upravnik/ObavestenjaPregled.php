@@ -20,14 +20,7 @@ class ObavestenjaPregled extends Component
     #[On('promenjenaZgrada')]
     public function refreshMe()
     {
-        //$this->render();
         return to_route('upravnik-obavestenja');
-    }
-
-    public function closeAlert()
-    {
-        if(session()->has('status')) session()->flash('status');
-        $this->redirect('/upravnik-obavestenja');
     }
 
     public function novoObavestenje()

@@ -24,8 +24,11 @@ class Zgrade extends Component
         $this->render();
     }
 
-    //TODO
-    //Ako je moguce dodati dugovanja preko API-ja
+    //TODO  Ako je moguce dodati dugovanja preko API-ja
+
+    //TODO Edit stana
+
+    //TODO Add stanar to stan
 
     public function read()
     {

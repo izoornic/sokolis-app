@@ -39,7 +39,6 @@ class ObavestenjeNovo extends Component
     public $zgrade;
     public $zgrade_error;
 
-    //TODO Kada se edituje obavestenje ne dodje fajl
     public function mount()
     {
         $this->oid = request()->query('oid');
@@ -161,7 +160,8 @@ class ObavestenjeNovo extends Component
                 'zgradaId' => $zg_id
             ]);
         }
-
+        $flash_msg = ($this->is_edit) ? 'Obaveštenje je uspešno izmenjeno.' : 'Novo obaveštenje uspešno dodato.';
+        session()->flash('status', $flash_msg);
         $this->redirect('/upravnik-obavestenja');
     }
 

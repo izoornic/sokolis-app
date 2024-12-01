@@ -25,12 +25,6 @@ class Stanari extends Component
        //dd(User::find(1)->stanoviDetalji()->get());
     }
 
-    public function closeAlert()
-    {
-        if(session()->has('status')) session()->flash('status');
-    }
-
-    
     #[On('stan-dodat')]
     public function stanDodatInfo()
     {

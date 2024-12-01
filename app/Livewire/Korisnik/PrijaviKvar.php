@@ -32,11 +32,6 @@ class PrijaviKvar extends Component
         $this->user_zids = session()->only(['stanovi', 'zgrade']);
     }
 
-    public function closeAlert()
-    {
-        if(session()->has('status')) session()->flash('status');
-    }
-
     public function read()
     {
         return kvarTiket::select('*', 'kvar_tikets.created_at as crt', 'kvar_tikets.id as ktid', 'kvar_komentar_user_views.broj_vidjenih')

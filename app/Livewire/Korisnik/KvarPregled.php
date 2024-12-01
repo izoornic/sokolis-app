@@ -98,7 +98,8 @@ class KvarPregled extends Component
     {
         kvarTiket::where('id',$this->tkid)->update(['tiket_statusId'=> 2]);
         session()->flash('status', 'Status tiketa #'.$this->tkid.' promenjen u ZAKLJUČAN');
-        return $this->redirect('/prijavi-kvar');
+
+        return ($this->upravnik) ? $this->redirect('/upravnik-kvarovi') : $this->redirect('/prijavi-kvar');
     }
 
     #[On('otkljucaj')] 
