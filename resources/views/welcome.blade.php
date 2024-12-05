@@ -483,7 +483,7 @@
             </div>
             <div class="animate_top me/5 ln rj">
               <h2 class="gk vj zp or kk wm hc">12</h2>
-              <p class="ek bk aq">Lamema</p>
+              <p class="ek bk aq">Lamela</p>
             </div>
             <div class="animate_top me/5 ln rj">
               <h2 class="gk vj zp or kk wm hc">14</h2>

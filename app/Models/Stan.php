@@ -5,17 +5,38 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Stan extends Model
 {
     use HasFactory;
 
     /**
-     * Get the user that owns the phone.
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'stan_namenaId',
+        'sprat',
+        'povrsina',
+        'garaza'
+    ];
+
+    /**
+     * Get the zgradu za odabrani stan.
      */
     public function zgrada(): BelongsTo
     {
         return $this->belongsTo(Zgrada::class, 'zgradaId');
+    }
+
+    /**
+     * Get garaze ya odabrani stan.
+     */
+    public function garaze(): HasMany
+    {
+        return $this->hasMany(Garaza::class, 'stanId ');
     }
 
 
