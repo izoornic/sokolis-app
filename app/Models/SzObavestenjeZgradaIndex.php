@@ -9,6 +9,17 @@ class SzObavestenjeZgradaIndex extends Model
 {
     use HasFactory;
 
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'sz_obavestenjeId',
+        'zgradaId',
+        'active'
+    ];
+
     public static function getZgradeObavestenja($oid)
     {
         return SzObavestenjeZgradaIndex::select('zgradas.naziv_sz')

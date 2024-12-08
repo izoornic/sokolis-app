@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class SzObavestenje extends Model
 {
     use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'userId',
+        'sz_ob_broj_fajlova',
+        'sz_ob_naslov',
+        'sz_ob_text'
+    ];
 }

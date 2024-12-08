@@ -33,38 +33,58 @@
         <div class="py-2 border-b-2 border-neutral-100">
             <p>Sprat:</p>
             <input type="number" wire:model="sprat" id="sprat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            <div>
+                @error('sprat') <span class="text-xs text-red-500">{{ $message }}</span> @enderror 
+            </div>
         </div>
 
         <div class="py-2 border-b-2 border-neutral-100">
             <p class="flex">Površina (m<span class="text-xs mb-2">2</span>):</p>
             <input type="number" wire:model="povrsina" id="povrsina" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            <div>
+                @error('povrsina') <span class="text-xs text-red-500">{{ $message }}</span> @enderror 
+            </div>
         </div>
         <div class="py-2 border-b-2 border-neutral-100">
             <p>Garaže:</p>
             @foreach($garaze as $garaza)
-                <p></p>
+                <div class="flex justify-between bg-teal-50 m-2 p-2" >
+                    <div class="flex">
+                        <span class="mt-2 mr-2 flex">Garaža površina (m<span class="text-xs mb-2">2</span>) : &nbsp; <span class="font-bold"> {{ $garaza->gpovrsina }}</span> </span>
+                        <div class="flex items-center px-2 bg-slate-100 border border-gray-200 rounded dark:border-gray-700 m-2">
+                            @if($garaza->stan_namenaId == 3) {{ __('Garaža') }} @else {{ __('Paking mesto') }} @endif
+                        </div>
+                    </div>
+                    <div>
+                        <button wire:click="delDbGaraza({{$garaza->id}})" class="p-2 bg-red-700 hover:bg-red-900 text-white rounded mt-1">
+                            <svg class="w-6 h-6 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/></svg>
+                        </button>
+                    </div>
+                </div>
             @endforeach
 
             @php
                 $names_index = 0;
             @endphp
             @foreach($nove_garaze as $new_garaza)
-                <div class="flex justify-between bg-teal-50 m-2 p-2" >
+                <div class="flex justify-between bg-teal-50 m-2 px-2" >
                     <div class="flex">
-                        <span class="mt-2 mr-2 flex">Garaža površina (m<span class="text-xs mb-2">2</span>): </span>
-                        <input type="number" id="" wire:model.live="nove_garaze.{{$names_index}}.povrsina" class="mt-2 border-gray-300 text-gray-900 rounded-lg w-24 h-8" />
-                        <div class="flex items-center px-2 border border-gray-200 rounded dark:border-gray-700 m-2">
+                        <span class="mt-2.5 mr-2 flex">Garaža površina (m<span class="text-xs">2</span>): </span>
+                        <input type="number" id="" wire:model.live="nove_garaze.{{$names_index}}.povrsina" class="mt-2 border-gray-300 text-gray-900 rounded-lg w-24 h-9" />
+                        <div class="flex items-center px-2 bg-slate-50 border border-gray-200 rounded-lg dark:border-gray-700 m-2">
                             <input id="grz{{$names_index}}" type="radio" wire:model.live="nove_garaze.{{$names_index}}.namena" value="3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                             <label for="grz{{$names_index}}" class="ms-2 py-2 text-sm font-medium text-gray-900 dark:text-gray-300">Garaža</label>
                         </div>
-                        <div class="flex items-center px-2 border border-gray-200 rounded dark:border-gray-700 m-2">
+                        <div class="flex items-center px-2 bg-slate-50 border border-gray-200 rounded-lg dark:border-gray-700 m-2">
                             <input id="grzp{{$names_index}}" type="radio" wire:model.live="nove_garaze.{{$names_index}}.namena" value="4" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                             <label for="grzp{{$names_index}}" class="ms-2 py-2 text-sm font-medium text-gray-900 dark:text-gray-300">Paking mesto</label>
                         </div>
                     </div>
-                    <span><button wire:click="delNewGaraza({{$names_index}})" class="p-2 bg-red-700 hover:bg-red-900 text-white rounded">
-                        <svg class="w-6 h-6 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/></svg>
-                    </button></span>
+                    <div>
+                        <button wire:click="delNewGaraza({{$names_index}})" class="p-2 bg-red-700 hover:bg-red-900 text-white rounded mt-1">
+                            <svg class="w-6 h-6 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/></svg>
+                        </button>
+                    </div>
                 </div>
                 @php
                     $names_index ++;

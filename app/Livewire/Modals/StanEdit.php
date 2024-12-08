@@ -6,9 +6,12 @@ use LivewireUI\Modal\ModalComponent;
 use App\Models\Stan;
 use App\Models\Garaza;
 
+use Illuminate\Support\Facades\DB;
+
 class StanEdit extends ModalComponent
 {
     public $sid;
+    public $zid;
     public $sbr;
     public $stan_namena;
     public $sprat;
@@ -26,19 +29,37 @@ class StanEdit extends ModalComponent
         $this->garaze = [];
         $this->nove_garaze = [];
         $this->stan_row = Stan::where('id', $this->sid)->first();
+        //dd($this->stan_row->zgrada()->get());
+        $this->zid = $this->stan_row->zgradaId;
         $this->stan_namena = $this->stan_row->stan_namenaId;
         $this->sprat = $this->stan_row->sprat;
         $this->povrsina = $this->stan_row->povrsina;
         $this->garaza_sum  = $this->stan_row->garaza;
         if($this->garaza_sum){
-            $this->garaze = $this->stan_row->garaze();
+            $this->garaze = $this->stan_row->garaze()->get();
         }
     }
 
-    //TODO save function
+    public function rules()
+    {
+        return [
+            'sprat' => 'required|numeric',
+            'povrsina' => 'required|numeric|min:1',
+        ];  
+    }
+    
+    public function delDbGaraza($gid)
+    {
+        Garaza::where('id', $gid)->delete();
+        $garaz_sum = Garaza::where('stanId', $this->sid)->count();
+        Stan::where('id', $this->sid)->update(['garaza' => $garaz_sum]);
+        $this->mount();
+    }
+
     public function save()
     {
-        //validacija unete povr[ine za garaze
+        $this->validate();
+        //validacija unete povrsine za garaze
         if(count($this->nove_garaze)){
             foreach($this->nove_garaze as $nova_garaza){
                 if($nova_garaza['povrsina'] <= 0 || !is_numeric($nova_garaza['povrsina'])){
@@ -48,6 +69,27 @@ class StanEdit extends ModalComponent
             }
             $this->povrsina_error = '';
         }
+        //UPDATE
+        DB::transaction(function () {
+            foreach($this->nove_garaze as $nova_garaza){
+                Garaza::create([
+                    'stanId' => $this->sid,
+                    'zgradaId' => $this->zid,
+                    'stan_namenaId' => $nova_garaza['namena'],
+                    'gpovrsina' => $nova_garaza['povrsina'],
+                ]);
+                $this->garaza_sum ++;
+            }
+            Stan::where('id', $this->sid)->update([
+                'stan_namenaId' => $this->stan_namena,
+                'sprat' => $this->sprat,
+                'povrsina' => $this->povrsina,
+                'garaza' => $this->garaza_sum
+            ]);
+            session()->flash('status', 'Podaci o stanu su uspešno promenjeni.');
+            $this->closeModal();
+            $this->redirect('/upravnik-zgrade');
+        });
         
     }
 

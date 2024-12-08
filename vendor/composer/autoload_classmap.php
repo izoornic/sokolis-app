@@ -18,7 +18,7 @@ return array(
     'App\\Http\\Middleware\\EnsureUserRoleIsAllowedToAccess' => $baseDir . '/app/Http/Middleware/EnsureUserRoleIsAllowedToAccess.php',
     'App\\Http\\TimeFormatHelper' => $baseDir . '/app/Http/TimeFormatHelper.php',
     'App\\Livewire\\Korisnik\\Komponente\\Obavestenje' => $baseDir . '/app/Livewire/Korisnik/Komponente/Obavestenje.php',
-    'App\\Livewire\\Korisnik\\Komponente\\SzObavestenje' => $baseDir . '/app/Livewire/Korisnik/Komponente/SzObavestenje.php',
+    'App\\Livewire\\Korisnik\\Komponente\\SzObavestenjeComp' => $baseDir . '/app/Livewire/Korisnik/Komponente/SzObavestenjeComp.php',
     'App\\Livewire\\Korisnik\\KvarPregled' => $baseDir . '/app/Livewire/Korisnik/KvarPregled.php',
     'App\\Livewire\\Korisnik\\MojiRacuni' => $baseDir . '/app/Livewire/Korisnik/MojiRacuni.php',
     'App\\Livewire\\Korisnik\\Pocetna' => $baseDir . '/app/Livewire/Korisnik/Pocetna.php',

@@ -10,7 +10,7 @@ use App\Models\ObavestenjaKomentarUserViewd;
 use App\Models\ObavestenjaLink;
 use App\Models\ObavestenjeZgradaIndex;
 
-use App\Livewire\Upravnik\ObavestenjaPregled;
+//use App\Livewire\Upravnik\ObavestenjaPregled;
 use Illuminate\Support\Facades\Storage;
 
 class Obavestenje extends Component
@@ -37,14 +37,9 @@ class Obavestenje extends Component
 
     public function mount()
     {
-        //dd($this->getMyLinks());
         $this->ob_links = $this->getMyLinks();
-        //$this->show_koments = false;
         $this->komentari = [];
         $this->new_coment = '';
-
-        $this->upravnik = (auth()->user()->user_tipId == 2) ? true : false;
-       // dd($this->komentari);
     }
 
     private function getMyLinks()
@@ -112,12 +107,12 @@ class Obavestenje extends Component
             $del_id = session('obavestenje_del_id');
             //dd(session('obavestenje_del_id'));
             ObavestenjeZgradaIndex::where('obavestenjeId', $del_id)->update(['active' => 0]);
-            if($this->ob_links){
+            /* if($this->ob_links){
                 foreach($this->ob_links as $olink){
                     Storage::delete($olink->ob_link_adress);
                     ObavestenjaLink::where('id', $olink->id)->delete();
                 }
-            }
+            } */
             session()->flash('status', 'Obaveštenje je uspešno obrisano.');
         }else{
             session()->flash('status', 'GREŠKA 216');

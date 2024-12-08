@@ -75,5 +75,13 @@ Route::middleware([
     Route::get('/upravnik-obavestenje-novo', function () {
         return view('upravnik/obavestenje-novo');
     })->name('upravnik-obavestenje-novo');
+
+    Route::get('/sz-upravnik-obavestenja', function () {
+        return view('upravnik/sz-obavestenja');
+    })->name('sz-upravnik-obavestenja');
+
+    Route::get('/sz-upravnik-obavestenje-novo', function () {
+        return view('upravnik/sz-obavestenje-novo');
+    })->name('sz-upravnik-obavestenje-novo');
     
 });

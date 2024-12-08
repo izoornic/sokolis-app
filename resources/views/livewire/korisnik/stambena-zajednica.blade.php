@@ -1,6 +1,6 @@
 <div class="p-6">
     @foreach($data as $obavestenje)
-        <livewire:korisnik.komponente.sz-obavestenje 
+        <livewire:korisnik.komponente.sz-obavestenje-comp 
                 o_id="{{ $obavestenje->oid }}" 
                 tip="{{ $obavestenje->ob_tip_naziv }}" 
                 naslov="{{ $obavestenje->sz_ob_naslov }}" 

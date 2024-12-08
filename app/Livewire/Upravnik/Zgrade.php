@@ -26,13 +26,9 @@ class Zgrade extends Component
 
     //TODO  Ako je moguce dodati dugovanja preko API-ja
 
-    //TODO Edit stana
-
-    //TODO Add stanar to stan
-
     public function read()
     {
-        return Stan::select('stans.id', 'stans.stanbr', 'stans.stan_namenaId', 'stans.sprat', 'stans.povrsina', 'stans.garaza', 'users.name', 'users.tel', 'users.email')
+        return Stan::select('stans.id', 'stans.stanbr', 'stans.stan_namenaId', 'stans.sprat', 'stans.povrsina', 'stans.garaza', 'users.name', 'users.tel', 'users.email', 'user_stan_indices.userId')
                         ->leftJoin('user_stan_indices', 'user_stan_indices.stanId', '=', 'stans.id')
                         ->leftJoin('users', 'users.id', '=', 'user_stan_indices.userId')
                         ->where('stans.zgradaId', '=', IzabranaZgrada::getIzabranaZgradaId())

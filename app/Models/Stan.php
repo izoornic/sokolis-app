@@ -36,7 +36,7 @@ class Stan extends Model
      */
     public function garaze(): HasMany
     {
-        return $this->hasMany(Garaza::class, 'stanId ');
+        return $this->hasMany(Garaza::class, 'stanId');
     }
 
 

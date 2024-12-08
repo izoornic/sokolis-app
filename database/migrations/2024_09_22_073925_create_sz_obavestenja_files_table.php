@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('sz_obavestenja_files', function (Blueprint $table) {
             $table->id();
             $table->integer('userId');
-            $table->integer('sz_obavestenjeId');
-            $table->string('sz_file_path', 256);
-            $table->integer('sz_file_typeId');
+            $table->string('sz_obavestenjeId');
+            $table->string('sz_link_text', 64);
+            $table->string('sz_file_name', 256);
             $table->timestamps();
         });
     }

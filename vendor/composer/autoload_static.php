@@ -612,7 +612,7 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'App\\Http\\Middleware\\EnsureUserRoleIsAllowedToAccess' => __DIR__ . '/../..' . '/app/Http/Middleware/EnsureUserRoleIsAllowedToAccess.php',
         'App\\Http\\TimeFormatHelper' => __DIR__ . '/../..' . '/app/Http/TimeFormatHelper.php',
         'App\\Livewire\\Korisnik\\Komponente\\Obavestenje' => __DIR__ . '/../..' . '/app/Livewire/Korisnik/Komponente/Obavestenje.php',
-        'App\\Livewire\\Korisnik\\Komponente\\SzObavestenje' => __DIR__ . '/../..' . '/app/Livewire/Korisnik/Komponente/SzObavestenje.php',
+        'App\\Livewire\\Korisnik\\Komponente\\SzObavestenjeComp' => __DIR__ . '/../..' . '/app/Livewire/Korisnik/Komponente/SzObavestenjeComp.php',
         'App\\Livewire\\Korisnik\\KvarPregled' => __DIR__ . '/../..' . '/app/Livewire/Korisnik/KvarPregled.php',
         'App\\Livewire\\Korisnik\\MojiRacuni' => __DIR__ . '/../..' . '/app/Livewire/Korisnik/MojiRacuni.php',
         'App\\Livewire\\Korisnik\\Pocetna' => __DIR__ . '/../..' . '/app/Livewire/Korisnik/Pocetna.php',

@@ -32,6 +32,7 @@ class StambenaZajednica extends Component
     public function read()
     {
         $obavestenja_ids = SzObavestenjeZgradaIndex::distinct('sz_obavestenjeId')
+        ->where('active', '=', 1)
         ->whereIn('zgradaId', $this->ko_stanovi_zgrade['zgrade'])
         ->pluck('sz_obavestenjeId');
 
