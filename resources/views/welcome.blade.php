@@ -129,7 +129,7 @@
               <div class="tc tf yo zf mb">               
 
                 <span class="tc sf">
-                  <a href="#" class="inline-block ek xj kk wm"> Pozovite nas (+381) 60 60000 434 </a>
+                  <a href="#" class="inline-block ek xj kk wm"> Pozovite nas (+381) 60 6000 434 </a>
                   <span class="inline-block">Za sve informacije</span>
                 </span>
               </div>
