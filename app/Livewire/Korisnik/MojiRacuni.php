@@ -47,20 +47,20 @@ class MojiRacuni extends Component
             //dd($racuni, $stan_key);
             
             foreach($racuni as $item){
-            if((int)$item['stari_dug'] < 1) {
-                    $item['rkv'] = Racuni::getApiKey($this->izabrani_stan, (int)$item['mid']);
-                    $item['datum'] = TimeFormatHelper::datumFormatDanFullYear($item['datum']);
-                    $item['r_date'] = TimeFormatHelper::datumFormatDanFullYear($item['r_date']);
-            }else{
-                    $item['rkv'] = '';
-            } 
-            $item['zaduzeno'] = number_format($item['zaduzeno'], 2, ',', ' ');
-            $item['razduzeno'] = number_format($item['razduzeno'], 2, ',', ' ');
-            // saldo_sign 0 = 0, 1 = manje od nula, minus, 2 vise od nuka, plus
-            $item['saldo_sign']  = ($item['saldo'] != 0) ? ($item['saldo'] < 0) ? 1 : 2 : 0;
-            $item['saldo'] = number_format(abs($item['saldo']), 2, ',', ' ');
-            
-                array_push($retval, $item);
+                if((int)$item['stari_dug'] < 1) {
+                        $item['rkv'] = Racuni::getApiKey($this->izabrani_stan, (int)$item['mid']);
+                        $item['datum'] = TimeFormatHelper::datumFormatDanFullYear($item['datum']);
+                        $item['r_date'] = TimeFormatHelper::datumFormatDanFullYear($item['r_date']);
+                }else{
+                        $item['rkv'] = '';
+                } 
+                $item['zaduzeno'] = number_format($item['zaduzeno'], 2, ',', ' ');
+                $item['razduzeno'] = number_format($item['razduzeno'], 2, ',', ' ');
+                // saldo_sign 0 = 0, 1 = manje od nula, minus, 2 vise od nuka, plus
+                $item['saldo_sign']  = ($item['saldo'] != 0) ? ($item['saldo'] < 0) ? 1 : 2 : 0;
+                $item['saldo'] = number_format(abs($item['saldo']), 2, ',', ' ');
+                
+                    array_push($retval, $item);
             }
         }
         //dd($retval);

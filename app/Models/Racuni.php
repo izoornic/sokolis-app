@@ -9,7 +9,7 @@ class Racuni extends Model
 {
     use HasFactory;
 
-    public static function getApiKey($stanid, $mid=56)
+    public static function getApiKey($stanid, $mid=59)
     {
         $racun_row = Racuni::where('stanId', '=', $stanid)->first();
         if(!$racun_row) return false;        

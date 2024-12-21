@@ -4,7 +4,7 @@ return [
 
 	'siteFooter' => '© 2024 Grading Sva prava zadržana',
 
-	'version' => 'V 1.4.3',
+	'version' => 'V 1.4.4',
 
 	'paginate' => 10,
 
