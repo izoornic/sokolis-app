@@ -83,5 +83,9 @@ Route::middleware([
     Route::get('/sz-upravnik-obavestenje-novo', function () {
         return view('upravnik/sz-obavestenje-novo');
     })->name('sz-upravnik-obavestenje-novo');
+
+    Route::get('/stanar-racun', function () {
+        return view('upravnik/stanar-racun');
+    })->name('stanar-racun');
     
 });

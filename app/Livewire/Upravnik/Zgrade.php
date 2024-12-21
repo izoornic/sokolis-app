@@ -24,6 +24,11 @@ class Zgrade extends Component
         $this->render();
     }
 
+    public function viewRacune($stanid)
+    {
+        $this->redirect('/stanar-racun?sid='.$stanid);
+    }
+
     //TODO  Ako je moguce dodati dugovanja preko API-ja
 
     public function read()

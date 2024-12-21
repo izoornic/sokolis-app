@@ -76,7 +76,7 @@
                                         </td>
                                         <td>
                                             @if($item->name)
-                                            <button wire:click="$dispatch('openModal', { component: 'modals.tiket-prijava' })" class="my-1 rounded-md text-amber-700 bg-emerald-100 hover:text-amber-100 hover:bg-amber-700 py-1 px-2" title ="Računi">
+                                            <button wire:click="viewRacune({{$item->id}})" class="my-1 rounded-md text-amber-700 bg-emerald-100 hover:text-amber-100 hover:bg-amber-700 py-1 px-2" title ="Računi">
                                                 <svg class="w-4 h-4 text-current dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 3v4a1 1 0 0 1-1 1H5m8-2h3m-3 3h3m-4 3v6m4-3H8M19 4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1ZM8 12v6h8v-6H8Z"/></svg>
                                             </button>
                                             @endif
