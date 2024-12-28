@@ -196,7 +196,8 @@ class KvarPregled extends Component
 
     public function getTiket()
     {
-        return kvarTiket::where('kvar_tikets.id', '=' ,$this->tkid)
+        return kvarTiket::select('kvar_tikets.*', 'kvar_tikets.created_at as tiket_created', 'kvar_tikets.updated_at as tiket_updated', 'kvar_tiket_prioritets.*', 'kvar_opis_tips.kvar_tip_naziv')
+        ->where('kvar_tikets.id', '=' ,$this->tkid)
         ->leftJoin('kvar_tiket_prioritets', 'kvar_tiket_prioritets.id', '=', 'kvar_tikets.tiket_prioritetId')
         ->leftJoin('kvar_opis_tips', 'kvar_opis_tips.id', '=', 'kvar_tikets.opis_kvaraId')
         ->first();

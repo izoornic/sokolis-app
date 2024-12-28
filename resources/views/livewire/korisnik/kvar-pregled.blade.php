@@ -37,13 +37,13 @@
 						<table class="divide-y divide-gray-200">
 							<tr>
 								<td class="p-2">Kreiran:</td>
-								<td><span class="font-bold">{{ App\Http\TimeFormatHelper::datumFormat($tiket->created_at) }}</span></td>
+								<td><span class="font-bold">{{ App\Http\TimeFormatHelper::datumFormat($tiket->tiket_created) }}</span></td>
 								<td class="px-2 pl-4"><svg class="float-left fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"/></svg>otvorio:</td>
 								<td><span class="font-bold">{{$tiket_creator}}</span></td>
 							</tr>
 							<tr>
 								<td class="p-2">Poslednja promena:</td>
-								<td><span class="font-bold">{{ App\Http\TimeFormatHelper::datumFormat($tiket->updated_at) }}</span></td>
+								<td><span class="font-bold">{{ App\Http\TimeFormatHelper::datumFormat($tiket->tiket_updated) }}</span></td>
 								<td class="px-2 pl-4"></td>
 								<td></td>
 							</tr>
@@ -174,7 +174,7 @@
                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z"/></svg>  
                             </span>
                             
-                            <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white"> - <span class="bg-sky-100 text-sky-900 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">{{ App\Http\TimeFormatHelper::datumFormat($tiket->created_at) }}</span></h3>
+                            <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white"> - <span class="bg-sky-100 text-sky-900 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">{{ App\Http\TimeFormatHelper::datumFormat($tiket->tiket_created) }}</span></h3>
                             <p class="mb-0 text-base font-normal text-gray-500 dark:text-gray-400">Akcija: <span class="font-bold">Tiket kreiran</span></p>
                             <p class="mb-2 text-base font-normal text-gray-500 dark:text-gray-400">Prioritet: <span class="font-bold">{{$tiket->prioritet_naziv}}</span></p>                          
                         </li>
