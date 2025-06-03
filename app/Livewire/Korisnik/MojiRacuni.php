@@ -9,13 +9,16 @@ use Illuminate\Support\Facades\Http;
 
 
 use Livewire\Component;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class MojiRacuni extends Component
 {
+
     public $izabrani_stan;
     public $appkey;
 
     public $stanovi_lista;
+    public $ukupno_dug;
 
     public $pdf_link = 'https://upravnikzgrade.rs/racun/?rkv=';
     //https://upravnikzgrade.rs/stan-stanje/?rkv=
@@ -28,6 +31,7 @@ class MojiRacuni extends Component
         $this->stanovi_lista = $this->user_zids['stanovi'];
         $this->izabrani_stan = $this->user_zids['stanovi'][0];
         $this->appkey = hash('xxh3', 'lkdjkritg765jn4$$lkdfj###ldvmklfvm_-??jfopdtr***');
+        $this->ukupno_dug = [];
     }
 
     public function read()
@@ -45,7 +49,9 @@ class MojiRacuni extends Component
             
             $racuni = json_decode($response->body(), true);
             //dd($racuni, $stan_key);
-            
+            if(!$racuni){
+                return [];
+            }
             foreach($racuni as $item){
                 if((int)$item['stari_dug'] < 1) {
                         $item['rkv'] = Racuni::getApiKey($this->izabrani_stan, (int)$item['mid']);
@@ -60,11 +66,27 @@ class MojiRacuni extends Component
                 $item['saldo_sign']  = ($item['saldo'] != 0) ? ($item['saldo'] < 0) ? 1 : 2 : 0;
                 $item['saldo'] = number_format(abs($item['saldo']), 2, ',', ' ');
                 
+                if((int)$item['stari_dug'] == 2){
+                    $this->ukupno_dug = $item;
+                }else{
                     array_push($retval, $item);
+                }   
             }
         }
         //dd($retval);
-        return $retval;
+        return $this->paginate($retval);
+    }
+
+    /**
+     * Paginate an array of items.
+     *
+     * @return LengthAwarePaginator         The paginated items.
+     */
+    private function paginate(array $items, int $perPage = 12, ?int $page = null, $options = []): LengthAwarePaginator
+    {
+        $page = $page ?: (LengthAwarePaginator::resolveCurrentPage() ?: 1);
+        $items = collect($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
     public function render()

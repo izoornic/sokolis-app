@@ -90,6 +90,34 @@
                             @endif
                         </tbody>
                     </table>
+                    @if (count($data))
+                    <div class="px-6 py-4 mb-6">
+                        
+                         {{ $data->withPath(url()->current())->links() }}
+                    </div>
+                       
+                    <table class="min-w-full divide-y divide-gray-200 bg-gray-100" style="width: 100% !important">
+                        <tfoot>
+                            <tr>
+                                <td class="pl-2 py-2 text-right">Ukupno zaduženo: </td>
+                                <td class="py-2 text-left"><span class="font-bold ml-2">{{ $ukupno_dug['zaduzeno'] }}</span></td>
+                                <td class="py-2 text-right">Ukupno razduženo: </td>
+                                <td class="py-2 text-left"><span class="font-bold  ml-2">{{ $ukupno_dug['razduzeno'] }}</span></td>
+                                <td class="py-2 text-right">Saldo: </td>
+                                <td class="py-2 text-left">
+                                     <span class="flex font-bold">
+                                    @if($ukupno_dug['saldo_sign'] == 0)
+                                        <svg class="w-5 h-5 mr-1 mt-0.5 text-green-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                                    @elseif($ukupno_dug['saldo_sign'] == 1)
+                                        <svg class="w-5 h-5 mr-1 mt-0.5 text-red-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                                    @else
+                                        <svg class="w-5 h-5 mr-1 mt-0.5 text-sky-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                                    @endif    
+                               {{ $ukupno_dug['saldo'] }}</span></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                     @endif
                 </div>
             </div>
         </div>

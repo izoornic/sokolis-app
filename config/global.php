@@ -2,9 +2,9 @@
 
 return [
 
-	'siteFooter' => '© 2024 Grading Sva prava zadržana',
+	'siteFooter' => '© '.date("Y").' Grading. Sva prava zadržana',
 
-	'version' => 'V 1.4.6',
+	'version' => 'V 1.4.7',
 
 	'paginate' => 10,
 
