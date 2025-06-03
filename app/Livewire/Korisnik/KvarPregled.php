@@ -10,7 +10,7 @@ use App\Models\kvarTiket;
 use App\Models\KvarKomentari;
 use App\Models\KvarKomentarUserView;
 use App\Models\KvarTiketImage;
-
+use App\Actions\Zgrada\EmailStanarimaSender;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -25,6 +25,7 @@ class KvarPregled extends Component
 
     public $tiket_init;
     public $tiket_creator;
+    public $tiket_creator_id;
     //public $komentari;
     public $new_coment;
 
@@ -60,7 +61,9 @@ class KvarPregled extends Component
     {
         $this->tiket_init = kvarTiket::where('kvar_tikets.id', '=' ,$this->tkid)->first();
 
-        $this->tiket_creator = kvarTiket::find($this->tkid)->user()->first()->name;
+        $tiket_creator = kvarTiket::find($this->tkid)->user()->first();
+        $this->tiket_creator = $tiket_creator->name;
+        $this->tiket_creator_id = $tiket_creator->id;
 
         $this->tiket_status = $this->tiket_init->tiket_statusId;
         $this->tiket_vidljivost =  $this->tiket_init->vidljiv_zgradi;
@@ -98,7 +101,10 @@ class KvarPregled extends Component
     {
         kvarTiket::where('id',$this->tkid)->update(['tiket_statusId'=> 2]);
         session()->flash('status', 'Status tiketa #'.$this->tkid.' promenjen u ZAKLJUČAN');
-
+        $this->setInitVals();
+        $this->sendEmailPromenaStatusa();
+        //ako je upravnik, vrati ga na listu kvarova, ako nije, vrati ga na prijavu kvara   
+        session()->flash('status', 'Tiket #'.$this->tkid.' je zatvoren.');
         return ($this->upravnik) ? $this->redirect('/upravnik-kvarovi') : $this->redirect('/prijavi-kvar');
     }
 
@@ -107,6 +113,7 @@ class KvarPregled extends Component
     {
         kvarTiket::where('id',$this->tkid)->update(['tiket_statusId'=> 1]);
         $this->setInitVals();
+        $this->sendEmailPromenaStatusa();
     }
 
     #[On('brisanje')] 
@@ -122,6 +129,19 @@ class KvarPregled extends Component
     {
         kvarTiket::where('id',$this->tkid)->update(['vidljiv_zgradi'=> ($this->tiket_vidljivost) ? 0 : 1]);
         $this->setInitVals();
+    }
+
+    public function sendEmailPromenaStatusa()
+    {
+        if(auth()->user()->id != $this->tiket_creator_id)
+        {
+            //send email obavestenje o novom komentaru
+            $message_eml = '<p> Vašoj prijavi kvara je promenjen status. </p>
+                            <p> Prijava br: <strong> #' . $this->tkid . '</strong></p>';
+
+            //posalji email
+            EmailStanarimaSender::sendToSingleUser('Promena statusa prijave kvara - stanari-sokolis.rs', $message_eml, $this->tiket_creator_id, 5, 'prijavi-kvar?tid='.$this->tkid);
+        }
     }
 
     public function dodajSlike()
@@ -182,6 +202,16 @@ class KvarPregled extends Component
 
         KvarKomentarUserView::updateOrCreate( ['kvar_tiketId'=>$this->tkid, 'userId'=>auth()->user()->id], ['broj_vidjenih'=>$new_bro->tiket_br_komentara] );
         $this->new_coment = '';
+
+        if(auth()->user()->id != $this->tiket_creator_id)
+        {
+            //send email obavestenje o novom komentaru
+            $message_eml = '<p> Dodat je novi komentar na Vašu prijavu kvara. </p>
+                            <p> Prijava br: <strong> #' . $this->tkid . '</strong></p>';
+
+            //posalji email
+            EmailStanarimaSender::sendToSingleUser('Novi komentar - stanari-sokolis.rs', $message_eml, $this->tiket_creator_id, 4, 'prijavi-kvar');
+        }
     }
 
     public function back()

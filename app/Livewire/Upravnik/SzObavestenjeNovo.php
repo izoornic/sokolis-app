@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Actions\Zgrada\IzabranaZgrada;
 use Joelwmale\LivewireQuill\Traits\HasQuillEditor;
 
+use App\Actions\Zgrada\EmailStanarimaSender;
+
 class SzObavestenjeNovo extends Component
 {
     use HasQuillEditor;
@@ -32,10 +34,11 @@ class SzObavestenjeNovo extends Component
     public $upload_files_display_text;
     public $cur_file;
 
-    
     public $is_edit;
     public $zgrade;
     public $zgrade_error;
+
+    public $ob_tip_email; // tip obaveštenja za email
 
     public function mount()
     {
@@ -60,7 +63,7 @@ class SzObavestenjeNovo extends Component
             $this->zgrade = [IzabranaZgrada::getIzabranaZgradaId()];
             $this->title = "Novo obaveštenje";
             $this->is_edit = false;
-            $this->ob_tip = 1;
+            $this->ob_tip_email = 7;
         }
     }
 
@@ -145,6 +148,14 @@ class SzObavestenjeNovo extends Component
                 $file['link_txt'] = $file['link_txt'] ?: $file['original_name'];
                 if ( Storage::disk('public')->putFileAs('', $file['file_to_up'], $file['hashName'])) SzObavestenjaFiles::create(['sz_obavestenjeId'=>$new_ob_id, 'sz_link_text'=>$file['link_txt'] , 'sz_file_name'=>$file['hashName'], 'userId'=>auth()->user()->id]);
             }
+        }
+
+        if(!$this->is_edit){
+            $message_eml = '<p> Na portalu je objavljeno novo obaveštenja na stranici: "Stambena zajednica". </p>
+                            <p> Obaveštenje: <strong>' . $this->ob_naslov . '</strong></p>';
+
+            //posalji email
+            EmailStanarimaSender::send('Novo obaveštenje - stanari-sokolis.rs', $message_eml, [], $this->zgrade, $this->ob_tip_email, 'stambena-zajednica');
         }
 
         foreach($this->zgrade as $zg_id){

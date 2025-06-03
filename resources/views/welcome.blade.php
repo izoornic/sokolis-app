@@ -129,7 +129,7 @@
               <div class="tc tf yo zf mb">               
 
                 <span class="tc sf">
-                  <a href="#" class="inline-block ek xj kk wm"> Pozovite nas (+381) 60 6000 434 </a>
+                  <a href="#" class="inline-block ek xj kk wm"> Pozovite nas (+381) 60 4034 034 </a>
                   <span class="inline-block">Za sve informacije</span>
                 </span>
               </div>
@@ -386,7 +386,7 @@
         <div class="bb ze i ki li xn br">
           <div class="tc uf tn xf gg">
             <div class="animate_top me/6 ln rj">
-              <h2 class="ek bk _p kk wm hc xe/3">Lamela 2</h2>
+              <h2 class="ek bk _p kk wm hc xe/3">Lamela 2 - Kolonija</h2>
               <p class="ek bk aq">Uskoro više  </p>
               <p class="ek bk aq">informacija... </p>
             </div>
@@ -396,7 +396,7 @@
               <p class="ek bk aq">Četvrtak 14:00 </p>
             </div>
             <div class="animate_top me/6 ln rj">
-              <h2 class="ek bk _p kk wm hc xe/3">Lamela 4</h2>
+              <h2 class="ek bk _p kk wm hc xe/3">Lamela 4 - Inžinjer</h2>
               <p class="ek bk aq">Uskoro više  </p>
               <p class="ek bk aq">informacija... </p>
             </div>

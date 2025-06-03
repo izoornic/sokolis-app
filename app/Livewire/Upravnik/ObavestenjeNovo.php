@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Actions\Zgrada\IzabranaZgrada;
 use Joelwmale\LivewireQuill\Traits\HasQuillEditor;
 
+use App\Actions\Zgrada\EmailStanarimaSender;
+
 class ObavestenjeNovo extends Component
 {
     use HasQuillEditor;
@@ -88,7 +90,12 @@ class ObavestenjeNovo extends Component
         return auth()->user()->zgrade()->get();
     }
 
-    public function setTipId($tid)
+    /*
+    * Set tip obavestenja u blade fajlu
+    * @param int $tid
+    * @return void
+    */
+    public function setTipId($tid):void
     {
         $this->ob_tip = $tid;
     }
@@ -122,7 +129,6 @@ class ObavestenjeNovo extends Component
     public function save()
     {
         $this->validate();
-
         if(!count($this->zgrade)){
             $this->zgrade_error = 'Barem jedna zgrada mora biti izabrana!';
             return;
@@ -160,6 +166,15 @@ class ObavestenjeNovo extends Component
                 'zgradaId' => $zg_id
             ]);
         }
+
+        if(!$this->is_edit){
+            $message_eml = '<p> Na portalu je objavljeno novo obaveštenja na stranici: "Početna". </p>
+                            <p> Obaveštenje: <strong>' . $this->ob_naslov . '</strong></p>';
+
+            //posalji email
+            EmailStanarimaSender::send('Novo obaveštenje - stanari-sokolis.rs', $message_eml, [], $this->zgrade, $this->ob_tip, 'pocetna');
+        }
+
         $flash_msg = ($this->is_edit) ? 'Obaveštenje je uspešno izmenjeno.' : 'Novo obaveštenje uspešno dodato.';
         session()->flash('status', $flash_msg);
         $this->redirect('/upravnik-obavestenja');

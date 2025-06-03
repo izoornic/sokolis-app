@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureUserRoleIsAllowedToAccess;
 use App\Models\User;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EmailAttWiewContorller;
 
 Route::get('image/{filename}', [HomeController::class, 'index'])->name('image.displayImage');
 
@@ -87,5 +88,19 @@ Route::middleware([
     Route::get('/stanar-racun', function () {
         return view('upravnik/stanar-racun');
     })->name('stanar-racun');
+
+    Route::get('/email-obavestenja', function () {
+        return view('upravnik/email-obavestenja');
+    })->name('email-obavestenja');
+
+    Route::get('/email-obavestenje-novo', function () {
+        return view('upravnik/email-obavestenje-novo');
+    })->name('email-obavestenje-novo');
+
+    Route::get('/eml-att/{filename}', [EmailAttWiewContorller::class, 'index'])->name('attachment.displayAttachment');
+
+    Route::get('/racun-obavestenje', function () {
+        return view('upravnik/email-obavestenje-novi-racun');
+    })->name('racun-obavestenje');
     
 });

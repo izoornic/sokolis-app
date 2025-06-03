@@ -120,15 +120,8 @@ class User extends Authenticatable
             session(['stanovi' => $stanovi, 'zgrade' => $zgrade]);
     }
 
-    /**
-     * Get sve stanove korisnika.
-     */
-   /*  public function stanovi(): BelongsToMany
-    {
-        return $this->BelongsToMany(Stan::class, 'user_stan_indices', 'userId', 'stanId');
-    } */
-
-    public function zgrade():  HasManyThrough
+    
+    public function zgrade(): HasManyThrough
     {
         return $this->hasManyThrough(
             Zgrada::class,
@@ -140,7 +133,8 @@ class User extends Authenticatable
         );
     }
 
-    public function stanoviDetalji():  HasManyThrough
+
+    public function stanoviDetalji(): HasManyThrough
     {
         return $this->hasManyThrough(
             Stan::class,
@@ -156,5 +150,26 @@ class User extends Authenticatable
     {
         return $this->HasMany(UserStanIndex::class, 'userId');
     }
+
+    public function emailObavestenja()
+    {
+        return $this->belongsToMany(EmailObavestenjaUser::class, 'email_obavestenja_users', 'user_id', 'email_obavestenja_tip_id')->withTimestamps();
+    }
+
+    /**
+     * Get sve email obavestenja korisnika.
+     * Iz nepoynatioh razloga ova funkcija ne radi?!?
+     */
+    /* public function emailObavestenja() : HasManyThrought
+    {
+        return $this->hasManyThrough(
+            EmailObavestenjaTip::class, 
+            EmailObavestenjaUser::class,
+            'user_id',
+            'id',
+            'id',
+            'email_obavestenje_tip_id'
+        );
+    } */
 
 }
