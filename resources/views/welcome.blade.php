@@ -387,18 +387,18 @@
           <div class="tc uf tn xf gg">
             <div class="animate_top me/6 ln rj">
               <h2 class="ek bk _p kk wm hc xe/3">Lamela 2 - Kolonija</h2>
-              <p class="ek bk aq">Uskoro više  </p>
-              <p class="ek bk aq">informacija... </p>
+              <p class="ek bk aq">Ponedeljak 12:00  </p>
+              <p class="ek bk aq">Četvrtak 12:00 </p>
             </div>
             <div class="animate_top me/6 ln rj">
               <h2 class="ek bk _p kk wm hc xe/3">Lamela 3 - Soko</h2>
-              <p class="ek bk aq">Utorak 14:00 </p>
-              <p class="ek bk aq">Četvrtak 14:00 </p>
+              <p class="ek bk aq">Sreda 12:00 </p>
+              <p class="ek bk aq">Subota 12:00 </p>
             </div>
             <div class="animate_top me/6 ln rj">
               <h2 class="ek bk _p kk wm hc xe/3">Lamela 4 - Inžinjer</h2>
-              <p class="ek bk aq">Uskoro više  </p>
-              <p class="ek bk aq">informacija... </p>
+              <p class="ek bk aq">Sreda 14:00</p>
+              <p class="ek bk aq">Subota 14:00 </p>
             </div>
             <div class="animate_top me/6 ln rj">
               <h2 class="ek bk _p kk wm hc xe/3">Garaža</h2>
@@ -575,7 +575,7 @@
       </div>
 
       <div class="animate_top">
-        <p>&copy; 2024 Grading Sva prava zadržana.</p>
+        <p>&copy; <?php echo date('Y'); ?> Grading Sva prava zadržana.</p>
       </div>
     </div>
     <!-- Footer Bottom -->

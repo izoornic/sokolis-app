@@ -12,6 +12,7 @@ class EmailZgradaSendLog extends Model
     protected $fillable = [
         'email_log_id',
         'email_obavestenja_tip_id',
-        'zgrada_id'
+        'zgrada_id',
+        'comment',
     ];
 }

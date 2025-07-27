@@ -45,7 +45,8 @@ class EmailObavestenjaLog extends Model
      * @param array $zgrade
      * @return void
      */
-    public static function log($email_log, $stanari_ids, $zgrade){
+    public static function log($email_log, $stanari_ids, $zgrade, $zgrada_comment = null, $nova_zgrada = true){
+        
         $log = new EmailObavestenjaLog();
         $log->email_obavestenja_tip_id = $email_log['email_obavestenja_tip_id'];
         $log->subject = $email_log['subject'];
@@ -61,12 +62,16 @@ class EmailObavestenjaLog extends Model
             ]);
         }
 
-        foreach($zgrade as $zgrada){
-            EmailZgradaSendLog::create([
-                'email_log_id' => $log->id,
-                'email_obavestenja_tip_id' => $email_log['email_obavestenja_tip_id'],
-                'zgrada_id' => $zgrada
-            ]);
+        if($nova_zgrada) {
+            foreach($zgrade as $zgrada){
+                EmailZgradaSendLog::create([
+                    'email_log_id' => $log->id,
+                    'email_obavestenja_tip_id' => $email_log['email_obavestenja_tip_id'],
+                    'zgrada_id' => $zgrada,
+                    'comment' => $zgrada_comment ?? null,
+                ]);
+            }
         }
+        
     }
 }

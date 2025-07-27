@@ -17,8 +17,13 @@
        <div class="p-2 mb-2 border-b border-slate-300">
             <p>Zgrade čiji stanari će dobiti obaveštenje: <br /><span class="text-sm text-gray-500">Na portalu je dostupan novi račun.</span></p>
             @foreach ($zgrade_upravnika as $item)
-               <p class="p-2"> <input type="checkbox" value="{{$item->id}}" wire:model="zgrade"  class="form-checkbox h-6 w-6 text-blue-500"> - {{ $item->naziv }}
-            <span class="ml-4 text-sm text-gray-500"> za mesec {{$item->last_month_name}} </span></p>
+               <p class="p-2 flex"> 
+                <input type="checkbox" id="ch{{$item->id}}" value="{{$item->id}}" wire:model="zgrade"  class="form-checkbox h-6 w-6 text-blue-500" /> 
+                <label for="ch{{$item->id}}" class="ml-4">- {{ $item->naziv }}</label>
+                <span class="ml-4 text-sm text-gray-500"> za mesec {{$item->last_month_name}} </span>
+                <span class="text-xs text-gray-500">Poslednji put poslato: {{$item->last_send}}</span>
+                <span class="text-xs text-gray-500">Komentar: {{$item->db_coment}}</span>
+                </p>
             @endforeach
             <div class="p-2 text-red-500 mb-3">{{$zgrade_error}} </div>
             

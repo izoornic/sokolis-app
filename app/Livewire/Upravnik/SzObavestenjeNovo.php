@@ -155,7 +155,7 @@ class SzObavestenjeNovo extends Component
                             <p> Obaveštenje: <strong>' . $this->ob_naslov . '</strong></p>';
 
             //posalji email
-            EmailStanarimaSender::send('Novo obaveštenje - stanari-sokolis.rs', $message_eml, [], $this->zgrade, $this->ob_tip_email, 'stambena-zajednica');
+            EmailStanarimaSender::send('Novo obaveštenje - stanari-sokolis.rs', $message_eml, false, [], $this->zgrade, $this->ob_tip_email, 'stambena-zajednica');
         }
 
         foreach($this->zgrade as $zg_id){

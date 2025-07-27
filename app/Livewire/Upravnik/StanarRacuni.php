@@ -21,6 +21,7 @@ class StanarRacuni extends Component
     {
         $this->stanid = request()->sid;
         $this->appkey = hash('xxh3', 'lkdjkritg765jn4$$lkdfj###ldvmklfvm_-??jfopdtr***');
+        //dd($this->stanid);
     }
 
     public function read()
@@ -35,6 +36,7 @@ class StanarRacuni extends Component
                             ->post('https://upravnikzgrade.rs/api/sokolis/', [
                                 'rkv' => $stan_key
                         ]);
+            //dd($response->body());
             
             $racuni = json_decode($response->body(), true);
             //dd($racuni, $stan_key);

@@ -64,7 +64,7 @@ class EmailObavestenjeNovo extends Component
         }
 
         //send and log email
-        EmailStanarimaSender::send($this->subject, $this->message, $this->files, $this->zgrade, 8);
+        EmailStanarimaSender::send($this->subject, $this->message, $email_adrese, $this->files, $this->zgrade, 8);
 
         $this->files = [];
         $this->message = '';

@@ -27,11 +27,16 @@ class EmailStanarimaSender
      * @param string|null $button_link - link za dugme u emailu (opciono)
      * @return void
      */
-    public static function send($subject, $message_p, $files, $zgrade, $tip_id, $button_link = null)
+    public static function send($subject, $message_p, $email_adrese, $files, $zgrade, $tip_id, $button_link = null)
     {
         
         $attacments = [];
-        $email_adrese = Zgrada::emailAdreseStanara($zgrade, $tip_id);
+        //dd($zgrade, $tip_id);
+        if(!$email_adrese){
+            $email_adrese = Zgrada::emailAdreseStanara($zgrade, $tip_id);
+        }
+        
+        //dd($email_adrese);
         if(count($files)){
             foreach($files as $file_attacment){
                 if(Storage::disk('mail_attachments')->putFileAs('', $file_attacment['file_to_up'], $file_attacment['original_name']) ){
@@ -63,7 +68,16 @@ class EmailStanarimaSender
         EmailObavestenjaLog::log($email_log, $email_adrese['stanari'], $zgrade);
     }
 
-    public static function sendToSingleUser($subject, $message_p, $user_id, $tip_id, $button_link = null)
+    /**
+     * Slanje email obaveštenja jednom korisniku
+     * @param string $subject - naslov emaila
+     * @param string $message_p - sadržaj emaila
+     * @param int $user_id - ID korisnika kome se šalje obaveštenje
+     * @param int $tip_id - ID tipa obaveštenja filtrira koji stanar dobija email
+     * @param string|null $button_link - link za dugme u emailu (opciono)
+     * @return void
+     */
+    public static function sendToSingleUser($subject, $message_p, $user_id, $tip_id, $button_link = null, $zgrada_comment = null, $nova_zgrada = true)
     {
         if(EmailObavestenjaUser::userPrimaEmail($user_id, $tip_id)) {
             $email_adresa = User::find($user_id)->email;
@@ -83,9 +97,7 @@ class EmailStanarimaSender
             'message' => $message_p,
             'attachments' => null
         ];
-        // Log the email for the specific user and building
-        // Assuming $zgrada is an array of building IDs
-        EmailObavestenjaLog::log($email_log, [$user_id], [$zgrada[0]]);
+        EmailObavestenjaLog::log($email_log, [$user_id], [$zgrada[0]], $zgrada_comment, $nova_zgrada);
     }
 
 }

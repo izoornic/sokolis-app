@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\EmailObavestenjaUser;
 use App\Models\UpravnikZgradaIndex;
+use App\Models\EmailZgradaSendLog;
 use App\Models\UserStanIndex;
 use App\Models\User;
 
@@ -40,16 +42,31 @@ class Zgrada extends Model
      */
     public static function emailAdreseStanara($zgrade, $tip_obavestenja = 0){
         $stanovi=[];
+        
         foreach($zgrade as $zgrada){
             $stanovi_p = Zgrada::find($zgrada)->stanovi->pluck('id');
             $stanovi = array_merge($stanovi, $stanovi_p->toArray());
         }
         $stanari = UserStanIndex::whereIn('stanId', $stanovi)->groupBy('userId')->pluck('userId');
+        
         if($tip_obavestenja > 0){
             $stanari = EmailObavestenjaUser::whereIn('user_id', $stanari)->where('email_obavestenja_tip_id', $tip_obavestenja)->groupBy('user_id')->pluck('user_id');
         }
         $bcc_adrese = User::whereIn('id', $stanari)->groupBy('email')->pluck('email');
-        
+        //dd($bcc_adrese);
         return ['bcc_adrese' => $bcc_adrese, 'stanari' => $stanari];
+    }
+
+    public static function emailZgradeSendLogs($zgrade, $obavestenje_tip_id)
+    {
+        //
+         $ids =  EmailZgradaSendLog::selectRaw('zgrada_id, MAX(id) as id',)
+                            ->whereIn('zgrada_id', $zgrade)
+                            ->where('email_obavestenja_tip_id', '=', $obavestenje_tip_id)
+                            ->groupBy('zgrada_id')
+                            ->pluck('id');
+
+            return EmailZgradaSendLog::whereIn('id', $ids)
+                            ->get();
     }
 }

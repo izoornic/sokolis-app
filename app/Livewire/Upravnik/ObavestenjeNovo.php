@@ -172,7 +172,7 @@ class ObavestenjeNovo extends Component
                             <p> Obaveštenje: <strong>' . $this->ob_naslov . '</strong></p>';
 
             //posalji email
-            EmailStanarimaSender::send('Novo obaveštenje - stanari-sokolis.rs', $message_eml, [], $this->zgrade, $this->ob_tip, 'pocetna');
+            EmailStanarimaSender::send('Novo obaveštenje - stanari-sokolis.rs',  $message_eml, false, [], $this->zgrade, $this->ob_tip, 'pocetna');
         }
 
         $flash_msg = ($this->is_edit) ? 'Obaveštenje je uspešno izmenjeno.' : 'Novo obaveštenje uspešno dodato.';
