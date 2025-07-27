@@ -8,6 +8,7 @@ use App\Actions\Zgrada\IzabranaZgrada;
 use App\Actions\Zgrada\EmailStanarimaSender;
 use App\Models\Zgrada;
 use App\Models\Racuni;
+use App\Models\UserStanIndex;
 
 use Illuminate\Support\Facades\Http;
 use App\Http\TimeFormatHelper;
@@ -111,10 +112,13 @@ class EmailObavestenjeNovRacun extends Component
             $nova_zgrada = true;
             
             foreach($stanari['stanari'] as $user_id){
-                $rkv = Racuni::getApiKey($user_id, $zgrada_info->mid);
-                $message_r = "<a href='" . $this->pdf_link . $rkv . "'> račun / uplatnica </a>";
-                EmailStanarimaSender::sendToSingleUser($subject, $message_p.$message_r, $user_id, 6, "moji-racuni", $log_comment, $nova_zgrada);
-                $nova_zgrada = false; // After the first user, we assume the building is not new anymore
+                $stan_id = UserStanIndex::where(['userId' => $user_id, 'zgrada_id' => $zgrada])->first()->stanId ?? 0;
+                $rkv = Racuni::getApiKey($stan_id, $zgrada_info->mid);
+                if(strlen($rkv > 0)){
+                   $message_r = "<a href='" . $this->pdf_link . $rkv . "'> račun / uplatnica </a>";
+                    EmailStanarimaSender::sendToSingleUser($subject, $message_p.$message_r, $user_id, 6, "moji-racuni", $log_comment, $nova_zgrada);
+                    $nova_zgrada = false; // After the first user, we assume the building is not new anymore
+                }
             }
         }
         

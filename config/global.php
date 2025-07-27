@@ -4,7 +4,7 @@ return [
 
 	'siteFooter' => '© '.date("Y").' Grading. Sva prava zadržana',
 
-	'version' => 'V 1.4.8',
+	'version' => 'V 1.4.9',
 
 	'paginate' => 10,
 

@@ -16,6 +16,7 @@ class UserStanIndex extends Model
      */
     protected $fillable = [
         'userId',
-        'stanId'
+        'stanId',
+        'zgrada_id'
     ];
 }
