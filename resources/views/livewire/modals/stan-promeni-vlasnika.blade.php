@@ -11,6 +11,7 @@
         </button>
     </div>
     <!-- MODAL BODY -->
+     <div class="ml-4">z: {{$zgradaId}}, s: {{$sid}}, u: {{$userId}}, rsid: {{$racunSid}}, rzid: {{$racunZid}}</div>
      @if($ima_vlasnika)
         <div class="p-4">
             <p>Vlasnik:</p>

@@ -70,7 +70,7 @@
                                         <td class="px-2 py-2">{{ $item->tel }}</td>
                                         <td class="px-2 py-2">{{ $item->email }}</td>
                                         <td>
-                                            <button wire:click="$dispatch('openModal', { component: 'modals.stan-promeni-vlasnika', arguments: {sid: '{{$item->id}}', sbr: '{{$item->stanbr}}', userId:'{{$item->userId}}' }})" class="my-1 bg-teal-500 hover:bg-teal-900 text-white font-bold py-1 px-2 rounded flex" title ="Promeni vlasnika">
+                                            <button wire:click="$dispatch('openModal', { component: 'modals.stan-promeni-vlasnika', arguments: {sid: '{{$item->id}}', sbr: '{{$item->stanbr}}', userId:'{{$item->userId}}', zgradaId:{{$zgradaId}} , racunSid:{{$item->racun_sid ?? 0}} , racunZid:{{$item->racun_zid ?? 0}} }})" class="my-1 bg-teal-500 hover:bg-teal-900 text-white font-bold py-1 px-2 rounded flex" title ="Promeni vlasnika">
                                                     <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="1.5" d="M7 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h1m4-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm7.441 1.559a1.907 1.907 0 0 1 0 2.698l-6.069 6.069L10 19l.674-3.372 6.07-6.07a1.907 1.907 0 0 1 2.697 0Z"/></svg>
                                             </button>
                                         </td>

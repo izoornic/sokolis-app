@@ -75,6 +75,8 @@ class EmailStanarimaSender
      * @param int $user_id - ID korisnika kome se šalje obaveštenje
      * @param int $tip_id - ID tipa obaveštenja filtrira koji stanar dobija email
      * @param string|null $button_link - link za dugme u emailu (opciono)
+     * @param string|null $zgrada_comment - komentar vezan za mail za zgradu (opciono)
+     * @param bool $nova_zgrada - da li je nova zgrada ili se [alje pojedinacno svim stanarima u jednoj zgradi (opciono, default true)
      * @return void
      */
     public static function sendToSingleUser($subject, $message_p, $user_id, $tip_id, $button_link = null, $zgrada_comment = null, $nova_zgrada = true)

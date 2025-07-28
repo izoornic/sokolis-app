@@ -21,6 +21,10 @@ class StanPromeniVlasnika extends ModalComponent
 
     public $userId;
     public $user_row;
+    public $zgradaId;
+
+    public $racunSid;
+    public $racunZid;
 
     public function mount()
     {

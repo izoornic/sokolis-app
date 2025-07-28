@@ -57,6 +57,13 @@ class Zgrada extends Model
         return ['bcc_adrese' => $bcc_adrese, 'stanari' => $stanari];
     }
 
+    /**
+     * Vraća poslednje poslate email obaveštenje za zgrade
+     * 
+     * @param array $zgrade
+     * @param int $obavestenje_tip_id
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public static function emailZgradeSendLogs($zgrade, $obavestenje_tip_id)
     {
         //
