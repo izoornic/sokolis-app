@@ -61,7 +61,7 @@ class ObavestenjeNovo extends Component
             $this->ob_tip = $ob_model->ob_tipId;
 
             $this->db_files = ObavestenjaLink::where('obavestenjeId', $this->oid)->get();
-            $this->zgrade = ObavestenjeZgradaIndex::select('zgradaId')->where('obavestenjeId', $this->oid)->pluck('zgradaId');
+            $this->zgrade = ObavestenjeZgradaIndex::select('zgradaId')->where('obavestenjeId', $this->oid)->where('active', 1)->pluck('zgradaId');
         }else{
             $this->zgrade = [IzabranaZgrada::getIzabranaZgradaId()];
             $this->title = "Novo obaveštenje";
@@ -145,7 +145,7 @@ class ObavestenjeNovo extends Component
         if($this->is_edit){
             Obavestenja::where('id', $this->oid)->update($model_data);
             //obrisi sve redove sa ovim idjem
-            ObavestenjeZgradaIndex::where('obavestenjeId', $this->oid)->delete();
+            //ObavestenjeZgradaIndex::where('obavestenjeId', $this->oid)->delete();
             $new_ob_id = $this->oid;
         }else{
             $new = Obavestenja::create($model_data);
@@ -160,24 +160,50 @@ class ObavestenjeNovo extends Component
             }
         }
 
-        foreach($this->zgrade as $zg_id){
-            ObavestenjeZgradaIndex::create([
-                'obavestenjeId' => $new_ob_id,
-                'zgradaId' => $zg_id
-            ]);
-        }
+        if($this->is_edit){
+            // proveri da li je aktivno
+            ObavestenjeZgradaIndex::where('obavestenjeId', $new_ob_id)->whereNotIn('zgradaId', $this->zgrade)->update(['active' => 0]);
+            
+            foreach($this->zgrade as $zg_id){
+                ObavestenjeZgradaIndex::where('obavestenjeId', $new_ob_id)->updateOrCreate(
+                    ['obavestenjeId' => $new_ob_id, 'zgradaId' => $zg_id],
+                    ['active' => 1]
+                );
+            }
+            //ako je edituj obavestenje, posalji email samo zgradama kojima nije poslat
+            $zgrade_za_email = ObavestenjeZgradaIndex::where(['obavestenjeId' => $new_ob_id, 'email_sent' => 0])->pluck('zgradaId');
+            if(count($zgrade_za_email)){
+                $this->PosaljiEmail($new_ob_id, $zgrade_za_email);
+            }
 
-        if(!$this->is_edit){
-            $message_eml = '<p> Na portalu je objavljeno novo obaveštenja na stranici: "Početna". </p>
-                            <p> Obaveštenje: <strong>' . $this->ob_naslov . '</strong></p>';
+            //$zgrade_za_email = ObavestenjeZgradaIndex::where(['obavestenjeId' => $new_ob_id, 'email_sent' => 0])->pluck('zgradaId');
 
-            //posalji email
-            EmailStanarimaSender::send('Novo obaveštenje - stanari-sokolis.rs',  $message_eml, false, [], $this->zgrade, $this->ob_tip, 'pocetna');
+        }else{
+            //NOVO OBAVEŠTENJE 
+            foreach($this->zgrade as $zg_id){
+                 ObavestenjeZgradaIndex::create(['obavestenjeId' => $new_ob_id, 'zgradaId' => $zg_id]);       
+            };
+            // POŠALJI EMAIL
+
+            $this->PosaljiEmail($new_ob_id, $this->zgrade);      
         }
 
         $flash_msg = ($this->is_edit) ? 'Obaveštenje je uspešno izmenjeno.' : 'Novo obaveštenje uspešno dodato.';
         session()->flash('status', $flash_msg);
         $this->redirect('/upravnik-obavestenja');
+    }
+
+    private function PosaljiEmail($ob_id, $zgrade)
+    {
+        $ob_model = Obavestenja::where('id', $ob_id)->first();
+        $ob_tip_id = $ob_model->ob_tipId;
+        $subject = "Novo obaveštenje: " . $ob_model->ob_naslov;
+        $message_p = "Poštovani, <br> Na portal je objavljeno novo obaveštenje: <strong>" . $ob_model->ob_naslov . "</strong>.<br> Molimo Vas da ga pogledate na portalu.";
+        
+        EmailStanarimaSender::send('Novo obaveštenje - stanari-sokolis.rs',  $message_p, false, [], $zgrade, $ob_tip_id, 'pocetna');
+        
+        //update email_sent
+        ObavestenjeZgradaIndex::where('obavestenjeId', $ob_id)->whereIn('zgradaId', $zgrade)->update(['email_sent' => 1]);
     }
 
     public function updated($key, $value)

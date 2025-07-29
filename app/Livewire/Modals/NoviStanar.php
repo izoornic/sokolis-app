@@ -5,6 +5,7 @@ namespace App\Livewire\Modals;
 use LivewireUI\Modal\ModalComponent;
 
 use App\Models\User;
+use App\Models\EmailObavestenjaUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
@@ -116,7 +117,8 @@ class NoviStanar extends ModalComponent
     {
         $this->tel = preg_replace('/\s+/', '', $this->tel);
         $this->validate();
-        User::create($this->modelData());
+        $new_user = User::create($this->modelData());
+        EmailObavestenjaUser::newUserObavestenjaSva($new_user->id);
         session()->flash('status', 'Nova stanar je uspešno dodat.');
         return $this->redirect('/upravnik-stanari');
     }

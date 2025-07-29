@@ -7,6 +7,7 @@ use Livewire\Attributes\On;
 use Livewire\WithPagination;
 
 use App\Models\User;
+use App\Models\EmailObavestenjaUser;
 //use App\Models\UserStanIndex;
 use Illuminate\Support\Facades\Config;
 
@@ -44,6 +45,7 @@ class Stanari extends Component
     #[On('obrisi-stanara')] 
     public function obrisiStanara()
     {
+        EmailObavestenjaUser::where('user_id', '=', $this->del_id)->delete();
         User::destroy($this->del_id);
         session()->flash('status', 'Stanar je uspešno obrisan.');
         $this->render();

@@ -27,8 +27,9 @@ class StanNoviStanaru extends ModalComponent
     #[On('link-stan')] 
     public function linkujStan()
     {
-        //dd($this->user_id, $this->stan_id);
-        UserStanIndex::create(['userId' => $this->user_id, 'stanId' => $this->stan_id]);
+        $zgradaId = IzabranaZgrada::getIzabranaZgradaId();
+        //dd($this->user_id, $this->stan_id, $zgradaId);
+        UserStanIndex::create(['userId' => $this->user_id, 'stanId' => $this->stan_id, 'zgrada_id' => $zgradaId]);
         $this->user_id = 0;
         $this->stan_id = 0;
         

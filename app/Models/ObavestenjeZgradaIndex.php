@@ -17,6 +17,7 @@ class ObavestenjeZgradaIndex extends Model
     protected $fillable = [
         'obavestenjeId',
         'zgradaId',
+        'email_sent',
         'active'
     ];
 

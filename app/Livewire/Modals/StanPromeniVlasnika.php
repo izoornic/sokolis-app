@@ -56,7 +56,7 @@ class StanPromeniVlasnika extends ModalComponent
 
     public function promeniVlasnika($uid)
     {
-        UserStanIndex::updateOrCreate(['stanId'=>$this->sid],['userId'=>$uid, 'stanId'=>$this->sid]);
+        UserStanIndex::updateOrCreate(['stanId'=>$this->sid],['userId'=>$uid, 'stanId'=>$this->sid, 'zgrada_id'=>$this->zgradaId]);
         $this->closeMod();
     }
 

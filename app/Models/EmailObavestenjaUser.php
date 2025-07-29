@@ -20,4 +20,23 @@ class EmailObavestenjaUser extends Model
             ->where('email_obavestenja_tip_id', $tip_id)
             ->exists();
     }
+
+    /**
+     * Set all email notifications for a new user.
+     *
+     * @param int $user_id
+     * @return void
+     */
+    public static function newUserObavestenjaSva($user_id)
+    {
+        $tipovi = EmailObavestenjaTip::all();
+        foreach ($tipovi as $tip) {
+            if ($tip->id != 8) {
+                EmailObavestenjaUser::create([
+                    'email_obavestenja_tip_id' => $tip->id,
+                    'user_id' => $user_id
+                ]);
+            }
+        }
+    }
 }
