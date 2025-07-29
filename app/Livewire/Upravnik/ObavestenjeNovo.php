@@ -198,7 +198,7 @@ class ObavestenjeNovo extends Component
         $ob_model = Obavestenja::where('id', $ob_id)->first();
         $ob_tip_id = $ob_model->ob_tipId;
         $subject = "Novo obaveštenje: " . $ob_model->ob_naslov;
-        $message_p = "Poštovani, <br> Na portal je objavljeno novo obaveštenje: <strong>" . $ob_model->ob_naslov . "</strong>.<br> Molimo Vas da ga pogledate na portalu.";
+        $message_p = "Poštovani, <br> Na portalu je objavljeno novo obaveštenja na stranici: Početna. <br> Obaveštenje: <strong>" . $ob_model->ob_naslov . "</strong>.";
         
         EmailStanarimaSender::send('Novo obaveštenje - stanari-sokolis.rs',  $message_p, false, [], $zgrade, $ob_tip_id, 'pocetna');
         
