@@ -140,7 +140,7 @@ class KvarPregled extends Component
                             <p> Prijava br: <strong> #' . $this->tkid . '</strong></p>';
 
             //posalji email
-            EmailStanarimaSender::sendToSingleUser('Promena statusa prijave kvara - stanari-sokolis.rs', $message_eml, $this->tiket_creator_id, 5, 'prijavi-kvar?tid='.$this->tkid);
+            EmailStanarimaSender::sendToSingleUser('Promena statusa prijave kvara - stanari-sokolis.rs', $message_eml, $this->tiket_creator_id, 5, 'kvar-pregled?tid='.$this->tkid);
         }
     }
 
@@ -210,7 +210,7 @@ class KvarPregled extends Component
                             <p> Prijava br: <strong> #' . $this->tkid . '</strong></p>';
 
             //posalji email
-            EmailStanarimaSender::sendToSingleUser('Novi komentar - stanari-sokolis.rs', $message_eml, $this->tiket_creator_id, 4, 'prijavi-kvar');
+            EmailStanarimaSender::sendToSingleUser('Novi komentar - stanari-sokolis.rs', $message_eml, $this->tiket_creator_id, 4, 'kvar-pregled?tid='.$this->tkid);
         }
     }
 
