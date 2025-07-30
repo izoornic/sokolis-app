@@ -27,6 +27,7 @@ class StambenaZajednica extends Component
             User::getMyZgradeStanove();
         }
        $this->ko_stanovi_zgrade = session()->only(['stanovi', 'zgrade']);
+       //dd($this->ko_stanovi_zgrade);
     }
 
     public function read()
@@ -35,14 +36,8 @@ class StambenaZajednica extends Component
         ->where('active', '=', 1)
         ->whereIn('zgradaId', $this->ko_stanovi_zgrade['zgrade'])
         ->pluck('sz_obavestenjeId');
-
-        return SzObavestenje::select('*','sz_obavestenjes.id as oid', 'sz_obavestenjes.created_at as obv_date')
-        //->leftJoin('obavestenje_tips', 'obavestenje_tips.id', '=', 'obavestenjas.ob_tipId')
-        //->leftJoin('obavestenja_komentar_user_viewds', function($join)
-        //{
-        //$join->on('obavestenjas.id', '=', 'obavestenja_komentar_user_viewds.obavestenjeId');
-        //$join->on('obavestenja_komentar_user_viewds.userId', '=', DB::raw(auth()->user()->id));
-        //})
+        //dd($obavestenja_ids);
+        return SzObavestenje::select('sz_obavestenjes.id as oid','sz_obavestenjes.*', 'sz_obavestenjes.created_at as obv_date')
         ->whereIn('sz_obavestenjes.id', $obavestenja_ids)
         ->orderBy('obv_date', 'desc')
         ->paginate(Config::get('global.obavestenja_paginate'), ['*'], 'obavest');

@@ -100,7 +100,7 @@ class ObavestenjeNovo extends Component
         $this->ob_tip = $tid;
     }
 
-    /* 
+    /* Example of contentChanged event handler
     [
         [
             'header' => [1, 2, 3, 4, 5, 6, false],
@@ -144,8 +144,7 @@ class ObavestenjeNovo extends Component
 
         if($this->is_edit){
             Obavestenja::where('id', $this->oid)->update($model_data);
-            //obrisi sve redove sa ovim idjem
-            //ObavestenjeZgradaIndex::where('obavestenjeId', $this->oid)->delete();
+           
             $new_ob_id = $this->oid;
         }else{
             $new = Obavestenja::create($model_data);
@@ -175,9 +174,6 @@ class ObavestenjeNovo extends Component
             if(count($zgrade_za_email)){
                 $this->PosaljiEmail($new_ob_id, $zgrade_za_email);
             }
-
-            //$zgrade_za_email = ObavestenjeZgradaIndex::where(['obavestenjeId' => $new_ob_id, 'email_sent' => 0])->pluck('zgradaId');
-
         }else{
             //NOVO OBAVEŠTENJE 
             foreach($this->zgrade as $zg_id){
@@ -200,7 +196,7 @@ class ObavestenjeNovo extends Component
         $subject = "Novo obaveštenje: " . $ob_model->ob_naslov;
         $message_p = "Poštovani, <br> Na portalu je objavljeno novo obaveštenja na stranici: Početna. <br> Obaveštenje: <strong>" . $ob_model->ob_naslov . "</strong>.";
         
-        EmailStanarimaSender::send('Novo obaveštenje - stanari-sokolis.rs',  $message_p, false, [], $zgrade, $ob_tip_id, 'pocetna');
+        EmailStanarimaSender::send($subject,  $message_p, false, [], $zgrade, $ob_tip_id, 'pocetna');
         
         //update email_sent
         ObavestenjeZgradaIndex::where('obavestenjeId', $ob_id)->whereIn('zgradaId', $zgrade)->update(['email_sent' => 1]);

@@ -134,8 +134,6 @@ class SzObavestenjeNovo extends Component
 
         if($this->is_edit){
             SzObavestenje::where('id', $this->oid)->update($model_data);
-            //obrisi sve redove sa ovim idjem
-            SzObavestenjeZgradaIndex::where('sz_obavestenjeId', $this->oid)->delete();
             $new_ob_id = $this->oid;
         }else{
             $new = SzObavestenje::create($model_data);
@@ -150,23 +148,48 @@ class SzObavestenjeNovo extends Component
             }
         }
 
-        if(!$this->is_edit){
-            $message_eml = '<p> Na portalu je objavljeno novo obaveštenja na stranici: "Stambena zajednica". </p>
-                            <p> Obaveštenje: <strong>' . $this->ob_naslov . '</strong></p>';
+        if($this->is_edit){
+           // proveri da li je aktivno
+            SzObavestenjeZgradaIndex::where('sz_obavestenjeId', $new_ob_id)->whereNotIn('zgradaId', $this->zgrade)->update(['active' => 0]);
+            
+            foreach($this->zgrade as $zg_id){
+                SzObavestenjeZgradaIndex::where('sz_obavestenjeId', $new_ob_id)->updateOrCreate(
+                    ['sz_obavestenjeId' => $new_ob_id, 'zgradaId' => $zg_id],
+                    ['active' => 1]
+                );
+            }
+            //ako je edit obavestenja, posalji email samo zgradama kojima nije poslat
+            $zgrade_za_email = SzObavestenjeZgradaIndex::where(['sz_obavestenjeId' => $new_ob_id, 'email_sent' => 0])->pluck('zgradaId');
+            if(count($zgrade_za_email)){
+                $this->PosaljiEmail($new_ob_id, $zgrade_za_email);
+            }
+        }else{
+            //NOVO OBAVEŠTENJE 
+            foreach($this->zgrade as $zg_id){
+                 SzObavestenjeZgradaIndex::create(['sz_obavestenjeId' => $new_ob_id, 'zgradaId' => $zg_id]);       
+            };
+            // POŠALJI EMAIL
 
-            //posalji email
-            EmailStanarimaSender::send('Novo obaveštenje - stanari-sokolis.rs', $message_eml, false, [], $this->zgrade, $this->ob_tip_email, 'stambena-zajednica');
+            $this->PosaljiEmail($new_ob_id, $this->zgrade);      
         }
-
-        foreach($this->zgrade as $zg_id){
-            SzObavestenjeZgradaIndex::create([
-                'sz_obavestenjeId' => $new_ob_id,
-                'zgradaId' => $zg_id
-            ]);
-        }
+        // Flash message for success
         $flash_msg = ($this->is_edit) ? 'Obaveštenje je uspešno izmenjeno.' : 'Novo obaveštenje uspešno dodato.';
         session()->flash('status', $flash_msg);
         $this->redirect('/sz-upravnik-obavestenja');
+    }
+
+    private function PosaljiEmail($ob_id, $zgrade)
+    {
+        $ob_model = SzObavestenje::where('id', $ob_id)->first();
+        //dd($ob_model);
+        $ob_tip_id = 7;
+        $subject = "Novo obaveštenje: " . $ob_model->sz_ob_naslov;
+        $message_p = "Poštovani, <br> Na portalu je objavljeno novo obaveštenja na stranici: Stambena zajednica. <br> Obaveštenje: <strong>" . $ob_model->sz_ob_naslov . "</strong>.";
+        
+        EmailStanarimaSender::send($subject,  $message_p, false, [], $zgrade, $ob_tip_id, 'stambena-zajednica');
+        
+        //update email_sent
+        SZObavestenjeZgradaIndex::where('sz_obavestenjeId', $ob_id)->whereIn('zgradaId', $zgrade)->update(['email_sent' => 1]);
     }
 
 
