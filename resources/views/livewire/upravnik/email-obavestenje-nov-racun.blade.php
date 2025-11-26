@@ -15,16 +15,33 @@
         </div>
         <!--  ZGRADE  -->
        <div class="p-2 mb-2 border-b border-slate-300">
-            <p>Zgrade čiji stanari će dobiti obaveštenje: <br /><span class="text-sm text-gray-500">Na portalu je dostupan novi račun.</span></p>
-            @foreach ($zgrade_upravnika as $item)
-               <p class="p-2 flex"> 
-                <input type="checkbox" id="ch{{$item->id}}" value="{{$item->id}}" wire:model="zgrade"  class="form-checkbox h-6 w-6 text-blue-500" /> 
-                <label for="ch{{$item->id}}" class="ml-4">- {{ $item->naziv }}</label>
-                <span class="ml-4 text-sm text-gray-500"> za mesec {{$item->last_month_name}} </span>
-                <span class="text-xs text-gray-500">Poslednji put poslato: {{$item->last_send}}</span>
-                <span class="text-xs text-gray-500">Komentar: {{$item->db_coment}}</span>
-                </p>
-            @endforeach
+            <p>Zgrade čiji stanari će dobiti obaveštenje: </p>
+            <p class="text-sm text-gray-500 ms-3">
+                Obaveštenje: <br />
+                    <span class="text-red-500">Na portalu je dostupan novi račun za mesec: </span>
+            </p>
+                <div class="flex flex-col">
+                    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                <table class="min-w-full divide-y divide-gray-200" style="width: 100% !important">
+                                    <tbody class="bg-white divide-y divide-gray-200"> 
+                                         @foreach ($zgrade_upravnika as $item) 
+                                            <tr class="bg-slate-50">
+                                                <td class="px-2 py-2"><input type="checkbox" id="ch{{$item->id}}" value="{{$item->id}}" wire:model="zgrade"  class="form-checkbox h-6 w-6 text-blue-500" /></td>
+                                                <td class="px-2 font-bold">{{ $item->naziv }}</td>
+                                                <td class="px-2 text-red-500">{{$item->last_month_name}} </td>
+                                                <td class="px-2 text-gray-500">Poslednji put poslato: {{$item->last_send}}</td>
+                                                <td class="px-2 text-gray-500">Poslednji poslat račun: <span class="text-emerald-600">{{$item->last_send_racun}} {{$item->db_coment}}</span></td>
+                                            </tr>
+                                        @endforeach 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             <div class="p-2 text-red-500 mb-3">{{$zgrade_error}} </div>
             
        </div>

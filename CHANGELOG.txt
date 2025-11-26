@@ -1,3 +1,0 @@
-== Version V 1.5.3: Released Jul 30 2025 ==
-
-* Dodata kontrola mejlova koje korisnik prima u profilu i mailer korisnicima (stanarima)
