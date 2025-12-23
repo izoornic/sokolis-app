@@ -1,9 +1,19 @@
-# Preventing spam submitted through forms
+<div align="left">
+    <a href="https://spatie.be/open-source?utm_source=github&utm_medium=banner&utm_campaign=laravel-honeypot">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://spatie.be/packages/header/laravel-honeypot/html/dark.webp">
+        <img alt="Logo for laravel-honeypot" src="https://spatie.be/packages/header/laravel-honeypot/html/light.webp">
+      </picture>
+    </a>
+
+<h1>Preventing spam submitted through forms</h1>
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-honeypot.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-honeypot)
 ![Test Status](https://img.shields.io/github/actions/workflow/status/spatie/laravel-honeypot/run-tests.yml?branch=main&label=Tests)
 ![Code Style Status](https://img.shields.io/github/actions/workflow/status/spatie/laravel-honeypot/php-cs-fixer.yml?branch=main&label=Code%20Style)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-honeypot.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-honeypot)
+    
+</div>
 
 When adding a form to a public site, there's a risk that spam bots will try to submit it with fake values. Luckily, the majority of these bots are pretty dumb. You can thwart most of them by adding an invisible field to your form that should never contain a value when submitted. Such a field is called a honeypot. These spam bots will just fill all fields, including the honeypot.
 
@@ -44,7 +54,7 @@ composer require spatie/laravel-honeypot
 Optionally, you can publish the config file of the package.
 
 ```bash
-php artisan vendor:publish --provider="Spatie\Honeypot\HoneypotServiceProvider" --tag=honeypot-config
+ php artisan vendor:publish --provider="Spatie\Honeypot\HoneypotServiceProvider" --tag="honeypot-config"
 ```
 
 This is the content of the config file that will be published at `config/honeypot.php`:
@@ -115,6 +125,11 @@ return [
      * This switch determines if the honeypot protection should be activated.
      */
     'enabled' => env('HONEYPOT_ENABLED', true),
+
+    /*
+     * need to add @csp https://github.com/spatie/laravel-csp in style tag hidden items 
+    */
+    'with_csp' => env('HONEYPOT_WITH_CSP', false),
 ];
 ```
   
@@ -209,6 +224,107 @@ data() {
     }
 }
 ```
+### Usage with Jetstream (Vue/Inertia)
+
+To make things work follow this steps:
+
+1. Add `\Spatie\Honeypot\ProtectAgainstSpam::class` to `bootstrap/app.php` in `->withMiddleware` block. For example:
+
+```php
+        $middleware->web(append: [
+            \App\Http\Middleware\HandleInertiaRequests::class,
+            \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
+
+            // will silenty reload Login page
+            \Spatie\Honeypot\ProtectAgainstSpam::class,    // <- this
+        ]);
+```
+
+or
+
+```php
+        $middleware->web(append: [
+            \App\Http\Middleware\HandleInertiaRequests::class,
+            \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
+        ]);
+
+        // will show blank responce page in iframe inside modal
+        $middleware->append(\Spatie\Honeypot\ProtectAgainstSpam::class);
+```
+
+2. Add `honeypot` variable to share block of `app/Http/Middleware/HandleInertiaRequests.php` middleware. For example:
+
+```php
+    public function share(Request $request): array
+    {
+        return array_merge(parent::share($request), [
+            // read more here https://laravel.com/docs/11.x/authorization#authorization-and-inertia
+            'honeypot' => new \Spatie\Honeypot\Honeypot(config('honeypot'))
+        ]);
+    }
+```
+
+3. Add honeypot elements to `Pages` you want. For example `resourses/js/Pages/Auth/Login.vue` like this:
+
+Redefine props like this:
+
+```javascript
+const props = defineProps({
+    canResetPassword: Boolean,
+    status: String,
+    honeypot: Object,
+});
+```
+
+Redefine `form` like this:
+
+```javascript
+const form = useForm({
+    email: '',
+    password: '',
+    remember: false,
+    [props.honeypot.nameFieldName]: '',
+    [props.honeypot.validFromFieldName]: props.honeypot.encryptedValidFrom,
+});
+```
+
+And add html to `template`, like this:
+
+```html
+<div v-if="honeypot.enabled" :name="`${honeypot.nameFieldName}_wrap`" style="display: none;">
+    <input type="text" v-model="form[honeypot.nameFieldName]" :name="honeypot.nameFieldName" :id="honeypot.nameFieldName" />
+    <input type="text" v-model="form[honeypot.validFromFieldName]" :name="honeypot.validFromFieldName" />
+</div>
+```
+
+In `Register.vue` changes will be:
+
+```javascript
+const props = defineProps({
+    honeypot: Object,
+});
+
+const form = useForm({
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+    terms: false,
+    [props.honeypot.nameFieldName]: '',
+    [props.honeypot.validFromFieldName]: props.honeypot.encryptedValidFrom,
+});
+```
+
+and 
+
+```html
+<div v-if="honeypot.enabled" :name="`${honeypot.nameFieldName}_wrap`" style="display: none;">
+    <input type="text" v-model="form[honeypot.nameFieldName]" :name="honeypot.nameFieldName" :id="honeypot.nameFieldName" />
+    <input type="text" v-model="form[honeypot.validFromFieldName]" :name="honeypot.validFromFieldName" />
+</div>
+```
+
+That's all.
 
 ### Usage in Livewire
 
@@ -258,12 +374,21 @@ Finally, use the `x-honeypot` in your Livewire Blade component:
     <input name="myField" type="text">
 </form>
 ```
+#### Usage Csp for hidden inline style 
+
+You can enable this feature to synchronize with csp by enabling config with_csp .
+Of course, you need to first install the package https://github.com/spatie/laravel-csp to manage csp additionally.
 
 #### Usage in Volt functional syntax
 
 To use this package in Volt functional syntax, return the `HoneypotData` property from the `guessHoneypotDataProperty` method.
 
 ```php
+use App\Models\User;
+use Spatie\Honeypot\Http\Livewire\Concerns\HoneypotData;
+use Spatie\Honeypot\Http\Livewire\Concerns\UsesSpamProtection;
+use function Livewire\Volt\{uses, state, mount};
+
 uses(UsesSpamProtection::class);
 
 state([

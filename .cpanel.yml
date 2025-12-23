@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/skyvorte/sokolisapp/
+    - export DEPLOYPATH=/home/skyvorte/sokolisapp-dev/
     - /bin/cp -a * $DEPLOYPATH
     #- /bin/cp -R app $DEPLOYPATH
     #- /bin/cp -R bootstrap  $DEPLOYPATH

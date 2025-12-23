@@ -27,7 +27,7 @@ class Collection extends BaseCollection implements QueueableCollection
      *
      * @param  mixed  $key
      * @param  TFindDefault  $default
-     * @return static<TKey, TModel>|TModel|TFindDefault
+     * @return ($key is (\Illuminate\Contracts\Support\Arrayable<array-key, mixed>|array<mixed>) ? static : TModel|TFindDefault)
      */
     public function find($key, $default = null)
     {
@@ -84,7 +84,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Load a set of relationships onto the collection.
      *
-     * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
+     * @param  array<array-key, array|(callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
      * @return $this
      */
     public function load($relations)
@@ -105,7 +105,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Load a set of aggregations over relationship's column onto the collection.
      *
-     * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
+     * @param  array<array-key, array|(callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
      * @param  string  $column
      * @param  string|null  $function
      * @return $this
@@ -142,7 +142,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Load a set of relationship counts onto the collection.
      *
-     * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
+     * @param  array<array-key, array|(callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
      * @return $this
      */
     public function loadCount($relations)
@@ -153,7 +153,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Load a set of relationship's max column values onto the collection.
      *
-     * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
+     * @param  array<array-key, array|(callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
      * @param  string  $column
      * @return $this
      */
@@ -165,7 +165,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Load a set of relationship's min column values onto the collection.
      *
-     * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
+     * @param  array<array-key, array|(callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
      * @param  string  $column
      * @return $this
      */
@@ -177,7 +177,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Load a set of relationship's column summations onto the collection.
      *
-     * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
+     * @param  array<array-key, array|(callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
      * @param  string  $column
      * @return $this
      */
@@ -189,7 +189,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Load a set of relationship's average column values onto the collection.
      *
-     * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
+     * @param  array<array-key, array|(callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
      * @param  string  $column
      * @return $this
      */
@@ -201,7 +201,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Load a set of related existences onto the collection.
      *
-     * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
+     * @param  array<array-key, array|(callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
      * @return $this
      */
     public function loadExists($relations)
@@ -212,7 +212,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Load a set of relationships onto the collection if they are not already eager loaded.
      *
-     * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
+     * @param  array<array-key, array|(callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>|string  $relations
      * @return $this
      */
     public function loadMissing($relations)
@@ -271,7 +271,7 @@ class Collection extends BaseCollection implements QueueableCollection
             return;
         }
 
-        $models = $models->pluck($name)->whereNotNull();
+        $models = $models->pluck($name)->filter();
 
         if ($models->first() instanceof BaseCollection) {
             $models = $models->collapse();
@@ -284,7 +284,7 @@ class Collection extends BaseCollection implements QueueableCollection
      * Load a set of relationships onto the mixed relationship collection.
      *
      * @param  string  $relation
-     * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>  $relations
+     * @param  array<array-key, array|(callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>  $relations
      * @return $this
      */
     public function loadMorph($relation, $relations)
@@ -301,7 +301,7 @@ class Collection extends BaseCollection implements QueueableCollection
      * Load a set of relationship counts onto the mixed relationship collection.
      *
      * @param  string  $relation
-     * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>  $relations
+     * @param  array<array-key, array|(callable(\Illuminate\Database\Eloquent\Relations\Relation<*, *, *>): mixed)|string>  $relations
      * @return $this
      */
     public function loadMorphCount($relation, $relations)
@@ -333,6 +333,19 @@ class Collection extends BaseCollection implements QueueableCollection
         }
 
         return parent::contains(fn ($model) => $model->getKey() == $key);
+    }
+
+    /**
+     * Determine if a key does not exist in the collection.
+     *
+     * @param  (callable(TModel, TKey): bool)|TModel|string|int  $key
+     * @param  mixed  $operator
+     * @param  mixed  $value
+     * @return bool
+     */
+    public function doesntContain($key, $operator = null, $value = null)
+    {
+        return ! $this->contains(...func_get_args());
     }
 
     /**
@@ -470,7 +483,7 @@ class Collection extends BaseCollection implements QueueableCollection
      *
      * @param  (callable(TModel, TKey): mixed)|string|null  $key
      * @param  bool  $strict
-     * @return static<int, TModel>
+     * @return static
      */
     public function unique($key = null, $strict = false)
     {
@@ -485,7 +498,7 @@ class Collection extends BaseCollection implements QueueableCollection
      * Returns only the models from the collection with the specified keys.
      *
      * @param  array<array-key, mixed>|null  $keys
-     * @return static<int, TModel>
+     * @return static
      */
     public function only($keys)
     {
@@ -502,7 +515,7 @@ class Collection extends BaseCollection implements QueueableCollection
      * Returns all models in the collection except the models with specified keys.
      *
      * @param  array<array-key, mixed>|null  $keys
-     * @return static<int, TModel>
+     * @return static
      */
     public function except($keys)
     {
