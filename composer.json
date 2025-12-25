@@ -5,7 +5,7 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
         "joelwmale/livewire-quill": "^3.0",
         "lakm/laravel-comments": "^1.4",
         "laravel/framework": "^11.9",

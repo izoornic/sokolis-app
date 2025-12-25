@@ -29,14 +29,14 @@ class Password implements Rule
      *
      * @var bool
      */
-    protected $requireNumeric = true;
+    protected $requireNumeric = false;
 
     /**
      * Indicates if the password must contain one special character.
      *
      * @var bool
      */
-    protected $requireSpecialCharacter = true;
+    protected $requireSpecialCharacter = false;
 
     /**
      * The message that should be used when validation fails.

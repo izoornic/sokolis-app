@@ -77,9 +77,9 @@ if (! function_exists('data_get')) {
             $segment = match ($segment) {
                 '\*' => '*',
                 '\{first}' => '{first}',
-                '{first}' => array_key_first(is_array($target) ? $target : collect($target)->all()),
+                '{first}' => array_key_first(is_array($target) ? $target : (new Collection($target))->all()),
                 '\{last}' => '{last}',
-                '{last}' => array_key_last(is_array($target) ? $target : collect($target)->all()),
+                '{last}' => array_key_last(is_array($target) ? $target : (new Collection($target))->all()),
                 default => $segment,
             };
 
@@ -239,18 +239,19 @@ if (! function_exists('value')) {
 
 if (! function_exists('when')) {
     /**
-     * Output a value if the given condition is true.
+     * Return a value if the given condition is true.
      *
      * @param  mixed  $condition
-     * @param  \Closure|mixed  $output
+     * @param  \Closure|mixed  $value
+     * @param  \Closure|mixed  $default
      * @return mixed
      */
-    function when($condition, $output)
+    function when($condition, $value, $default = null)
     {
         if ($condition) {
-            return value($output);
+            return value($value, $condition);
         }
 
-        return null;
+        return value($default, $condition);
     }
 }

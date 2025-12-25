@@ -39,7 +39,7 @@ return [
      * If the form is submitted faster than this amount of seconds
      * the form submission will be considered invalid.
      */
-    'amount_of_seconds' => (int) env('HONEYPOT_SECONDS', 3),
+    'amount_of_seconds' => (int) env('HONEYPOT_SECONDS', 1),
 
     /*
      * This class is responsible for sending a response to requests that
@@ -63,4 +63,9 @@ return [
      * this value.
      */
     'spam_protection' => \Spatie\Honeypot\SpamProtection::class,
+
+    /*
+     * need to add @cspNonce https://github.com/spatie/laravel-csp in style tag hidden items 
+    */
+    'with_csp' => env('HONEYPOT_WITH_CSP', false),
 ];

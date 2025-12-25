@@ -1,15 +1,19 @@
 # Livewire Quill
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/joelwmale/livewire-quill.svg?style=flat-square)](https://packagist.org/packages/joelwmale/livewire-quill)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/joelwmale/livewire-quill/tests.yml?branch=master&label=Tests)](https://github.com/joelwmale/livewire-quill/actions?query=workflow%3ATests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/joelwmale/livewire-quill.svg?style=flat-square)](https://packagist.org/packages/joelwmale/livewire-quill)
+[![License](https://poser.pugx.org/joelwmale/livewire-quill/license.svg)](https://packagist.org/packages/joelwmale/livewire-quill)
 
 ---
 
 This package adds an easy to use Livewire component to your application, which will create and largely manage a [Quill]([Quill](https://quilljs.com/)) editor for you.
 
-It instantly supports the image uploads with zero work from you.
+It supports image uploads out of the box with zero work from you.
 
-> v2.0 of this package only supports Livewire v3.x. If you're still using Livewire 2.x, please use [v1.0](https://github.com/joelwmale/livewire-quill/tree/v1.0.0) of this package.
+## Livewire v2.x Support
+
+v2.0 of this package only supports Livewire v3.x. If you're still using Livewire 2.x, please use [v1.0](https://github.com/joelwmale/livewire-quill/tree/v1.0.0) of this package.
 
 ## Installation
 
@@ -97,28 +101,43 @@ class SomeLivewireComponent extends Component
         $this->content = $content;
     }
 }
-
 ```
 
-### Parameters
+## Configuration
 
-#### QuillId
+### QuillId
 
 A div is created with this id, this allows for easy use of multiple quill instances on the same page.
 
-#### Data
+### Data
 
 This is the initial value of the text editor (i.e: a previous saved version of the text editor)
 
-#### Classes
+### Classes
 
 Any custom classes you wish to add to the base editor class.
 
 Note: for any customisation, we recommend using CSS to make changes. You can always edit a specific Quill instance by referring to the #quillId variable.
 
-#### Toolbar
+### Toolbar
 
 An array of arrays to manage and create a toolbar for Quill to use
+
+## Initialising Livewire Quill Manually
+
+If you wish to initialise Livewire Quill manually (i.e after you show a modal) you can dispatch an event to the window:
+
+### Javascript:
+
+```javascript
+dispatchEvent('livewire-quill:init')
+```
+
+### Livewire:
+
+```php
+$this->dispatchBrowserEvent('livewire-quill:init');
+```
 
 ## Testing
 

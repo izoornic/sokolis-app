@@ -3,14 +3,18 @@
 namespace Illuminate\Concurrency;
 
 use Closure;
-use Illuminate\Foundation\Defer\DeferredCallback;
+use Exception;
+use Illuminate\Console\Application;
+use Illuminate\Contracts\Concurrency\Driver;
 use Illuminate\Process\Factory as ProcessFactory;
 use Illuminate\Process\Pool;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Defer\DeferredCallback;
 use Laravel\SerializableClosure\SerializableClosure;
-use Symfony\Component\Process\PhpExecutableFinder;
 
-class ProcessDriver
+use function Illuminate\Support\defer;
+
+class ProcessDriver implements Driver
 {
     /**
      * Create a new process based concurrency driver.
@@ -25,22 +29,28 @@ class ProcessDriver
      */
     public function run(Closure|array $tasks): array
     {
-        $php = (new PhpExecutableFinder)->find(false);
+        $command = Application::formatCommandString('invoke-serialized-closure');
 
-        $results = $this->processFactory->pool(function (Pool $pool) use ($tasks, $php) {
+        $results = $this->processFactory->pool(function (Pool $pool) use ($tasks, $command) {
             foreach (Arr::wrap($tasks) as $task) {
                 $pool->path(base_path())->env([
                     'LARAVEL_INVOKABLE_CLOSURE' => serialize(new SerializableClosure($task)),
-                ])->command($php.' artisan invoke-serialized-closure');
+                ])->command($command);
             }
         })->start()->wait();
 
         return $results->collect()->map(function ($result) {
+            if ($result->failed()) {
+                throw new Exception('Concurrent process failed with exit code ['.$result->exitCode().']. Message: '.$result->errorOutput());
+            }
+
             $result = json_decode($result->output(), true);
 
             if (! $result['successful']) {
                 throw new $result['exception'](
-                    $result['message']
+                    ...(! empty(array_filter($result['parameters']))
+                        ? $result['parameters']
+                        : [$result['message']])
                 );
             }
 
@@ -53,11 +63,13 @@ class ProcessDriver
      */
     public function defer(Closure|array $tasks): DeferredCallback
     {
-        return defer(function () use ($tasks) {
+        $command = Application::formatCommandString('invoke-serialized-closure');
+
+        return defer(function () use ($tasks, $command) {
             foreach (Arr::wrap($tasks) as $task) {
                 $this->processFactory->path(base_path())->env([
                     'LARAVEL_INVOKABLE_CLOSURE' => serialize(new SerializableClosure($task)),
-                ])->run('php artisan invoke-serialized-closure 2>&1 &');
+                ])->run($command.' 2>&1 &');
             }
         });
     }
