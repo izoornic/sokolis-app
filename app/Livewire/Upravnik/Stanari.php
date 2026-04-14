@@ -8,7 +8,9 @@ use Livewire\WithPagination;
 
 use App\Models\User;
 use App\Models\EmailObavestenjaUser;
-//use App\Models\UserStanIndex;
+use App\Models\UserStanIndex;
+use App\Models\Stan;
+use App\Models\UpravnikZgradaIndex;
 use Illuminate\Support\Facades\Config;
 
 class Stanari extends Component
@@ -71,15 +73,23 @@ class Stanari extends Component
 
     public function read()
     {
+        $zgradaIds = UpravnikZgradaIndex::where('userId', auth()->user()->id)->pluck('zgradaId');
+        $stanIds   = Stan::whereIn('zgradaId', $zgradaIds)->pluck('id');
+        $userIds   = UserStanIndex::whereIn('stanId', $stanIds)->pluck('userId')->unique();
+
         return User::select('*')
             ->withCount(['stanovi'])
             ->where('users.user_tipId', '=', 1)
-            ->when($this->search_name, function ($rtval){
-                return $rtval->where('users.name', 'like', '%'.$this->search_name.'%');
-            } )
-            ->when($this->search_email, function ($rtval){
-                return $rtval->where('users.email', 'like', '%'.$this->search_email.'%');
-            } )
+            ->where(function ($q) use ($userIds) {
+                $q->whereIn('users.id', $userIds)
+                  ->orWhereDoesntHave('stanovi');
+            })
+            ->when($this->search_name, function ($q) {
+                return $q->where('users.name', 'like', '%'.$this->search_name.'%');
+            })
+            ->when($this->search_email, function ($q) {
+                return $q->where('users.email', 'like', '%'.$this->search_email.'%');
+            })
             ->paginate(Config::get('global.paginate'), ['*'], 'tik');
     }
 
