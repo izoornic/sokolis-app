@@ -21,7 +21,7 @@
                 <x-section-border />
             @endif
 
-            @if(auth()->user()->user_tipId == 1)
+            @if(in_array(auth()->user()->user_tipId, [1, 2]))
                 <div class="mt-10 sm:mt-0">
                     @livewire('profil.mailing-form')
                 </div>

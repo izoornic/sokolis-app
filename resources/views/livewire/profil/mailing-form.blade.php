@@ -1,6 +1,6 @@
 <x-action-section>
     <x-slot name="title">
-        {{ __('Podašavanja za e-mail obaveštenja') }}
+        {{ __('Podešavanja za e-mail obaveštenja') }}
     </x-slot>
 
     <x-slot name="description">

@@ -9,6 +9,14 @@ use Livewire\WithFileUploads;
 use App\Models\kvarTiket;
 use App\Models\Stan;
 use App\Models\KvarTiketImage;
+use App\Models\KvarOpisTip;
+use App\Models\KvarTiketPrioritet;
+use App\Models\UpravnikZgradaIndex;
+use App\Models\User;
+use App\Models\EmailObavestenjaTip;
+use App\Models\EmailObavestenjaUser;
+use App\Mail\ObavestenjeStanarima;
+use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -133,8 +141,10 @@ class TiketPrijava extends ModalComponent
             kvarTiket::where('id', '=', $newTik->id)->update(['broj_slika' => $no_of_photos]);
         }
         
+        $this->notifikujUpravnika($newTik->zgradaId, $newTik->id);
+
         session()->flash('status', 'Nova prijava kvara je uspešno sačuvana.');
- 
+
         return $this->redirect('/prijavi-kvar');
     }
 
@@ -166,6 +176,52 @@ class TiketPrijava extends ModalComponent
         
         foreach($slice_keys as $skey){
             array_splice($this->photos, $skey);
+        }
+    }
+
+    private function notifikujUpravnika(int $zgradaId, int $tiketId): void
+    {
+        $tip = EmailObavestenjaTip::where('naziv', 'Nova prijava kvara')->first();
+
+        $managerIds = UpravnikZgradaIndex::where('zgradaId', $zgradaId)->pluck('userId');
+        if ($managerIds->isEmpty()) return;
+
+        // Filter only managers who opted into kvar notifications (if the type exists in DB)
+        if ($tip) {
+            $managerIds = $managerIds->filter(
+                fn($id) => EmailObavestenjaUser::userPrimaEmail($id, $tip->id)
+            );
+        }
+
+        if ($managerIds->isEmpty()) return;
+
+        $managerEmails = User::whereIn('id', $managerIds)->pluck('email');
+        if ($managerEmails->isEmpty()) return;
+
+        $zgrada    = Stan::find($this->odabrani_stan)->zgrada()->first();
+        $stan      = Stan::find($this->odabrani_stan);
+        $vrstaKvara = KvarOpisTip::find($this->vrsta_kvara);
+        $prioritet  = KvarTiketPrioritet::find($this->kvar_prioritet);
+        $podnosilac = User::find($this->userId);
+
+        $subject = 'Nova prijava kvara – ' . $zgrada->naziv;
+
+        $message = implode('', [
+            '<p><strong>Nova prijava kvara je podneta.</strong></p>',
+            '<p>',
+            '<strong>Zgrada:</strong> ' . e($zgrada->naziv) . '<br>',
+            '<strong>Stan:</strong> ' . e($stan->stanbr) . '<br>',
+            '<strong>Vrsta kvara:</strong> ' . e($vrstaKvara?->kvar_tip_naziv ?? '–') . '<br>',
+            '<strong>Prioritet:</strong> ' . e($prioritet?->prioritet_naziv ?? '–') . '<br>',
+            '<strong>Opis:</strong> ' . e($this->kvar_opis) . '<br>',
+            '<strong>Podnosilac:</strong> ' . e($podnosilac->name),
+            '</p>',
+        ]);
+
+        foreach ($managerEmails as $email) {
+            Mail::to($email)->send(
+                new ObavestenjeStanarima($subject, ['text' => $message], [], 'upravnik-kvarovi')
+            );
         }
     }
 

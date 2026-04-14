@@ -22,7 +22,10 @@ class MailingForm extends Component
     public function read()
     {
         
-       $kat_all = EmailObavestenjaKategorija::all()
+       $userTipId = auth()->user()->user_tipId;
+
+       $kat_all = EmailObavestenjaKategorija::where('for_user_tip', $userTipId)
+            ->get()
             ->map(function ($item) {
                 return [
                     'id' => $item->id,

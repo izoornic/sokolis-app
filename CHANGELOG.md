@@ -15,3 +15,8 @@ V 1.6.0.0 Released December 25 2025
 V 1.6.0.1 Released April 14 2026
 
 - Dodata dashboard stranica za upravnika
+
+V 1.6.0.2 Released April 14 2026
+
+- Dodat email prijave kvara za upravnika
+- Na profilu upravnik bira da li prima mejlove
