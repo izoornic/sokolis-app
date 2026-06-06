@@ -49,7 +49,7 @@
                         <p> {!! html_entity_decode($textdisp) !!}</p>
 
                         @if(count($ob_links))
-                        <div class="flex mt-2">
+                        <div class="flex flex-wrap mt-2">
                             @foreach($ob_links as $oblink)
                                 <a id="{{$oblink->id}}" class="my-1 mx-2 bg-neutral-400 hover:bg-neutral-600 text-white text-sm py-2 px-2 rounded flex" href="{{$oblink->url}}" target="_blanck">
                                     {{ $oblink->ob_link_tekst }}
