@@ -30,3 +30,8 @@ V 1.6.0.5 Released August 12 2026
 
 - Dodata uloga "servis održavanja" sa svojim zgradama, početnom stranicom i listom prijava kvarova
 - Servis dobija e-mail za svaku novu prijavu i svaki komentar (podešivo u profilu)
+
+V 1.6.0.6 Released August 12 2026
+
+- Na početnim stranama upravnika i servisa broje se samo prijave sa statusom "Otvoren"
+- Skripta za novog servisera označava zatečene prijave i komentare kao pregledane

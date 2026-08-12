@@ -15,6 +15,13 @@ class kvarTiket extends Model
     use HasFactory;
 
     /**
+     * Vrednosti kolone tiket_statusId
+     */
+    public const STATUS_OTVOREN   = 1;
+    public const STATUS_ZAKLJUCAN = 2;
+    public const STATUS_OBRISAN   = 3;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var string[]

@@ -43,7 +43,7 @@ class Pocetna extends Component
 
         $kvaroviRaw = kvarTiket::select('zgradaId', 'tiket_prioritetId', DB::raw('COUNT(*) as broj'))
             ->whereIn('zgradaId', $zgradaIds)
-            ->where('tiket_statusId', '<', 3)
+            ->where('tiket_statusId', '=', kvarTiket::STATUS_OTVOREN)
             ->groupBy('zgradaId', 'tiket_prioritetId')
             ->get();
 
@@ -64,7 +64,7 @@ class Pocetna extends Component
                      ->where('ktv.userId', '=', $userId);
             })
             ->whereIn('kt.zgradaId', $zgradaIds)
-            ->where('kt.tiket_statusId', '<', 3)
+            ->where('kt.tiket_statusId', '=', kvarTiket::STATUS_OTVOREN)
             ->whereNull('ktv.prvi_pregled')
             ->groupBy('kt.zgradaId')
             ->pluck('nepregledani', 'zgradaId');
@@ -77,7 +77,7 @@ class Pocetna extends Component
                      ->where('kv.userId', '=', $userId);
             })
             ->whereIn('kt.zgradaId', $zgradaIds)
-            ->where('kt.tiket_statusId', '<', 3)
+            ->where('kt.tiket_statusId', '=', kvarTiket::STATUS_OTVOREN)
             ->groupBy('kt.zgradaId')
             ->pluck('nevidjeni', 'zgradaId');
 
