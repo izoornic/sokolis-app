@@ -33,9 +33,14 @@
                                     @php
                                      if(!$item->broj_vidjenih) $item->broj_vidjenih = 0;
                                      $br_novih = $item->tiket_br_komentara - $item->broj_vidjenih;
+                                     $nepregledan = !$item->prvi_pregled;
                                     @endphp
-                                    <tr class="@if($item->tstid == 3) bg-emerald-50 @endif">
-                                        <td class="px-2 py-2">#{{ $item->ktid }}</td>
+                                    <tr class="@if($item->tstid == 3) bg-emerald-50 @endif @if($nepregledan) bg-yellow-50 font-semibold @endif">
+                                        <td class="px-2 py-2" @if(!$nepregledan) title="Poslednji pregled: {{ App\Http\TimeFormatHelper::datumFormat($item->poslednji_pregled) }} ({{ $item->broj_pregleda }}x)" @endif>#{{ $item->ktid }}
+                                            @if($nepregledan)
+                                                <span class="ml-1 px-1 text-white bg-red-500 rounded" style="font-size: 0.65rem; line-height: 0.9rem;">NOVO</span>
+                                            @endif
+                                        </td>
                                         <td >{{ App\Http\TimeFormatHelper::datumFormat($item->crt)}}</td>
                                         <td class="text-center">
                                                 @if($item->tiket_statusId == 1) 

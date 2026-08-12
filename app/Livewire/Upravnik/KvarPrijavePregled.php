@@ -26,13 +26,19 @@ class KvarPrijavePregled extends Component
 
     public function read()
     {
-        return kvarTiket::select('*', 'kvar_tikets.created_at as crt', 'kvar_tikets.id as ktid', 'kvar_komentar_user_views.broj_vidjenih')
+        return kvarTiket::select('*', 'kvar_tikets.created_at as crt', 'kvar_tikets.id as ktid', 'kvar_komentar_user_views.broj_vidjenih',
+            'kvar_tiket_upravnik_views.prvi_pregled', 'kvar_tiket_upravnik_views.poslednji_pregled', 'kvar_tiket_upravnik_views.broj_pregleda')
         ->leftJoin('kvar_tiket_prioritets', 'kvar_tikets.tiket_prioritetId', '=', 'kvar_tiket_prioritets.id')
         ->leftJoin('kvar_opis_tips', 'kvar_tikets.opis_kvaraId', '=', 'kvar_opis_tips.id')
         ->leftJoin('kvar_komentar_user_views', function($join)
         {
             $join->on('kvar_komentar_user_views.kvar_tiketId', '=', 'kvar_tikets.id');
             $join->on('kvar_komentar_user_views.userId', '=', DB::raw(auth()->user()->id));
+        })
+        ->leftJoin('kvar_tiket_upravnik_views', function($join)
+        {
+            $join->on('kvar_tiket_upravnik_views.kvar_tiketId', '=', 'kvar_tikets.id');
+            $join->on('kvar_tiket_upravnik_views.userId', '=', DB::raw(auth()->user()->id));
         })
         ->where('kvar_tikets.zgradaId', '=', IzabranaZgrada::getIzabranaZgradaId())
         

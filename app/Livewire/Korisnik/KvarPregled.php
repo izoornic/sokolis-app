@@ -9,6 +9,7 @@ use App\Models\Stan;
 use App\Models\kvarTiket;
 use App\Models\KvarKomentari;
 use App\Models\KvarKomentarUserView;
+use App\Models\KvarTiketUpravnikView;
 use App\Models\KvarTiketImage;
 use App\Actions\Zgrada\EmailStanarimaSender;
 
@@ -55,6 +56,11 @@ class KvarPregled extends Component
         $this->tkid = request()->query('tid');
 
         $this->setInitVals();
+
+        //zabelezi da je upravnik pregledao tiket
+        if($this->upravnik && $this->can_view){
+            KvarTiketUpravnikView::zabeleziPregled($this->tkid, auth()->user()->id);
+        }
     }
 
     private function setInitVals()

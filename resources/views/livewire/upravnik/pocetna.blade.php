@@ -7,6 +7,7 @@
         @foreach($zgrade as $zgrada)
             @php
                 $ukupnoKvarova = collect($kvarovi[$zgrada->id] ?? [])->sum();
+                $nepregledani = (int) ($nepregledaniKvarovi[$zgrada->id] ?? 0);
             @endphp
 
             <div class="bg-white rounded-lg shadow border border-gray-200 overflow-hidden flex flex-col">
@@ -52,6 +53,12 @@
                                         </span>
                                     @endif
                                 @endforeach
+
+                                @if($nepregledani > 0)
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-red-500 text-white" title="Prijave koje još niste otvorili">
+                                        Nepregledano: {{ $nepregledani }}
+                                    </span>
+                                @endif
                             </div>
                         @else
                             <p class="text-xs text-gray-400 italic">Nema otvorenih prijava</p>

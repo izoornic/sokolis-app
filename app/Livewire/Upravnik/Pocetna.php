@@ -56,6 +56,19 @@ class Pocetna extends Component
 
         $userId = auth()->user()->id;
 
+        // Tickets the upravnik has never opened, per building (open tickets only)
+        $nepregledaniKvaroviRaw = DB::table('kvar_tikets as kt')
+            ->selectRaw('kt.zgradaId, COUNT(*) as nepregledani')
+            ->leftJoin('kvar_tiket_upravnik_views as ktv', function ($join) use ($userId) {
+                $join->on('ktv.kvar_tiketId', '=', 'kt.id')
+                     ->where('ktv.userId', '=', $userId);
+            })
+            ->whereIn('kt.zgradaId', $zgradaIds)
+            ->where('kt.tiket_statusId', '<', 3)
+            ->whereNull('ktv.prvi_pregled')
+            ->groupBy('kt.zgradaId')
+            ->pluck('nepregledani', 'zgradaId');
+
         // Unseen kvar comments per building (open tickets only)
         $nevidjeniKvaroviRaw = DB::table('kvar_tikets as kt')
             ->selectRaw('kt.zgradaId, SUM(kt.tiket_br_komentara - COALESCE(kv.broj_vidjenih, 0)) as nevidjeni')
@@ -85,6 +98,7 @@ class Pocetna extends Component
             'kvarovi'              => $kvarovi,
             'prioriteti'           => $prioriteti,
             'nevidjeniKvarovi'     => $nevidjeniKvaroviRaw,
+            'nepregledaniKvarovi'  => $nepregledaniKvaroviRaw,
             'nevidjeniObavestenja' => $nevidjeniObavestenjaRaw,
         ]);
     }
