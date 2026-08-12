@@ -34,6 +34,28 @@ class Zgrada extends Model
     }
 
     /**
+     * Zgrade koje ulogovani servis održava
+     */
+    public static function zgradeServisa()
+    {
+        return ServisZgradaIndex::select('zgradas.id', 'zgradas.naziv')
+            ->leftJoin('zgradas', 'zgradas.id', '=', 'servis_zgrada_indices.zgradaId')
+            ->where('servis_zgrada_indices.userId', '=', auth()->user()->id)
+            ->pluck('zgradas.naziv', 'zgradas.id');
+    }
+
+    /**
+     * Zgrade dodeljene ulogovanom korisniku, u zavisnosti od uloge.
+     * Koristi je selektor zgrade koji dele upravnik i servis.
+     */
+    public static function zgradeTrenutnogKorisnika()
+    {
+        return (auth()->user()->user_tipId == User::TIP_SERVIS)
+            ? Zgrada::zgradeServisa()
+            : Zgrada::zgradeUpravnika();
+    }
+
+    /**
      * Vraca e-mail adrese stanara koji su čekirali tip obaveštenja za izabrane zgrade
      * 
      * @param array $zgrade

@@ -37,7 +37,7 @@ class StanPromeniVlasnika extends ModalComponent
     public function read()
     {
         return User::select('*')
-            ->where('users.user_tipId', '=', 1)
+            ->where('users.user_tipId', '=', User::TIP_STANAR)
             ->where('users.id', '<>', $this->userId)
             ->when($this->search_name, function ($rtval){
                 return $rtval->where('users.name', 'like', '%'.$this->search_name.'%');

@@ -25,3 +25,8 @@ V 1.6.0.4 Released August 12 2026
 
 - Praćenje pregleda prijava kvarova (tiketa) od strane upravnika
 - U listi kvarova i na početnoj strani upravnika označene nepregledane prijave
+
+V 1.6.0.5 Released August 12 2026
+
+- Dodata uloga "servis održavanja" sa svojim zgradama, početnom stranicom i listom prijava kvarova
+- Servis dobija e-mail za svaku novu prijavu i svaki komentar (podešivo u profilu)

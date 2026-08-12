@@ -14,9 +14,12 @@ class IzborZgrade extends Component
     public function mount()
     {
         if(!session()->exists('upravnik_izabrana_zgrada_id') && !session()->exists('upravnik_izabrana_zgrada_name')){
-            $zgrd = User::find(auth()->user()->id)->zgrade->first();
-            session(['upravnik_izabrana_zgrada_id' => $zgrd->id]);
-            session(['upravnik_izabrana_zgrada_name' => $zgrd->naziv]);
+            $korisnik = User::find(auth()->user()->id);
+            $zgrd = ($korisnik->jeServis()) ? $korisnik->zgradeServis->first() : $korisnik->zgrade->first();
+            if($zgrd){
+                session(['upravnik_izabrana_zgrada_id' => $zgrd->id]);
+                session(['upravnik_izabrana_zgrada_name' => $zgrd->naziv]);
+            }
         }
         $this->izabrana_zgradaId = session('upravnik_izabrana_zgrada_id');
         $this->zgrada_name = session('upravnik_izabrana_zgrada_name');

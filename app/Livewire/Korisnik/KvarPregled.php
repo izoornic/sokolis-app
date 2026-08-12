@@ -11,7 +11,9 @@ use App\Models\KvarKomentari;
 use App\Models\KvarKomentarUserView;
 use App\Models\KvarTiketUpravnikView;
 use App\Models\KvarTiketImage;
+use App\Models\ServisZgradaIndex;
 use App\Actions\Zgrada\EmailStanarimaSender;
+use App\Actions\Zgrada\ServisNotifikacije;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -35,6 +37,7 @@ class KvarPregled extends Component
 
     public $vlasnik_tiketa;
     public $upravnik;
+    public $servis;
 
     public $tiket_vidljivost;
 
@@ -43,7 +46,8 @@ class KvarPregled extends Component
     public function mount()
     {
         $this->sorce=env('IMAGE_MANIPILATION');
-        $this->upravnik = (auth()->user()->user_tipId == 1) ? false : true;
+        $this->upravnik = (auth()->user()->user_tipId == User::TIP_STANAR) ? false : true;
+        $this->servis = (auth()->user()->user_tipId == User::TIP_SERVIS);
         if(!$this->upravnik){
             if(!session()->exists(['stanovi', 'zgrade'])){
                 User::getMyZgradeStanove();
@@ -75,7 +79,11 @@ class KvarPregled extends Component
         $this->tiket_vidljivost =  $this->tiket_init->vidljiv_zgradi;
 
         if($this->tiket_init){
-            if($this->upravnik){
+            if($this->servis){
+                // servis radi sa tiketima kao upravnik, ali samo u zgradama koje održava
+                $this->can_view = ServisZgradaIndex::odrzavaZgradu(auth()->user()->id, $this->tiket_init->zgradaId);
+                $this->vlasnik_tiketa = $this->can_view;
+            }elseif($this->upravnik){
                 $this->can_view = true;
                 $this->vlasnik_tiketa = true;
             }else{
@@ -109,9 +117,9 @@ class KvarPregled extends Component
         session()->flash('status', 'Status tiketa #'.$this->tkid.' promenjen u ZAKLJUČAN');
         $this->setInitVals();
         $this->sendEmailPromenaStatusa();
-        //ako je upravnik, vrati ga na listu kvarova, ako nije, vrati ga na prijavu kvara   
+        //ako je upravnik ili servis, vrati ga na listu kvarova, ako nije, vrati ga na prijavu kvara
         session()->flash('status', 'Tiket #'.$this->tkid.' je zatvoren.');
-        return ($this->upravnik) ? $this->redirect('/upravnik-kvarovi') : $this->redirect('/prijavi-kvar');
+        return $this->redirect($this->listaKvarovaRuta());
     }
 
     #[On('otkljucaj')] 
@@ -127,7 +135,16 @@ class KvarPregled extends Component
     {
         kvarTiket::where('id',$this->tkid)->update(['tiket_statusId'=> 3]);
         session()->flash('status', 'Tiket #'.$this->tkid.' je obrisan.');
-        return $this->redirect('/prijavi-kvar');
+        return $this->redirect($this->listaKvarovaRuta());
+    }
+
+    /**
+     * Stranica sa listom kvarova za ulogu ulogovanog korisnika
+     */
+    private function listaKvarovaRuta()
+    {
+        if($this->servis) return '/servis-kvarovi';
+        return ($this->upravnik) ? '/upravnik-kvarovi' : '/prijavi-kvar';
     }
 
     #[On('promena-vidljivosti')]
@@ -207,6 +224,16 @@ class KvarPregled extends Component
         //$new_bro->ob_broj_komentara);
 
         KvarKomentarUserView::updateOrCreate( ['kvar_tiketId'=>$this->tkid, 'userId'=>auth()->user()->id], ['broj_vidjenih'=>$new_bro->tiket_br_komentara] );
+
+        //email servisu održavanja zaduženom za zgradu (osim ako je servis sam napisao komentar)
+        ServisNotifikacije::noviKomentar(
+            $this->tiket_init->zgradaId,
+            $this->tkid,
+            auth()->user()->id,
+            auth()->user()->name,
+            $this->new_coment
+        );
+
         $this->new_coment = '';
 
         if(auth()->user()->id != $this->tiket_creator_id)

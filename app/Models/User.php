@@ -31,6 +31,14 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
 
     /**
+     * Vrednosti kolone user_tipId (tabela user_tips)
+     */
+    public const TIP_STANAR   = 1;
+    public const TIP_UPRAVNIK = 2;
+    public const TIP_ADMIN    = 3;
+    public const TIP_SERVIS   = 4;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -133,6 +141,29 @@ class User extends Authenticatable
         );
     }
 
+
+    /**
+     * Zgrade koje korisnik održava (uloga "servis održavanja")
+     */
+    public function zgradeServis(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Zgrada::class,
+            ServisZgradaIndex::class,
+            'userId',
+            'id',
+            'id',
+            'zgradaId'
+        );
+    }
+
+    /**
+     * Da li je korisnik servis održavanja
+     */
+    public function jeServis(): bool
+    {
+        return $this->user_tipId == self::TIP_SERVIS;
+    }
 
     public function stanoviDetalji(): HasManyThrough
     {

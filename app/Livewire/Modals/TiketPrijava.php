@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\EmailObavestenjaTip;
 use App\Models\EmailObavestenjaUser;
 use App\Mail\ObavestenjeStanarima;
+use App\Actions\Zgrada\ServisNotifikacije;
 use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Support\Facades\Validator;
@@ -142,6 +143,7 @@ class TiketPrijava extends ModalComponent
         }
         
         $this->notifikujUpravnika($newTik->zgradaId, $newTik->id);
+        $this->notifikujServis($newTik->zgradaId, $newTik->id);
 
         session()->flash('status', 'Nova prijava kvara je uspešno sačuvana.');
 
@@ -223,6 +225,22 @@ class TiketPrijava extends ModalComponent
                 new ObavestenjeStanarima($subject, ['text' => $message], [], 'upravnik-kvarovi')
             );
         }
+    }
+
+    /**
+     * Email servisu održavanja zaduženom za zgradu
+     */
+    private function notifikujServis(int $zgradaId, int $tiketId): void
+    {
+        ServisNotifikacije::novaPrijava(
+            $zgradaId,
+            $tiketId,
+            Stan::find($this->odabrani_stan)->zgrada()->first()->naziv,
+            Stan::find($this->odabrani_stan)->stanbr,
+            KvarOpisTip::find($this->vrsta_kvara)?->kvar_tip_naziv,
+            KvarTiketPrioritet::find($this->kvar_prioritet)?->prioritet_naziv,
+            $this->kvar_opis
+        );
     }
 
     public function isPreviwable()

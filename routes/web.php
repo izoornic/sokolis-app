@@ -23,11 +23,13 @@ Route::middleware([
     'userpremisions',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        if(auth()->user()->user_tipId == 1){
+        if(auth()->user()->user_tipId == User::TIP_STANAR){
             User::getMyZgradeStanove();
             return redirect('/pocetna');
-        }elseif(auth()->user()->user_tipId == 2){
+        }elseif(auth()->user()->user_tipId == User::TIP_UPRAVNIK){
             return redirect('/upravnik-pocetna');
+        }elseif(auth()->user()->user_tipId == User::TIP_SERVIS){
+            return redirect('/servis-pocetna');
         }
         //return (auth()->user()->user_tipId == 1) ? redirect('/pocetna') : 
         //return view('dashboard');
@@ -52,6 +54,14 @@ Route::middleware([
     Route::get('/stambena-zajednica', function () {
         return view('korisnik/stambena-zajednica');
     })->name('stambena-zajednica');
+
+    Route::get('/servis-pocetna', function () {
+        return view('servis/pocetna');
+    })->name('servis-pocetna');
+
+    Route::get('/servis-kvarovi', function () {
+        return view('servis/kvar-prijave-pregled');
+    })->name('servis-kvarovi');
 
     Route::get('/upravnik-pocetna', function () {
         return view('upravnik/pocetna');

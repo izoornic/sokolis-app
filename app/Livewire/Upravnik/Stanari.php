@@ -79,7 +79,7 @@ class Stanari extends Component
 
         return User::select('*')
             ->withCount(['stanovi'])
-            ->where('users.user_tipId', '=', 1)
+            ->where('users.user_tipId', '=', User::TIP_STANAR)
             ->where(function ($q) use ($userIds) {
                 $q->whereIn('users.id', $userIds)
                   ->orWhereDoesntHave('stanovi');
