@@ -212,6 +212,10 @@ class KvarPregled extends Component
     {
         if(trim($this->new_coment) == '') return;
 
+        $this->validate(['new_coment' => 'string|max:2000'], [
+            'new_coment.max' => 'Komentar može imati najviše 2000 karaktera.',
+        ]);
+
         KvarKomentari::create([
                 'kvar_tiketId'=>$this->tkid,
                 'userId'=>auth()->user()->id,

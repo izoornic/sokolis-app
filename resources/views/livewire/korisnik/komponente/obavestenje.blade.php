@@ -106,7 +106,8 @@
                         <div class="relative w-full">
                             <div class="mt-4 ml-auto">
                                 <p class="text-slate-600 text-lg">Dodaj komentar:</p>
-                                <textarea wire:model="new_coment" class="border border-slate-400 rounded-lg w-full" id="novi_komentar" type="textarea" class="mt-1 block w-full disabled:opacity-50"></textarea>
+                                <textarea wire:model="new_coment" maxlength="2000" class="border border-slate-400 rounded-lg w-full" id="novi_komentar" type="textarea" class="mt-1 block w-full disabled:opacity-50"></textarea>
+                                @error('new_coment') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
                                 <p class="text-right">
                                     <button wire:click="addComment()" class="mt-2 bg-slate-400 hover:bg-slate-700 text-white font-bold py-2 px-4 border border-slate-600 rounded">Pošalji</button>
                                 </p>

@@ -79,8 +79,12 @@ class Obavestenje extends Component
             $this->show_koments = false;
             $this->ShowComments($this->o_id);
             return;
-        } 
-        
+        }
+
+        $this->validate(['new_coment' => 'string|max:2000'], [
+            'new_coment.max' => 'Komentar može imati najviše 2000 karaktera.',
+        ]);
+
         ObavestenjeKomentari::create([
                 'obavestenjeId'=>$this->o_id,
                 'userId'=>auth()->user()->id,

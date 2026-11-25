@@ -35,3 +35,7 @@ V 1.6.0.6 Released August 12 2026
 
 - Na početnim stranama upravnika i servisa broje se samo prijave sa statusom "Otvoren"
 - Skripta za novog servisera označava zatečene prijave i komentare kao pregledane
+
+V 1.6.0.7 Released November 25 2026
+
+- Komentari na prijavama kvarova i obaveštenjima mogu imati do 2000 karaktera (ranije pucalo na 256)
